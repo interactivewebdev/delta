@@ -41,6 +41,8 @@ Route::get('/forgot-password', [MainController::class, 'forgot'])->name('forgot.
 Route::get('/new-password', [MainController::class, 'newPassword'])->name('new.password');
 Route::post('/change-password', [MainController::class, 'changePassword'])->name('change.password');
 
+// latest update
+
 Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
