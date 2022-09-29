@@ -64,7 +64,8 @@
                         alt="looginpage"></div>
                 <div class="col-xl-5 p-0">
                     <div class="login-card">
-                        <form class="theme-form login-form">
+                        <form class="theme-form login-form" method="POST" action="{{ route('auth.save') }}">
+                            @csrf
                             <h4>Create your account</h4>
                             <h6>Enter your personal details to create account</h6>
                             <div class="form-group">
@@ -72,12 +73,12 @@
                                 <div class="small-group">
                                     <div class="input-group"><span class="input-group-text"><i
                                                 class="icon-user"></i></span>
-                                        <input class="form-control" type="email" required=""
+                                        <input class="form-control" type="text" required name="fname"
                                             placeholder="First Name">
                                     </div>
                                     <div class="input-group"><span class="input-group-text"><i
                                                 class="icon-user"></i></span>
-                                        <input class="form-control" type="email" required=""
+                                        <input class="form-control" type="text" required name="lname"
                                             placeholder="Last Name">
                                     </div>
                                 </div>
@@ -86,7 +87,7 @@
                                 <label>Email Address</label>
                                 <div class="input-group"><span class="input-group-text"><i
                                             class="icon-email"></i></span>
-                                    <input class="form-control" type="email" required=""
+                                    <input class="form-control" type="email" required name="email"
                                         placeholder="Test@gmail.com">
                                 </div>
                             </div>
@@ -94,15 +95,17 @@
                                 <label>Password</label>
                                 <div class="input-group"><span class="input-group-text"><i
                                             class="icon-lock"></i></span>
-                                    <input class="form-control" type="password" name="login[password]"
-                                        required="" placeholder="*********">
+                                    <input class="form-control" type="password" name="password" required=""
+                                        placeholder="*********">
                                     <div class="show-hide"><span class="show"> </span></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block" type="submit">Create Account</button>
                             </div>
-                            <p>Already have an account?<a class="ms-2" href="login.html">Sign in</a></p>
+                            <p>Already have an account?<a class="ms-2" href="{{ route('auth.login') }}">Sign
+                                    in</a>
+                            </p>
                         </form>
                     </div>
                 </div>

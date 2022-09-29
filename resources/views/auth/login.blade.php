@@ -63,21 +63,21 @@
                         src="{{ url('assets/images/login/3.jpg') }}" alt="looginpage"></div>
                 <div class="col-xl-7 p-0">
                     <div class="login-card">
-                        <form class="theme-form login-form">
+                        <form class="theme-form login-form" method="post" action="{{ route('auth.dologin') }}">
+                            @csrf
                             <h4>Login</h4>
                             <h6>Welcome back! Log in to your account.</h6>
                             <div class="form-group">
-                                <label>Email Address</label>
-                                <div class="input-group"><span class="input-group-text"><i
-                                            class="icon-email"></i></span>
-                                    <input class="form-control" type="email" required=""
-                                        placeholder="Test@gmail.com">
+                                <label>Username</label>
+                                <div class="input-group"><span class="input-group-text"><i class="icon-user"></i></span>
+                                    <input class="form-control" type="text" required name="username"
+                                        placeholder="username">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
                                 <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
-                                    <input class="form-control" type="password" name="login[password]" required=""
+                                    <input class="form-control" type="password" name="password" required
                                         placeholder="*********">
                                     <div class="show-hide"><span class="show"> </span></div>
                                 </div>
@@ -86,14 +86,16 @@
                                 {{-- <div class="checkbox">
                                     <input id="checkbox1" type="checkbox">
                                     <label class="text-muted" for="checkbox1">Remember password</label>
-                                </div> --}}<a class="link" href="forget-password.html">Forgot password?</a>
+                                </div> --}}<a class="link" href="{{ route('forgot.password') }}">Forgot
+                                    password?</a>
                             </div>
                             <br>
                             <br>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
                             </div>
-                            <p>Don't have account?<a class="ms-2" href="sign-up.html">Create Account</a></p>
+                            <p>Don't have account?<a class="ms-2" href="{{ route('auth.register') }}">Create
+                                    Account</a></p>
                         </form>
                     </div>
                 </div>

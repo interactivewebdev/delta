@@ -1,5 +1,24 @@
 @extends('layouts.app');
 
+@section('breadcrumb')
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <h3>Default</h3>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> <a class="home-item" href="{{ url('/') }}"><i
+                                    data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item active"> Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="container-fluid default-dash">
         <div class="row">
@@ -9,13 +28,14 @@
                         <div class="media">
                             <div class="media-body">
                                 <div class="greeting-user">
-                                    <h1>Hello, Harry Mendez</h1>
+                                    <h1>Hello, {{ $username }}</h1>
                                     <p>Welcome back, your dashboard is ready!</p><a class="btn btn-outline-white_color"
                                         href="blog-single.html">Get Started<i class="icon-arrow-right"> </i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="cartoon-img"><img class="img-fluid" src="../assets/images/images.svg" alt="">
+                        <div class="cartoon-img"><img class="img-fluid" src="{{ url('assets/images/images.svg') }}"
+                                alt="">
                         </div>
                     </div>
                 </div>
@@ -24,7 +44,7 @@
                 <div class="card pb-0 o-hidden earning-card">
                     <div class="card-header earning-back"></div>
                     <div class="card-body p-0">
-                        <div class="earning-content"><img class="img-fluid" src="../assets/images/avatar.jpg"
+                        <div class="earning-content"><img class="img-fluid" src="{{ url('assets//images/avatar.jpg') }}"
                                 alt=""><a href="blog-single.html">
                                 <h4>Today's Earning</h4>
                             </a><span>(Mon 15 - Sun 21)</span>
@@ -67,7 +87,8 @@
                                     <tr>
                                         <td>
                                             <div class="media"><img class="img-fluid me-3 b-r-5"
-                                                    src="../assets/images/dashboard/rectangle-26.jpg" alt="">
+                                                    src="{{ url('assets//images/dashboard/rectangle-26.jpg') }}"
+                                                    alt="">
                                                 <div class="media-body"><a href="blog-single.html">
                                                         <h5>Google Project Apply Reviwe</h5>
                                                     </a>
@@ -81,7 +102,8 @@
                                     <tr>
                                         <td>
                                             <div class="media"> <img class="img-fluid me-3 b-r-5"
-                                                    src="../assets/images/dashboard/rectangle-27.jpg" alt="">
+                                                    src="{{ url('assets//images/dashboard/rectangle-27.jpg') }}"
+                                                    alt="">
                                                 <div class="media-body"><a href="blog-single.html">
                                                         <h5>Business Logo Create</h5>
                                                     </a>
@@ -95,7 +117,8 @@
                                     <tr>
                                         <td>
                                             <div class="media"><img class="img-fluid me-3 b-r-5"
-                                                    src="../assets/images/dashboard/rectangle-28.jpg" alt="">
+                                                    src="{{ url('assets//images/dashboard/rectangle-28.jpg') }}"
+                                                    alt="">
                                                 <div class="media-body"><a href="blog-single.html">
                                                         <h5>Business Project Research</h5>
                                                     </a>
@@ -109,7 +132,8 @@
                                     <tr>
                                         <td>
                                             <div class="media"><img class="img-fluid me-3 b-r-5"
-                                                    src="../assets/images/dashboard/rectangle-29.jpg" alt="">
+                                                    src="{{ url('assets//images/dashboard/rectangle-29.jpg') }}"
+                                                    alt="">
                                                 <div class="media-body"><a href="blog-single.html">
                                                         <h5>Recruitment in it Department</h5>
                                                     </a>
@@ -123,7 +147,8 @@
                                     <tr>
                                         <td>
                                             <div class="media"><img class="img-fluid me-3 b-r-5"
-                                                    src="../assets/images/dashboard/rectangle-28.jpg" alt="">
+                                                    src="{{ url('assets//images/dashboard/rectangle-28.jpg') }}"
+                                                    alt="">
                                                 <div class="media-body"><a href="blog-single.html">
                                                         <h5>Business Project Research</h5>
                                                     </a>
@@ -178,7 +203,8 @@
                                         <td>
                                             <div class="media">
                                                 <div class="square-box me-2"><img class="img-fluid b-r-5"
-                                                        src="../assets/images/avtar/boy.png" alt=""></div>
+                                                        src="{{ url('assets//images/avtar/boy.png') }}" alt="">
+                                                </div>
                                                 <div class="media-body ps-2">
                                                     <div class="avatar-details"><a href="product-page.html">
                                                             <h6>Gary</h6>
@@ -200,7 +226,9 @@
                                         <td>
                                             <div class="media">
                                                 <div class="square-box me-2"><img class="img-fluid b-r-5"
-                                                        src="../assets/images/avtar/girl.png" alt=""></div>
+                                                        src="{{ url('assets//images/avtar/girl.png') }}"
+                                                        alt="">
+                                                </div>
                                                 <div class="media-body ps-2">
                                                     <div class="avatar-details"><a href="product-page.html">
                                                             <h6>Ralph Waters</h6>
@@ -222,7 +250,8 @@
                                         <td>
                                             <div class="media">
                                                 <div class="square-box me-2"><img class="img-fluid b-r-5"
-                                                        src="../assets/images/avtar/man.png" alt=""></div>
+                                                        src="{{ url('assets//images/avtar/man.png') }}" alt="">
+                                                </div>
                                                 <div class="media-body ps-2">
                                                     <div class="avatar-details"><a href="product-page.html">
                                                             <h6>Edwin Day</h6>
@@ -244,7 +273,8 @@
                                         <td>
                                             <div class="media">
                                                 <div class="square-box me-2"><img class="img-fluid b-r-5"
-                                                        src="../assets/images/avtar/woman.png" alt=""></div>
+                                                        src="{{ url('assets//images/avtar/woman.png') }}"
+                                                        alt=""></div>
                                                 <div class="media-body ps-2">
                                                     <div class="avatar-details"><a href="product-page.html">
                                                             <h6>Gary</h6>
@@ -295,7 +325,8 @@
                                         <td>
                                             <div class="media">
                                                 <div class="square-box me-2"><img class="img-fluid b-r-5"
-                                                        src="../assets/images/avtar/teacher.png" alt=""></div>
+                                                        src="{{ url('assets//images/avtar/teacher.png') }}"
+                                                        alt=""></div>
                                                 <div class="media-body"><a href="user-profile.html">
                                                         <h5>Alana Brady added new event</h5>
                                                     </a>
@@ -310,7 +341,8 @@
                                         <td>
                                             <div class="media">
                                                 <div class="square-box me-2"><img class="img-fluid b-r-5"
-                                                        src="../assets/images/avtar/teenager.png" alt=""></div>
+                                                        src="{{ url('assets//images/avtar/teenager.png') }}"
+                                                        alt=""></div>
                                                 <div class="media-body"><a href="user-profile.html">
                                                         <h5>Lena Burton added new</h5>
                                                     </a>
@@ -329,7 +361,8 @@
                                         <td>
                                             <div class="media">
                                                 <div class="square-box me-2"><img class="img-fluid b-r-5"
-                                                        src="../assets/images/avtar/chinese.png" alt=""></div>
+                                                        src="{{ url('assets//images/avtar/chinese.png') }}"
+                                                        alt=""></div>
                                                 <div class="media-body image-swipe"><a href="user-profile.html">
                                                         <h5>Max Simmons attached 2</h5>
                                                     </a>
@@ -339,20 +372,20 @@
                                                         <div class="row gallery">
                                                             <figure class="inner-img ms-3" itemprop="associatedMedia"
                                                                 itemscope=""><a
-                                                                    href="../assets/images/dashboard/img-26.jpg"
+                                                                    href="{{ url('assets//images/dashboard/img-26.jpg') }}"
                                                                     itemprop="contentUrl" data-size="600x600"><img
                                                                         class="img-fluid img-40"
-                                                                        src="../assets/images/dashboard/img-26.jpg"
+                                                                        src="{{ url('assets//images/dashboard/img-26.jpg') }}"
                                                                         itemprop="thumbnail" alt="Image description"></a>
                                                                 <figcaption itemprop="caption description">Photos 1
                                                                 </figcaption>
                                                             </figure>
                                                             <figure class="inner-img ms-3" itemprop="associatedMedia"
                                                                 itemscope=""><a
-                                                                    href="../assets/images/dashboard/image-20.jpg"
+                                                                    href="{{ url('assets//images/dashboard/image-20.jpg') }}"
                                                                     itemprop="contentUrl" data-size="600x600"><img
                                                                         class="img-fluid img-40"
-                                                                        src="../assets/images/dashboard/image-20.jpg"
+                                                                        src="{{ url('assets//images/dashboard/image-20.jpg') }}"
                                                                         itemprop="thumbnail" alt="Image description"></a>
                                                                 <figcaption itemprop="caption description">Photos 2
                                         <td> <span class="badge badge-light-theme-light font-theme-light">22 Jun

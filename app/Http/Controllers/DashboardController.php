@@ -6,11 +6,9 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function __construct() {
-        echo "hello";
-    }
-
-    public function index() {
-        return view('home');
+    public function index(Request $request)
+    {
+        $username = $request->session()->get('name');
+        return view('home', compact('username'));
     }
 }

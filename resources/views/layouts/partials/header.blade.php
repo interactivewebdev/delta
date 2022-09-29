@@ -1,8 +1,8 @@
 <div class="page-header">
     <div class="header-wrapper row m-0">
         <div class="header-logo-wrapper col-auto p-0">
-            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo.png"
-                        alt=""></a></div>
+            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid"
+                        src="{{ url('assets/images/logo/Deltabiocare_logo.svg') }}" alt=""></a></div>
             <div class="toggle-sidebar">
                 <div class="status_toggle sidebar-toggle d-flex">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -116,7 +116,8 @@
                         <li><a href="kanban.html"><i data-feather="file-text"></i><span>Taskboard</span></a>
                         </li>
                         <li><a href="edit-profile.html"><i data-feather="settings"></i><span>Settings</span></a></li>
-                        <li><a href="login.html"><i data-feather="log-in"> </i><span>Log in</span></a></li>
+                        <li><a href="{{ route('logout') }}"><i data-feather="log-in"> </i><span>Logout</span></a>
+                        </li>
                     </ul>
                 </li>
             </ul>
