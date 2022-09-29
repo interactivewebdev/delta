@@ -31,7 +31,22 @@
     </style>
 @endsection
 @section('page-content')
-    <div class="container">]
+    <div class="product-banner-image">
+        <figure>
+            <img src="{{ url('assets/front/images/3.jpg') }}" width="100%">
+        </figure>
+    </div>
+    <div class="container">
+        <div class="product-heading">
+            <h3>Login/Register</h3>
+            <nav>
+                <ol class="product-breadcrumb">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    Login/Register
+                </ol>
+            </nav>
+        </div>
+        <p>&nbsp;</p>
         <div class="row">
             <div class="col-6">
                 <div class=" text-center mt-5 ">
@@ -126,7 +141,8 @@
                                                         <label for="form_need">Please specify your need *</label>
                                                         <select id="form_need" name="need" class="form-control"
                                                             required="required" data-error="Please specify your need.">
-                                                            <option value="" selected disabled>--Select Your Issue--
+                                                            <option value="" selected disabled>--Select Your
+                                                                Issue--
                                                             </option>
                                                             <option>Request Invoice for order</option>
                                                             <option>Request order status</option>
@@ -155,5 +171,6 @@
                 </div>
             </div>
         </div>
+        <p>&nbsp;</p>
     </div>
 @endsection
