@@ -58,23 +58,22 @@
                         <div class="card mt-2 mx-auto p-4 bg-light">
                             <div class="card-body bg-light">
                                 <div class="container">
-                                    <form id="login-form" role="form">
+                                    <form id="login-form" role="form" method="POST" action="{{ url('user/login') }}">
+                                        @csrf
                                         <div class="controls">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Email Address *</label>
                                                         <input type="text" name="email" class="form-control"
-                                                            placeholder="Please enter your email address *"
-                                                            required="required" data-error="Email address is required.">
+                                                            placeholder="Please enter your email address *" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Password *</label>
                                                         <input type="password" name="password" class="form-control"
-                                                            placeholder="Please enter your password *" required="required"
-                                                            data-error="Password is required.">
+                                                            placeholder="Please enter your password *" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,50 +104,74 @@
                         <div class="card mt-2 mx-auto p-4 bg-light">
                             <div class="card-body bg-light">
                                 <div class="container">
-                                    <form id="register-form" role="form">
+                                    <form id="register-form" role="form" method="POST"
+                                        action="{{ url('user/register') }}">
+                                        @csrf
                                         <div class="controls">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="form_name">Firstname *</label>
-                                                        <input id="form_name" type="text" name="name"
-                                                            class="form-control" placeholder="Please enter your firstname *"
-                                                            required="required" data-error="Firstname is required.">
+                                                        <label>Username *</label>
+                                                        <input type="text" name="username" class="form-control"
+                                                            placeholder="Please enter your username *" required>
 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="form_lastname">Lastname *</label>
-                                                        <input id="form_lastname" type="text" name="surname"
-                                                            class="form-control" placeholder="Please enter your lastname *"
-                                                            required="required" data-error="Lastname is required.">
+                                                        <label>Password *</label>
+                                                        <input type="password" name="password" class="form-control"
+                                                            placeholder="Please enter your password *" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Name *</label>
+                                                        <input type="text" name="name" class="form-control"
+                                                            placeholder="Please enter your name *" required>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Email *</label>
+                                                        <input type="email" name="email" class="form-control"
+                                                            placeholder="Please enter your email *" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="form_email">Email *</label>
-                                                        <input id="form_email" type="email" name="email"
-                                                            class="form-control" placeholder="Please enter your email *"
-                                                            required="required" data-error="Valid email is required.">
+                                                        <label>Phone</label>
+                                                        <input type="text" name="phone" class="form-control"
+                                                            placeholder="Please enter your phone">
 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="form_need">Please specify your need *</label>
-                                                        <select id="form_need" name="need" class="form-control"
-                                                            required="required" data-error="Please specify your need.">
-                                                            <option value="" selected disabled>--Select Your
-                                                                Issue--
-                                                            </option>
-                                                            <option>Request Invoice for order</option>
-                                                            <option>Request order status</option>
-                                                            <option>Haven't received cashback yet</option>
-                                                            <option>Other</option>
+                                                        <label>Country *</label>
+                                                        <select name="country" class="form-control" required>
+                                                            <option value="">-- Select --</option>
+                                                            @foreach ($countries as $cn)
+                                                                <option value="{{ $cn->id }}">{{ $cn->name }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Company</label>
+                                                        <input type="text" name="company" class="form-control"
+                                                            placeholder="Please enter your company">
 
                                                     </div>
                                                 </div>

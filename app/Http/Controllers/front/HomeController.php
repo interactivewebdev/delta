@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Models\Benefits;
 use App\Models\Content;
+use App\Models\Country;
 use App\Models\Meetus;
 use App\Models\NewsBlog;
 use Illuminate\Http\Request;
@@ -68,6 +69,21 @@ class HomeController extends BaseController
 
     public function register()
     {
-        return view('front.register');
+        $countries = Country::all();
+        return view('front.register', compact('countries'));
+    }
+
+    public function postLogin(Request $request)
+    {
+        dd($request);
+    }
+
+    public function postRegister(Request $request)
+    {
+        $inputData = $request->input();
+        unset($inputData['_token']);
+        DB::table('doc_user')->insert($inputData);
+
+        return redirect('page/thanks',['message'=>'You are successfully registered.']);
     }
 }

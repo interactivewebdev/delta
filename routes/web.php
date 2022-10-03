@@ -29,6 +29,8 @@ Route::get('/product/detail/{name}/{product_id}', [App\Http\Controllers\front\Pr
 Route::post('/subscribe/newsletter', [App\Http\Controllers\front\HomeController::class, 'subscribe']);
 Route::get('/nosubscribe/newsletter', [App\Http\Controllers\front\HomeController::class, 'noSubscribe']);
 Route::get('/user/register', [App\Http\Controllers\front\HomeController::class, 'register']);
+Route::post('/user/register', [App\Http\Controllers\front\HomeController::class, 'postRegister']);
+Route::post('/user/login', [App\Http\Controllers\front\HomeController::class, 'postLogin']);
 
 // Admin routes
 Route::get('/admin/login', [MainController::class, 'login'])->name('auth.login');
