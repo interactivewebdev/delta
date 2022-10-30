@@ -31,6 +31,7 @@ Route::get('/nosubscribe/newsletter', [App\Http\Controllers\front\HomeController
 Route::get('/user/register', [App\Http\Controllers\front\HomeController::class, 'register']);
 Route::post('/user/register', [App\Http\Controllers\front\HomeController::class, 'postRegister']);
 Route::post('/user/login', [App\Http\Controllers\front\HomeController::class, 'postLogin']);
+Route::get('/page/thanks', [App\Http\Controllers\front\HomeController::class, 'thanks']);
 
 // Admin routes
 Route::get('/admin/login', [MainController::class, 'login'])->name('auth.login');

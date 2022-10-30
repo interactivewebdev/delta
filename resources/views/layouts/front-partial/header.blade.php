@@ -2,15 +2,20 @@
     <!--header-->
     <div class="header">
         <div>
+            <div class="px-2">
+                <div class="text-right"><a href='{{ url('/user/register') }}'
+                        class='btn btn-primary pills-btn btn-xs'>Login | Signup</a></div>
+            </div>
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand d-none d-md-block" href="{{ url('/') }}"><img
                         srcset="{{ url('assets/front/images/Deltabiocare_logo.svg') }}" width="200"
                         alt="Delta Bio Care"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     <a class="navbar-brand" href="{{ url('/') }}"><img
-                            srcset="{{ url('assets/images/Deltabiocare_logo.svg') }}" alt="Delta Bio Care"
+                            srcset="{{ url('assets/front/images/Deltabiocare_logo.svg') }}" alt="Delta Bio Care"
                             style="width:130px; margin-top:45px;"></a>
                 </button>
 
@@ -71,8 +76,6 @@
                                 <li><a class="dropdown-item" href="{{ url('/faq') }}">FAQ</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/contact-us') }}">Contact Us</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item"><a href="{{ url('/user/register') }}" class="nav-link">Login/Signup</a>
                         </li>
                         <li class="nav-link">
                             <div class="top-header d-none d-sm-block">

@@ -47,6 +47,10 @@
             </nav>
         </div>
         <p>&nbsp;</p>
+        @if (Session::has('error'))
+            <p>{{ Session::get('error') }}</p>
+        @endif
+        <p>&nbsp;</p>
         <div class="row">
             <div class="col-6">
                 <div class=" text-center mt-5 ">
@@ -64,7 +68,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Email Address *</label>
+                                                        <label>Username *</label>
                                                         <input type="text" name="email" class="form-control"
                                                             placeholder="Please enter your email address *" required>
                                                     </div>
@@ -104,6 +108,9 @@
                         <div class="card mt-2 mx-auto p-4 bg-light">
                             <div class="card-body bg-light">
                                 <div class="container">
+                                    @if (Session::has('error'))
+                                        <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                                    @endif
                                     <form id="register-form" role="form" method="POST"
                                         action="{{ url('user/register') }}">
                                         @csrf
@@ -138,7 +145,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Email *</label>
+                                                        <label>Company Email *</label>
                                                         <input type="email" name="email" class="form-control"
                                                             placeholder="Please enter your email *" required>
                                                     </div>

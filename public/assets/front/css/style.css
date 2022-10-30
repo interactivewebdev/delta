@@ -20,6 +20,14 @@ select {
     right: 5px;
 }
 
+.pills-btn {
+    padding: 2px 9px !important;
+    border-radius:0.65rem !important;
+    margin:5px auto;
+    font-size:12px;
+    text-shadow:2px 2px 5px rgb(3, 193, 167,0.5);
+}
+
 .distributor-document-zone {
     min-height: 250px;
     backdrop-filter: invert(0.6);
@@ -2427,6 +2435,7 @@ ul.qty li p {
     .navbar-toggler {
         border: 0px;
         width: 100%;
+        padding:0px;
     }
     .navbar-toggler-icon {
         float: left;

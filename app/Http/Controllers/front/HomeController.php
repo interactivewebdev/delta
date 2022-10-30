@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
 use App\Models\Benefits;
 use App\Models\Content;
 use App\Models\Country;
 use App\Models\Meetus;
-use App\Models\NewsBlog;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Traits\SubscribeTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends BaseController
 {
@@ -22,7 +20,8 @@ class HomeController extends BaseController
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
         $benefits = Benefits::select("*")->get();
         $about = Content::select('*')->where('id', 1)->first();
         $meetus = Meetus::select("*")
@@ -30,42 +29,42 @@ class HomeController extends BaseController
             ->orderBy('id', 'DESC')
             ->get();
         $news = DB::table('news_blog as n')
-            ->leftJoin('category as c', 'n.category_id','c.category_id')
+            ->leftJoin('category as c', 'n.category_id', 'c.category_id')
             ->selectRaw("c.title as category, n.*, if(n.status=1,'Active','Deactive') as news_status, date_format(n.created_at,'%b %d, %Y') as created, date_format(n.modified_at,'%b %d, %Y') as last_modified")
             ->where('type', 'news')
             ->orderBy('n.order_by', 'DESC')
             ->take(2)
             ->get();
 
-        return view('front.home', compact('benefits','about','meetus','news'));
+        return view('front.home', compact('benefits', 'about', 'meetus', 'news'));
     }
 
     public function subscribe(Request $request)
-	{
+    {
         $data = $request->input();
-		$this->subscribeData($data);
+        $this->subscribeData($data);
 
-		$message = view('front.newsletter_subscription', compact('data'));
-		$this->email->from('info@deltabiocare.com', 'New Subscription');
-		//$this->email->to('visitajayar@gmail.com');
-		$this->email->to('info@deltabiocare.com');
+        $message = view('front.newsletter_subscription', compact('data'));
+        $this->email->from('info@deltabiocare.com', 'New Subscription');
+        //$this->email->to('visitajayar@gmail.com');
+        $this->email->to('info@deltabiocare.com');
 
-		$this->email->subject('Newsletter Subscription');
-		$this->email->message($message);
-		$this->email->send();
+        $this->email->subject('Newsletter Subscription');
+        $this->email->message($message);
+        $this->email->send();
 
         $minutes = time() + (86400 * 1);
         return response('Request successfully sent to DeltabioCare data base.')->cookie(
             'subscribed', 'yes', $minutes
         );
-	}	
+    }
 
-	public function noSubscribe(Request $request)
-	{
+    public function noSubscribe(Request $request)
+    {
         $minutes = time() + (86400 * 1);
         return response('You are successfully unsubscribed.')->cookie('subscribed', 'not interested', $minutes
-    );
-	}
+        );
+    }
 
     public function register()
     {
@@ -81,9 +80,22 @@ class HomeController extends BaseController
     public function postRegister(Request $request)
     {
         $inputData = $request->input();
-        unset($inputData['_token']);
-        DB::table('doc_user')->insert($inputData);
 
-        return redirect('page/thanks',['message'=>'You are successfully registered.']);
+        $userExists = DB::table('doc_user')->where('username', $request->input('username'))->count();
+
+        if ($userExists <= 0) {
+            unset($inputData['_token']);
+            DB::table('doc_user')->insert($inputData);
+
+            return redirect('page/thanks')->with('message', 'You are successfully registered.');
+        }else{
+            return redirect('user/register')->with('    ', 'Username is already exists.');
+        }
+    }
+
+    public function thanks()
+    {
+        $response['message'] = session('message');
+        return view('front.thanks', compact('response'));
     }
 }
