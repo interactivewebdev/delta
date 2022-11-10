@@ -57,6 +57,14 @@ Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
     Route::get('/document/active/{id}', [App\Http\Controllers\DocumentController::class, 'doc_active']);
     Route::get('/document/deactive/{id}', [App\Http\Controllers\DocumentController::class, 'doc_deactive']);
 
+    Route::get('/document/users', [App\Http\Controllers\DocumentController::class, 'docUsers']);
+    Route::get('/doc_user-form', [App\Http\Controllers\DocumentController::class, 'docuser_add']);
+    Route::post('/doc_user/store', [App\Http\Controllers\DocumentController::class, 'docuser_store']);
+    Route::get('/doc_user/edit/{id}', [App\Http\Controllers\DocumentController::class, 'docuser_edit']);
+    Route::get('/doc_user/delete/{id}', [App\Http\Controllers\DocumentController::class, 'docuser_delete']);
+    Route::get('/doc_user/active/{id}', [App\Http\Controllers\DocumentController::class, 'docuser_active']);
+    Route::get('/doc_user/deactive/{id}', [App\Http\Controllers\DocumentController::class, 'docuser_deactive']);
+
     Route::get('/document/categories', [App\Http\Controllers\DocumentController::class, 'docCategories']);
     Route::get('/doc_category-form', [App\Http\Controllers\DocumentController::class, 'category_add']);
     Route::post('/doc_category/store', [App\Http\Controllers\DocumentController::class, 'category_store']);
