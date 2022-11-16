@@ -37,7 +37,7 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>Listing of documents
-                            <a href="<?php echo e(url('doc_add')); ?>" class="mx-5 btn btn-primary btn-xs"
+                            <a href="<?php echo e(url('/admin/document-form')); ?>" class="mx-5 btn btn-primary btn-xs"
                                 data-original-title="btn btn-danger btn-xs" title="">Add New Document</a>
                         </h5>
                     </div>
@@ -66,7 +66,7 @@
                                         <?php $__currentLoopData = $documents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
                                                 <td><?php echo e($value->document_name); ?></td>
-                                                <td><?php echo e($value->categories); ?></td>
+                                                <td><?php echo e($value->category_id); ?></td>
                                                 <td><?php echo e($value->document); ?></td>
                                                 <td><?php echo e($value->country); ?></td>
                                                 <td><?php echo e($value->valid_upto); ?></td>

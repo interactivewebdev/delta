@@ -37,7 +37,7 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>Listing of documents
-                            <a href="{{ url('doc_add') }}" class="mx-5 btn btn-primary btn-xs"
+                            <a href="{{ url('/admin/document-form') }}" class="mx-5 btn btn-primary btn-xs"
                                 data-original-title="btn btn-danger btn-xs" title="">Add New Document</a>
                         </h5>
                     </div>
@@ -65,7 +65,7 @@
                                         @foreach ($documents as $key => $value)
                                             <tr>
                                                 <td>{{ $value->document_name }}</td>
-                                                <td>{{ $value->categories }}</td>
+                                                <td>{{ $value->category_id }}</td>
                                                 <td>{{ $value->document }}</td>
                                                 <td>{{ $value->country }}</td>
                                                 <td>{{ $value->valid_upto }}</td>
