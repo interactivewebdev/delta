@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2022 at 09:58 PM
+-- Generation Time: Nov 16, 2022 at 03:17 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -327,6 +327,13 @@ CREATE TABLE `documents` (
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `documents`
+--
+
+INSERT INTO `documents` (`id`, `category_id`, `subcategory_id`, `subsubcategory_id`, `document_name`, `document`, `country`, `valid_upto`, `status`) VALUES
+(1, 1, 3, 5, 'Title', 'http://localhost:8000/uploads/documents/5Ww90FMMZvvPBFlXB5MtGIXi0vtlXr9xGeEVzrd5.txt', 1, '2022-12-09 18:30:00', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -340,6 +347,16 @@ CREATE TABLE `doc_category` (
   `title` varchar(150) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `doc_category`
+--
+
+INSERT INTO `doc_category` (`id`, `parent_id`, `title`, `status`) VALUES
+(1, 0, 'Organic', 1),
+(3, 1, 'Fruits', 1),
+(4, 3, 'Dry', 1),
+(5, 3, 'Seasonal', 1);
 
 -- --------------------------------------------------------
 
@@ -374,6 +391,13 @@ CREATE TABLE `doc_user` (
   `company` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `doc_user`
+--
+
+INSERT INTO `doc_user` (`id`, `username`, `password`, `name`, `email`, `phone`, `country`, `company`, `status`) VALUES
+(2, 'textile', '12345678', 'Drama textile', 'dharma@textile.com', '9879876543', 1, 'Company', 1);
 
 -- --------------------------------------------------------
 
@@ -989,13 +1013,13 @@ ALTER TABLE `distributor`
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `doc_category`
 --
 ALTER TABLE `doc_category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `doc_request`
@@ -1007,7 +1031,7 @@ ALTER TABLE `doc_request`
 -- AUTO_INCREMENT for table `doc_user`
 --
 ALTER TABLE `doc_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `faq`
