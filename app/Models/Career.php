@@ -11,6 +11,7 @@ class Career extends Model
 
     protected $table = "career";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +26,6 @@ class Career extends Model
         'experience',
         'functional_area',
         'job_description',
-        'status'
+        'status',
     ];
 }

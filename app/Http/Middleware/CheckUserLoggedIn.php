@@ -19,6 +19,6 @@ class CheckUserLoggedIn
         if($request->session()->get('isLoggedIn') === true)
             return $next($request);
         else    
-            return redirect('/login');
+            return redirect('/admin/login');
     }
 }

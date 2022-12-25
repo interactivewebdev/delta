@@ -1,0 +1,8 @@
+MnmM8LjjR6DYUSQ3XtdN
+
+
+
+DBC Online DB Detail:
+DB: deltafo1_newdbc
+User: deltafo1_newdbcuser
+Pass: Dbc@12345Test

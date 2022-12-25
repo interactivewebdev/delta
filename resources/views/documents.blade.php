@@ -10,6 +10,15 @@
     </script>
 @endsection
 
+@section('custom-css-styles')
+    <style>
+        a.edit-btn {
+            margin: 5px;
+            display: block;
+        }
+    </style>
+@endsection
+
 @section('breadcrumb')
     <div class="container-fluid">
         <div class="page-title">
@@ -47,16 +56,15 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <div class="table-responsive product-table">
+                        <div class="table-responsive">
                             @if (count($documents) > 0)
                                 <table class="display" id="documents-list">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th style="width:150px !important;">Name</th>
                                             <th>Category</th>
-                                            <th>Document</th>
+                                            <th style="width:100px !important;">Document</th>
                                             <th>Country</th>
-                                            <th>Valid Upto</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -64,30 +72,32 @@
                                     <tbody>
                                         @foreach ($documents as $key => $value)
                                             <tr>
-                                                <td>{{ $value->document_name }}</td>
-                                                <td>{{ $value->category_id }}</td>
-                                                <td>{{ $value->document }}</td>
-                                                <td>{{ $value->country }}</td>
-                                                <td>{{ $value->valid_upto }}</td>
+                                                <td class="text-start">{{ $value->document_name }}</td>
+                                                <td>{{ $value->category_name }}</td>
+                                                <td style="width:100px !important; text-align:center;"><a
+                                                        href="{{ $value->document }}" target="_blank"><i
+                                                            class="fa-solid fa-file"></i></a>
+                                                </td>
+                                                <td>{{ $value->country_name }}</td>
                                                 <td class="font-success">{{ $value->status ? 'Active' : 'Inactive' }}</td>
                                                 <td>
                                                     @if ($value->status == 0)
-                                                        <a href="{{ url('/document/active/' . $value->id) }}"
-                                                            class="btn btn-success btn-xs" type="button"
+                                                        <a href="{{ url('/admin/document/active/' . $value->id) }}"
+                                                            class="btn btn-success btn-xs edit-btn" type="button"
                                                             data-original-title="btn btn-success btn-xs"
                                                             title="">Active</a>
                                                     @else
-                                                        <a href="{{ url('/document/deactive/' . $value->id) }}"
-                                                            class="btn btn-info btn-xs" type="button"
+                                                        <a href="{{ url('/admin/document/deactive/' . $value->id) }}"
+                                                            class="btn btn-info btn-xs edit-btn" type="button"
                                                             data-original-title="btn btn-info btn-xs"
                                                             title="">Deactive</a>
                                                     @endif
-                                                    <a href="{{ url('/document/delete/' . $value->id) }}"
-                                                        class="btn btn-danger btn-xs" type="button"
+                                                    <a href="{{ url('/admin/document/delete/' . $value->id) }}"
+                                                        class="btn btn-danger btn-xs edit-btn" type="button"
                                                         data-original-title="btn btn-danger btn-xs"
                                                         title="">Delete</a>
-                                                    <a href="{{ url('/document/edit/' . $value->id) }}"
-                                                        class="btn btn-primary btn-xs" type="button"
+                                                    <a href="{{ url('/admin/document/edit/' . $value->id) }}"
+                                                        class="btn btn-primary btn-xs edit-btn" type="button"
                                                         data-original-title="btn btn-danger btn-xs" title="">Edit</a>
                                                 </td>
                                             </tr>

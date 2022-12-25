@@ -5,11 +5,15 @@ namespace App\Http\Controllers\front;
 use App\Models\Benefits;
 use App\Models\Content;
 use App\Models\Country;
+use App\Models\Distributor;
+use App\Models\Doccategory;
+use App\Models\Documents;
 use App\Models\Meetus;
 use App\Traits\SubscribeTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends BaseController
 {
@@ -88,7 +92,54 @@ class HomeController extends BaseController
             DB::table('doc_user')->insert($inputData);
 
             return redirect('page/thanks')->with('message', 'You are successfully registered.');
-        }else{
+        } else {
+            return redirect('user/register')->with('    ', 'Username is already exists.');
+        }
+    }
+
+    public function distRegister()
+    {
+        $countries = Country::all();
+        return view('front.distributor-register', compact('countries'));
+    }
+
+    public function postDistLogin(Request $request)
+    {
+        $distributor = Distributor::where(['username' => $request->username, 'password' => $request->password]);
+
+        if ($distributor->count() > 0) {
+            $data = $distributor->first()->toArray();
+            $request->session()->put('dst_name', $data['name']);
+            $request->session()->put('distributor', $data);
+            $request->session()->put('distributor_logged_in', true);
+
+            return redirect('/distributor/' . $data['id'] . '/profile');
+        } else {
+            return back()->withInput();
+        }
+    }
+
+    public function distLogout()
+    {
+        Session::forget('dst_name');
+        Session::forget('distributor');
+        Session::forget('distributor_logged_in');
+
+        return redirect('/');
+    }
+
+    public function postDistRegister(Request $request)
+    {
+        $inputData = $request->input();
+
+        $userExists = DB::table('distributor')->where('username', $request->input('username'))->count();
+
+        if ($userExists <= 0) {
+            unset($inputData['_token']);
+            DB::table('distributor')->insert($inputData);
+
+            return redirect('page/thanks')->with('message', 'You are successfully registered.');
+        } else {
             return redirect('user/register')->with('    ', 'Username is already exists.');
         }
     }
@@ -97,5 +148,24 @@ class HomeController extends BaseController
     {
         $response['message'] = session('message');
         return view('front.thanks', compact('response'));
+    }
+
+    public function distributor_profile($id)
+    {
+        $distributor = Distributor::where('id', $id)->first();
+        $country = Country::where('id', $distributor->country)->first();
+        $documents = Documents::where('country', $distributor->country)->get();
+
+        $categories = Doccategory::where('parent_id', 0)->get()->toArray();
+
+        foreach ($categories as $key => $c) {
+            $categories[$key]['categories'] = Doccategory::where('parent_id', $c['id'])->get()->toArray();
+
+            foreach ($categories[$key]['categories'] as $key1 => $c1) {
+                $categories[$key]['categories'][$key1]['categories'] = Doccategory::where('parent_id', $c1['id'])->get()->toArray();
+            }
+        }
+
+        return view('front.distributor_profile', compact('distributor', 'country', 'documents', 'categories'));
     }
 }

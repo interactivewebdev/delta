@@ -10,6 +10,15 @@
     </script>
 @endsection
 
+@section('custom-css-styles')
+    <style>
+        a.edit-btn {
+            margin: 5px;
+            display: block;
+        }
+    </style>
+@endsection
+
 @section('breadcrumb')
     <div class="container-fluid">
         <div class="page-title">
@@ -50,7 +59,7 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <div class="table-responsive product-table">
+                        <div class="table-responsive">
                             <table class="display" id="product-list">
                                 <thead>
                                     <tr>
@@ -75,20 +84,20 @@
                                             <td>
                                                 @if ($value->status == 0)
                                                     <a href="{{ url('/product/active/' . $value->product_id) }}"
-                                                        class="btn btn-success btn-xs" type="button"
+                                                        class="edit-btn btn btn-success btn-xs" type="button"
                                                         data-original-title="btn btn-success btn-xs"
                                                         title="">Active</a>
                                                 @else
                                                     <a href="{{ url('/product/deactive/' . $value->product_id) }}"
-                                                        class="btn btn-info btn-xs" type="button"
+                                                        class="edit-btn btn btn-info btn-xs" type="button"
                                                         data-original-title="btn btn-info btn-xs"
                                                         title="">Deactive</a>
                                                 @endif
                                                 <a href="{{ url('/product/delete/' . $value->product_id) }}"
-                                                    class="btn btn-danger btn-xs" type="button"
+                                                    class="edit-btn btn btn-danger btn-xs" type="button"
                                                     data-original-title="btn btn-danger btn-xs" title="">Delete</a>
                                                 <a href="{{ url('/product/edit/' . $value->product_id) }}"
-                                                    class="btn btn-primary btn-xs" type="button"
+                                                    class="edit-btn btn btn-primary btn-xs" type="button"
                                                     data-original-title="btn btn-danger btn-xs" title="">Edit</a>
                                             </td>
                                         </tr>

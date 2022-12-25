@@ -37,8 +37,7 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>Listing of document users
-                            <a href="<?php echo e(url('admin/doc_user-form')); ?>" class="mx-5 btn btn-primary btn-xs"
-                                data-original-title="btn btn-danger btn-xs" title="">Add New Document User</a>
+                            
                         </h5>
                     </div>
                     <div class="card-body">
@@ -63,14 +62,22 @@
                                     <tbody>
                                         <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td class="text-start"><?php echo e($value->name); ?></td>
+                                                <td class="text-start">
+                                                    <?php echo e($value->name); ?>
+
+                                                    <?php if($value->approve == 0): ?>
+                                                        <br><span class="badge bg-warning text-white">Pending</span>
+                                                    <?php elseif($value->approve == 1): ?>
+                                                        <br><span class="badge bg-success text-white">Approved</span>
+                                                    <?php else: ?>
+                                                        <br><span class="badge bg-danger text-white">Rejected</span>
+                                                    <?php endif; ?>
+                                                </td>
                                                 <td class="text-start"><?php echo e($value->email); ?></td>
                                                 <td><?php echo e($value->phone); ?></td>
                                                 <td class="font-success"><?php echo e($value->status ? 'Active' : 'Inactive'); ?></td>
                                                 <td>
-                                                    <a href="<?php echo e(url('/admin/doc_user/edit/' . $value->id)); ?>"
-                                                        class="btn btn-primary btn-xs" type="button"
-                                                        data-original-title="btn btn-danger btn-xs" title="">Edit</a>
+                                                    
                                                     <a href="<?php echo e(url('/admin/doc_user/delete/' . $value->id)); ?>"
                                                         class="btn btn-danger btn-xs" type="button"
                                                         data-original-title="btn btn-danger btn-xs"
@@ -85,6 +92,19 @@
                                                             class="btn btn-info btn-xs" type="button"
                                                             data-original-title="btn btn-info btn-xs"
                                                             title="">Deactive</a>
+                                                    <?php endif; ?>
+
+                                                    <?php if($value->approve == 0): ?>
+                                                        <div class="m-1"><a
+                                                                href="<?php echo e(url('/admin/doc_user/approve/' . $value->id)); ?>"
+                                                                class="btn btn-success btn-xs" type="button"
+                                                                data-original-title="btn btn-success btn-xs"
+                                                                title="">Approve</a>
+                                                            <a href="<?php echo e(url('/admin/doc_user/reject/' . $value->id)); ?>"
+                                                                class="btn btn-danger btn-xs" type="button"
+                                                                data-original-title="btn btn-danger btn-xs"
+                                                                title="">Reject</a>
+                                                        </div>
                                                     <?php endif; ?>
 
 

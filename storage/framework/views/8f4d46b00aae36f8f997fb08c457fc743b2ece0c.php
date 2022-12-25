@@ -59,8 +59,8 @@
     <section>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-5"><img class="bg-img-cover bg-center"
-                        src="<?php echo e(url('assets/images/login/3.jpg')); ?>" alt="looginpage"></div>
+                <div class="col-xl-5"><img class="bg-img-cover bg-center" src="<?php echo e(url('assets/images/login/3.jpg')); ?>"
+                        alt="looginpage"></div>
                 <div class="col-xl-7 p-0">
                     <div class="login-card">
                         <form class="theme-form login-form" method="post" action="<?php echo e(route('auth.dologin')); ?>">
@@ -83,16 +83,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <a class="link" href="<?php echo e(route('forgot.password')); ?>">Forgot
-                                    password?</a>
+                                
                             </div>
                             <br>
                             <br>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
                             </div>
-                            <p>Don't have account?<a class="ms-2" href="<?php echo e(route('auth.register')); ?>">Create
-                                    Account</a></p>
+                            
                         </form>
                     </div>
                 </div>

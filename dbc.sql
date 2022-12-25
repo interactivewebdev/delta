@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2022 at 03:17 AM
+-- Generation Time: Dec 25, 2022 at 07:02 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -43,8 +43,9 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`id`, `country`, `city`, `lat`, `lon`, `address`, `status`) VALUES
-(1, 'IN', 'vijayawada', '73.1234', '85.2338', 'Vijaywada India', 2),
-(2, 'IN', 'Tezpur', '73.1234', '85.2338', 'Tezpur', 1);
+(1, 'IN', 'vijayawada', '73.1234', '85.2338', 'Vijaywada India', 1),
+(2, 'IN', 'Tezpur', '73.1234', '85.2338', 'Tezpur', 0),
+(3, 'IN', 'New Delhi', '10.123', '12.324', 'Nangloi', 1);
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `username`, `password`, `last_login_at`, `status`) VALUES
-(1, 'Deltabiocare', 'delta', 'e10adc3949ba59abbe56e057f20f883e', '2022-09-06 20:01:20', 1);
+(1, 'Deltabiocare', 'delta', 'c93ccd78b2076528346216b3b2f701e6', '2022-11-22 05:15:43', 1);
 
 -- --------------------------------------------------------
 
@@ -102,10 +103,11 @@ CREATE TABLE `benefits` (
 --
 
 INSERT INTO `benefits` (`id`, `title`, `short_desc`, `image`, `status`) VALUES
-(1, 'Customize ingredients', 'You bring your requirement for current or future needs, DBC, strives to offer green solutions that suit your formulations.', 'https://www.deltabiocare.com/uploads/1641144667.png', 0),
+(1, 'Customize ingredients', 'You bring your requirement for current or future needs, DBC, strives to offer green solutions that suit your formulations.', 'https://www.deltabiocare.com/uploads/1641144667.png', 1),
 (2, 'Flexible production volumes', 'Flexible production facilities allow us to accept small to large-scale production volumes.', 'https://www.deltabiocare.com/uploads/1641144702.png', 0),
-(3, 'Regulatory compliance', 'DBC, supports your country regulatory requirements and ensure their compliance.', 'https://www.deltabiocare.com/uploads/1641144752.png', 0),
-(4, 'Global Customer support', 'Every customer request typically replied with in 48 hrs.\r\n', 'https://www.deltabiocare.com/uploads/1641144799.png', 0);
+(3, 'Regulatory compliance', 'DBC, supports your country regulatory requirements and ensure their compliance.', 'https://www.deltabiocare.com/uploads/1641144752.png', 1),
+(4, 'Global Customer support', 'Every customer request typically replied with in 48 hrs.\r\n', 'https://www.deltabiocare.com/uploads/1641144799.png', 0),
+(5, 'test', 'This is just test short description.', 'http://localhost:8000/uploads/benefit/1669907093-full.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -125,6 +127,14 @@ CREATE TABLE `career` (
   `job_description` text NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `career`
+--
+
+INSERT INTO `career` (`id`, `title`, `positions`, `place`, `job_type`, `experience`, `functional_area`, `job_description`, `status`) VALUES
+(1, 'Full Stack Developer', 3, 'Gurugram, Haryana', 'Permanent', '7 yrs', 'Software Development', 'This is job description for full stack development. Something else....', 1),
+(2, 'Team Leader - Web Designer', 2, 'Gurugram, Haryana', 'Permanent', '7 yrs', 'Designing', 'Designer', 1);
 
 -- --------------------------------------------------------
 
@@ -155,7 +165,8 @@ INSERT INTO `category` (`category_id`, `parent_id`, `title`, `description`, `ima
 (5, 9, 'Organic Premium', '', 'https://deltabiocare.com/uploads/1627287463.jpg', '2', 1, '2021-07-19 08:34:10', '2021-10-14 15:10:25', 0),
 (6, 1, 'Enhance', '', 'https://deltabiocare.com/uploads/1627308655.jpg', '2', 1, '2021-07-26 08:40:55', '2021-10-14 15:11:56', 0),
 (8, 0, 'BioSustain', '', '', '1', 1, '2021-08-29 03:49:31', '2021-10-14 15:05:55', 0),
-(9, 0, 'Research Herbals', '', '', '1', 1, '2021-10-14 15:10:12', NULL, 0);
+(9, 0, 'Research Herbals', '', '', '1', 1, '2021-10-14 15:10:12', NULL, 0),
+(10, 1, 'Test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent magna arcu, sollicitudin volutpat fermentum id, mattis sed ex. Vestibulum finibus elit et ex fermentum suscipit.', 'http://localhost:8000/uploads/categories/lGz4zOmXAcycP4nm6Ao5Y9ZZoK2QpqcF80ZEbOU0.jpg', '1', 1, '2022-11-28 12:29:30', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -237,8 +248,9 @@ CREATE TABLE `content` (
 --
 
 INSERT INTO `content` (`id`, `title`, `short_desc`, `description`, `image`, `list_image`, `order_by`, `status`, `created_at`, `modified_at`) VALUES
-(1, 'About Us', 'Customizing our herbal/nutraceutical active ingredient blends suits your product and market needs make our customers unique in the market. The safety and efficacy of our ingredients undergo testing at every phase of our ingredients i.,e from sourcing of our raw materials to processing them. Sourcing our raw materials according to your requirements and holding the repeatable quality KPIs allow us to serve our clients in a better way.', '<p>&nbsp;</p><p><strong>OUR COMMITMENT</strong></p><ul><li>Customization of our herbal-nutraceutical ingredients suits your product.</li><li>Safety and efficacy-oriented ingredients.</li></ul><p>&nbsp;</p><p><strong>WHO ARE WE</strong></p><ul><li>We are sourcing our raw materials locally and processing herbal-nutraceutical ingredients according to our global customer requirements established in 2022, India.&nbsp;</li><li>&nbsp;Customize each ingredient we process according to nutraceutical and well-being product manufacturers.</li></ul><p>&nbsp;</p><p><strong>CERTIFICATIONS</strong></p><ul><li>FSSC</li><li>USDA ORGANIC</li><li>HALAL</li></ul><p>&nbsp;</p>', 'https://deltabiocare.com/uploads/1627289464.jpg', 'https://deltabiocare.com/uploads/About_Us_DBC.png', '1', 0, '2021-05-25 09:11:17', '2021-05-25 09:11:17'),
-(2, 'Contact us', '', '<p>he</p>', 'https://deltabiocare.com/uploads/1639599714.jpeg', '', '1', 0, '2021-07-13 10:35:14', '2021-07-13 10:35:14');
+(1, 'About Us', 'Customizing our herbal/nutraceutical active ingredient blends suits your product and market needs make our customers unique in the market. The safety and efficacy of our ingredients undergo testing at every phase of our ingredients i.,e from sourcing of our raw materials to processing them. Sourcing our raw materials according to your requirements and holding the repeatable quality KPIs allow us to serve our clients in a better way.', '<p>&nbsp;</p><p><strong>OUR COMMITMENT</strong></p><ul><li>Customization of our herbal-nutraceutical ingredients suits your product.</li><li>Safety and efficacy-oriented ingredients.</li></ul><p>&nbsp;</p><p><strong>WHO ARE WE</strong></p><ul><li>We are sourcing our raw materials locally and processing herbal-nutraceutical ingredients according to our global customer requirements established in 2022, India.&nbsp;</li><li>&nbsp;Customize each ingredient we process according to nutraceutical and well-being product manufacturers.</li></ul><p>&nbsp;</p><p><strong>CERTIFICATIONS</strong></p><ul><li>FSSC</li><li>USDA ORGANIC</li><li>HALAL</li></ul><p>&nbsp;</p>', 'https://deltabiocare.com/uploads/1627289464.jpg', 'https://deltabiocare.com/uploads/About_Us_DBC.png', '1', 1, '2021-05-25 09:11:17', '2022-11-30 13:56:21'),
+(2, 'Contact us', 'To move the file to the public folder we are making use of $request->image->move() which helps to move the image uploaded to the destination path.', 'To move the file to the public folder we are making use of $request->image->move() which helps to move the image uploaded to the destination path. The public folder path is retrieved using : public_path($destinationPath)', 'http://localhost:8000/uploads/content/1669749638-full.jpg', 'http://localhost:8000/uploads/content/1669749638-list.jpg', '1', 1, '2021-07-13 10:35:14', '2022-11-30 13:56:28'),
+(3, 'How to upload files in Laravel directly into the public folder?', 'Let us move the files uploaded inside images/ folders in public. The file upload display is as follows −', '<html>\r\n<head>\r\n   <title>Student Form</title>\r\n</head>\r\n<body>\r\n   @if (count($errors) > 0)\r\n      <div class = \"alert alert-danger\">\r\n         <ul>\r\n            @foreach ($errors->all() as $error)\r\n            <li>{{ $error }}</li>\r\n            @endforeach\r\n         </ul>\r\n      </div>\r\n   @endif\r\n   <?php\r\n      echo Form::open(array(\'url\'=>\'/student\', \'files\'=>\'true\'));\r\n      echo \'Upload File.\';\r\n      echo Form::file(\'image\');\r\n      echo Form::submit(\'Upload\');\r\n      echo Form::close();\r\n   ?>\r\n</body>\r\n</html>', 'http://localhost:8000/uploads/content/1669749744-full.jpg', 'http://localhost:8000/uploads/content/1669749744-list.gif', '2', 1, '2022-11-29 13:52:24', '2022-12-03 00:57:11');
 
 -- --------------------------------------------------------
 
@@ -271,42 +283,259 @@ INSERT INTO `content_section` (`id`, `content_id`, `title`, `description`, `imag
 
 DROP TABLE IF EXISTS `country`;
 CREATE TABLE `country` (
-  `id` int(20) NOT NULL,
-  `iso_code_2` varchar(50) NOT NULL,
-  `name` varchar(150) NOT NULL
+  `id` int(11) NOT NULL,
+  `iso_code_2` char(2) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `nicename` varchar(80) NOT NULL,
+  `iso3` char(3) DEFAULT NULL,
+  `numcode` smallint(6) DEFAULT NULL,
+  `phonecode` int(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `country`
 --
 
-INSERT INTO `country` (`id`, `iso_code_2`, `name`) VALUES
-(1, 'IN', 'India');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `distributor`
---
-
-DROP TABLE IF EXISTS `distributor`;
-CREATE TABLE `distributor` (
-  `id` bigint(20) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `distributor`
---
-
-INSERT INTO `distributor` (`id`, `username`, `password`, `name`, `email`, `phone`, `status`) VALUES
-(1, 'abhijit', 'JTmH]6<D', 'Abhijit Sarma', 'asarma464@gmail.com', '6000804627', 1),
-(2, 'srikanth', 'zZqBLTLc', 'srikanth', 'srikanthlavu1@gmail.com', '7093747478', 1);
+INSERT INTO `country` (`id`, `iso_code_2`, `name`, `nicename`, `iso3`, `numcode`, `phonecode`) VALUES
+(1, 'AF', 'AFGHANISTAN', 'Afghanistan', 'AFG', 4, 93),
+(2, 'AL', 'ALBANIA', 'Albania', 'ALB', 8, 355),
+(3, 'DZ', 'ALGERIA', 'Algeria', 'DZA', 12, 213),
+(4, 'AS', 'AMERICAN SAMOA', 'American Samoa', 'ASM', 16, 1684),
+(5, 'AD', 'ANDORRA', 'Andorra', 'AND', 20, 376),
+(6, 'AO', 'ANGOLA', 'Angola', 'AGO', 24, 244),
+(7, 'AI', 'ANGUILLA', 'Anguilla', 'AIA', 660, 1264),
+(8, 'AQ', 'ANTARCTICA', 'Antarctica', NULL, NULL, 0),
+(9, 'AG', 'ANTIGUA AND BARBUDA', 'Antigua and Barbuda', 'ATG', 28, 1268),
+(10, 'AR', 'ARGENTINA', 'Argentina', 'ARG', 32, 54),
+(11, 'AM', 'ARMENIA', 'Armenia', 'ARM', 51, 374),
+(12, 'AW', 'ARUBA', 'Aruba', 'ABW', 533, 297),
+(13, 'AU', 'AUSTRALIA', 'Australia', 'AUS', 36, 61),
+(14, 'AT', 'AUSTRIA', 'Austria', 'AUT', 40, 43),
+(15, 'AZ', 'AZERBAIJAN', 'Azerbaijan', 'AZE', 31, 994),
+(16, 'BS', 'BAHAMAS', 'Bahamas', 'BHS', 44, 1242),
+(17, 'BH', 'BAHRAIN', 'Bahrain', 'BHR', 48, 973),
+(18, 'BD', 'BANGLADESH', 'Bangladesh', 'BGD', 50, 880),
+(19, 'BB', 'BARBADOS', 'Barbados', 'BRB', 52, 1246),
+(20, 'BY', 'BELARUS', 'Belarus', 'BLR', 112, 375),
+(21, 'BE', 'BELGIUM', 'Belgium', 'BEL', 56, 32),
+(22, 'BZ', 'BELIZE', 'Belize', 'BLZ', 84, 501),
+(23, 'BJ', 'BENIN', 'Benin', 'BEN', 204, 229),
+(24, 'BM', 'BERMUDA', 'Bermuda', 'BMU', 60, 1441),
+(25, 'BT', 'BHUTAN', 'Bhutan', 'BTN', 64, 975),
+(26, 'BO', 'BOLIVIA', 'Bolivia', 'BOL', 68, 591),
+(27, 'BA', 'BOSNIA AND HERZEGOVINA', 'Bosnia and Herzegovina', 'BIH', 70, 387),
+(28, 'BW', 'BOTSWANA', 'Botswana', 'BWA', 72, 267),
+(29, 'BV', 'BOUVET ISLAND', 'Bouvet Island', NULL, NULL, 0),
+(30, 'BR', 'BRAZIL', 'Brazil', 'BRA', 76, 55),
+(31, 'IO', 'BRITISH INDIAN OCEAN TERRITORY', 'British Indian Ocean Territory', NULL, NULL, 246),
+(32, 'BN', 'BRUNEI DARUSSALAM', 'Brunei Darussalam', 'BRN', 96, 673),
+(33, 'BG', 'BULGARIA', 'Bulgaria', 'BGR', 100, 359),
+(34, 'BF', 'BURKINA FASO', 'Burkina Faso', 'BFA', 854, 226),
+(35, 'BI', 'BURUNDI', 'Burundi', 'BDI', 108, 257),
+(36, 'KH', 'CAMBODIA', 'Cambodia', 'KHM', 116, 855),
+(37, 'CM', 'CAMEROON', 'Cameroon', 'CMR', 120, 237),
+(38, 'CA', 'CANADA', 'Canada', 'CAN', 124, 1),
+(39, 'CV', 'CAPE VERDE', 'Cape Verde', 'CPV', 132, 238),
+(40, 'KY', 'CAYMAN ISLANDS', 'Cayman Islands', 'CYM', 136, 1345),
+(41, 'CF', 'CENTRAL AFRICAN REPUBLIC', 'Central African Republic', 'CAF', 140, 236),
+(42, 'TD', 'CHAD', 'Chad', 'TCD', 148, 235),
+(43, 'CL', 'CHILE', 'Chile', 'CHL', 152, 56),
+(44, 'CN', 'CHINA', 'China', 'CHN', 156, 86),
+(45, 'CX', 'CHRISTMAS ISLAND', 'Christmas Island', NULL, NULL, 61),
+(46, 'CC', 'COCOS (KEELING) ISLANDS', 'Cocos (Keeling) Islands', NULL, NULL, 672),
+(47, 'CO', 'COLOMBIA', 'Colombia', 'COL', 170, 57),
+(48, 'KM', 'COMOROS', 'Comoros', 'COM', 174, 269),
+(49, 'CG', 'CONGO', 'Congo', 'COG', 178, 242),
+(50, 'CD', 'CONGO, THE DEMOCRATIC REPUBLIC OF THE', 'Congo, the Democratic Republic of the', 'COD', 180, 242),
+(51, 'CK', 'COOK ISLANDS', 'Cook Islands', 'COK', 184, 682),
+(52, 'CR', 'COSTA RICA', 'Costa Rica', 'CRI', 188, 506),
+(53, 'CI', 'COTE D\'IVOIRE', 'Cote D\'Ivoire', 'CIV', 384, 225),
+(54, 'HR', 'CROATIA', 'Croatia', 'HRV', 191, 385),
+(55, 'CU', 'CUBA', 'Cuba', 'CUB', 192, 53),
+(56, 'CY', 'CYPRUS', 'Cyprus', 'CYP', 196, 357),
+(57, 'CZ', 'CZECH REPUBLIC', 'Czech Republic', 'CZE', 203, 420),
+(58, 'DK', 'DENMARK', 'Denmark', 'DNK', 208, 45),
+(59, 'DJ', 'DJIBOUTI', 'Djibouti', 'DJI', 262, 253),
+(60, 'DM', 'DOMINICA', 'Dominica', 'DMA', 212, 1767),
+(61, 'DO', 'DOMINICAN REPUBLIC', 'Dominican Republic', 'DOM', 214, 1809),
+(62, 'EC', 'ECUADOR', 'Ecuador', 'ECU', 218, 593),
+(63, 'EG', 'EGYPT', 'Egypt', 'EGY', 818, 20),
+(64, 'SV', 'EL SALVADOR', 'El Salvador', 'SLV', 222, 503),
+(65, 'GQ', 'EQUATORIAL GUINEA', 'Equatorial Guinea', 'GNQ', 226, 240),
+(66, 'ER', 'ERITREA', 'Eritrea', 'ERI', 232, 291),
+(67, 'EE', 'ESTONIA', 'Estonia', 'EST', 233, 372),
+(68, 'ET', 'ETHIOPIA', 'Ethiopia', 'ETH', 231, 251),
+(69, 'FK', 'FALKLAND ISLANDS (MALVINAS)', 'Falkland Islands (Malvinas)', 'FLK', 238, 500),
+(70, 'FO', 'FAROE ISLANDS', 'Faroe Islands', 'FRO', 234, 298),
+(71, 'FJ', 'FIJI', 'Fiji', 'FJI', 242, 679),
+(72, 'FI', 'FINLAND', 'Finland', 'FIN', 246, 358),
+(73, 'FR', 'FRANCE', 'France', 'FRA', 250, 33),
+(74, 'GF', 'FRENCH GUIANA', 'French Guiana', 'GUF', 254, 594),
+(75, 'PF', 'FRENCH POLYNESIA', 'French Polynesia', 'PYF', 258, 689),
+(76, 'TF', 'FRENCH SOUTHERN TERRITORIES', 'French Southern Territories', NULL, NULL, 0),
+(77, 'GA', 'GABON', 'Gabon', 'GAB', 266, 241),
+(78, 'GM', 'GAMBIA', 'Gambia', 'GMB', 270, 220),
+(79, 'GE', 'GEORGIA', 'Georgia', 'GEO', 268, 995),
+(80, 'DE', 'GERMANY', 'Germany', 'DEU', 276, 49),
+(81, 'GH', 'GHANA', 'Ghana', 'GHA', 288, 233),
+(82, 'GI', 'GIBRALTAR', 'Gibraltar', 'GIB', 292, 350),
+(83, 'GR', 'GREECE', 'Greece', 'GRC', 300, 30),
+(84, 'GL', 'GREENLAND', 'Greenland', 'GRL', 304, 299),
+(85, 'GD', 'GRENADA', 'Grenada', 'GRD', 308, 1473),
+(86, 'GP', 'GUADELOUPE', 'Guadeloupe', 'GLP', 312, 590),
+(87, 'GU', 'GUAM', 'Guam', 'GUM', 316, 1671),
+(88, 'GT', 'GUATEMALA', 'Guatemala', 'GTM', 320, 502),
+(89, 'GN', 'GUINEA', 'Guinea', 'GIN', 324, 224),
+(90, 'GW', 'GUINEA-BISSAU', 'Guinea-Bissau', 'GNB', 624, 245),
+(91, 'GY', 'GUYANA', 'Guyana', 'GUY', 328, 592),
+(92, 'HT', 'HAITI', 'Haiti', 'HTI', 332, 509),
+(93, 'HM', 'HEARD ISLAND AND MCDONALD ISLANDS', 'Heard Island and Mcdonald Islands', NULL, NULL, 0),
+(94, 'VA', 'HOLY SEE (VATICAN CITY STATE)', 'Holy See (Vatican City State)', 'VAT', 336, 39),
+(95, 'HN', 'HONDURAS', 'Honduras', 'HND', 340, 504),
+(96, 'HK', 'HONG KONG', 'Hong Kong', 'HKG', 344, 852),
+(97, 'HU', 'HUNGARY', 'Hungary', 'HUN', 348, 36),
+(98, 'IS', 'ICELAND', 'Iceland', 'ISL', 352, 354),
+(99, 'IN', 'INDIA', 'India', 'IND', 356, 91),
+(100, 'ID', 'INDONESIA', 'Indonesia', 'IDN', 360, 62),
+(101, 'IR', 'IRAN, ISLAMIC REPUBLIC OF', 'Iran, Islamic Republic of', 'IRN', 364, 98),
+(102, 'IQ', 'IRAQ', 'Iraq', 'IRQ', 368, 964),
+(103, 'IE', 'IRELAND', 'Ireland', 'IRL', 372, 353),
+(104, 'IL', 'ISRAEL', 'Israel', 'ISR', 376, 972),
+(105, 'IT', 'ITALY', 'Italy', 'ITA', 380, 39),
+(106, 'JM', 'JAMAICA', 'Jamaica', 'JAM', 388, 1876),
+(107, 'JP', 'JAPAN', 'Japan', 'JPN', 392, 81),
+(108, 'JO', 'JORDAN', 'Jordan', 'JOR', 400, 962),
+(109, 'KZ', 'KAZAKHSTAN', 'Kazakhstan', 'KAZ', 398, 7),
+(110, 'KE', 'KENYA', 'Kenya', 'KEN', 404, 254),
+(111, 'KI', 'KIRIBATI', 'Kiribati', 'KIR', 296, 686),
+(112, 'KP', 'KOREA, DEMOCRATIC PEOPLE\'S REPUBLIC OF', 'Korea, Democratic People\'s Republic of', 'PRK', 408, 850),
+(113, 'KR', 'KOREA, REPUBLIC OF', 'Korea, Republic of', 'KOR', 410, 82),
+(114, 'KW', 'KUWAIT', 'Kuwait', 'KWT', 414, 965),
+(115, 'KG', 'KYRGYZSTAN', 'Kyrgyzstan', 'KGZ', 417, 996),
+(116, 'LA', 'LAO PEOPLE\'S DEMOCRATIC REPUBLIC', 'Lao People\'s Democratic Republic', 'LAO', 418, 856),
+(117, 'LV', 'LATVIA', 'Latvia', 'LVA', 428, 371),
+(118, 'LB', 'LEBANON', 'Lebanon', 'LBN', 422, 961),
+(119, 'LS', 'LESOTHO', 'Lesotho', 'LSO', 426, 266),
+(120, 'LR', 'LIBERIA', 'Liberia', 'LBR', 430, 231),
+(121, 'LY', 'LIBYAN ARAB JAMAHIRIYA', 'Libyan Arab Jamahiriya', 'LBY', 434, 218),
+(122, 'LI', 'LIECHTENSTEIN', 'Liechtenstein', 'LIE', 438, 423),
+(123, 'LT', 'LITHUANIA', 'Lithuania', 'LTU', 440, 370),
+(124, 'LU', 'LUXEMBOURG', 'Luxembourg', 'LUX', 442, 352),
+(125, 'MO', 'MACAO', 'Macao', 'MAC', 446, 853),
+(126, 'MK', 'MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF', 'Macedonia, the Former Yugoslav Republic of', 'MKD', 807, 389),
+(127, 'MG', 'MADAGASCAR', 'Madagascar', 'MDG', 450, 261),
+(128, 'MW', 'MALAWI', 'Malawi', 'MWI', 454, 265),
+(129, 'MY', 'MALAYSIA', 'Malaysia', 'MYS', 458, 60),
+(130, 'MV', 'MALDIVES', 'Maldives', 'MDV', 462, 960),
+(131, 'ML', 'MALI', 'Mali', 'MLI', 466, 223),
+(132, 'MT', 'MALTA', 'Malta', 'MLT', 470, 356),
+(133, 'MH', 'MARSHALL ISLANDS', 'Marshall Islands', 'MHL', 584, 692),
+(134, 'MQ', 'MARTINIQUE', 'Martinique', 'MTQ', 474, 596),
+(135, 'MR', 'MAURITANIA', 'Mauritania', 'MRT', 478, 222),
+(136, 'MU', 'MAURITIUS', 'Mauritius', 'MUS', 480, 230),
+(137, 'YT', 'MAYOTTE', 'Mayotte', NULL, NULL, 269),
+(138, 'MX', 'MEXICO', 'Mexico', 'MEX', 484, 52),
+(139, 'FM', 'MICRONESIA, FEDERATED STATES OF', 'Micronesia, Federated States of', 'FSM', 583, 691),
+(140, 'MD', 'MOLDOVA, REPUBLIC OF', 'Moldova, Republic of', 'MDA', 498, 373),
+(141, 'MC', 'MONACO', 'Monaco', 'MCO', 492, 377),
+(142, 'MN', 'MONGOLIA', 'Mongolia', 'MNG', 496, 976),
+(143, 'MS', 'MONTSERRAT', 'Montserrat', 'MSR', 500, 1664),
+(144, 'MA', 'MOROCCO', 'Morocco', 'MAR', 504, 212),
+(145, 'MZ', 'MOZAMBIQUE', 'Mozambique', 'MOZ', 508, 258),
+(146, 'MM', 'MYANMAR', 'Myanmar', 'MMR', 104, 95),
+(147, 'NA', 'NAMIBIA', 'Namibia', 'NAM', 516, 264),
+(148, 'NR', 'NAURU', 'Nauru', 'NRU', 520, 674),
+(149, 'NP', 'NEPAL', 'Nepal', 'NPL', 524, 977),
+(150, 'NL', 'NETHERLANDS', 'Netherlands', 'NLD', 528, 31),
+(151, 'AN', 'NETHERLANDS ANTILLES', 'Netherlands Antilles', 'ANT', 530, 599),
+(152, 'NC', 'NEW CALEDONIA', 'New Caledonia', 'NCL', 540, 687),
+(153, 'NZ', 'NEW ZEALAND', 'New Zealand', 'NZL', 554, 64),
+(154, 'NI', 'NICARAGUA', 'Nicaragua', 'NIC', 558, 505),
+(155, 'NE', 'NIGER', 'Niger', 'NER', 562, 227),
+(156, 'NG', 'NIGERIA', 'Nigeria', 'NGA', 566, 234),
+(157, 'NU', 'NIUE', 'Niue', 'NIU', 570, 683),
+(158, 'NF', 'NORFOLK ISLAND', 'Norfolk Island', 'NFK', 574, 672),
+(159, 'MP', 'NORTHERN MARIANA ISLANDS', 'Northern Mariana Islands', 'MNP', 580, 1670),
+(160, 'NO', 'NORWAY', 'Norway', 'NOR', 578, 47),
+(161, 'OM', 'OMAN', 'Oman', 'OMN', 512, 968),
+(162, 'PK', 'PAKISTAN', 'Pakistan', 'PAK', 586, 92),
+(163, 'PW', 'PALAU', 'Palau', 'PLW', 585, 680),
+(164, 'PS', 'PALESTINIAN TERRITORY, OCCUPIED', 'Palestinian Territory, Occupied', NULL, NULL, 970),
+(165, 'PA', 'PANAMA', 'Panama', 'PAN', 591, 507),
+(166, 'PG', 'PAPUA NEW GUINEA', 'Papua New Guinea', 'PNG', 598, 675),
+(167, 'PY', 'PARAGUAY', 'Paraguay', 'PRY', 600, 595),
+(168, 'PE', 'PERU', 'Peru', 'PER', 604, 51),
+(169, 'PH', 'PHILIPPINES', 'Philippines', 'PHL', 608, 63),
+(170, 'PN', 'PITCAIRN', 'Pitcairn', 'PCN', 612, 0),
+(171, 'PL', 'POLAND', 'Poland', 'POL', 616, 48),
+(172, 'PT', 'PORTUGAL', 'Portugal', 'PRT', 620, 351),
+(173, 'PR', 'PUERTO RICO', 'Puerto Rico', 'PRI', 630, 1787),
+(174, 'QA', 'QATAR', 'Qatar', 'QAT', 634, 974),
+(175, 'RE', 'REUNION', 'Reunion', 'REU', 638, 262),
+(176, 'RO', 'ROMANIA', 'Romania', 'ROM', 642, 40),
+(177, 'RU', 'RUSSIAN FEDERATION', 'Russian Federation', 'RUS', 643, 70),
+(178, 'RW', 'RWANDA', 'Rwanda', 'RWA', 646, 250),
+(179, 'SH', 'SAINT HELENA', 'Saint Helena', 'SHN', 654, 290),
+(180, 'KN', 'SAINT KITTS AND NEVIS', 'Saint Kitts and Nevis', 'KNA', 659, 1869),
+(181, 'LC', 'SAINT LUCIA', 'Saint Lucia', 'LCA', 662, 1758),
+(182, 'PM', 'SAINT PIERRE AND MIQUELON', 'Saint Pierre and Miquelon', 'SPM', 666, 508),
+(183, 'VC', 'SAINT VINCENT AND THE GRENADINES', 'Saint Vincent and the Grenadines', 'VCT', 670, 1784),
+(184, 'WS', 'SAMOA', 'Samoa', 'WSM', 882, 684),
+(185, 'SM', 'SAN MARINO', 'San Marino', 'SMR', 674, 378),
+(186, 'ST', 'SAO TOME AND PRINCIPE', 'Sao Tome and Principe', 'STP', 678, 239),
+(187, 'SA', 'SAUDI ARABIA', 'Saudi Arabia', 'SAU', 682, 966),
+(188, 'SN', 'SENEGAL', 'Senegal', 'SEN', 686, 221),
+(189, 'CS', 'SERBIA AND MONTENEGRO', 'Serbia and Montenegro', NULL, NULL, 381),
+(190, 'SC', 'SEYCHELLES', 'Seychelles', 'SYC', 690, 248),
+(191, 'SL', 'SIERRA LEONE', 'Sierra Leone', 'SLE', 694, 232),
+(192, 'SG', 'SINGAPORE', 'Singapore', 'SGP', 702, 65),
+(193, 'SK', 'SLOVAKIA', 'Slovakia', 'SVK', 703, 421),
+(194, 'SI', 'SLOVENIA', 'Slovenia', 'SVN', 705, 386),
+(195, 'SB', 'SOLOMON ISLANDS', 'Solomon Islands', 'SLB', 90, 677),
+(196, 'SO', 'SOMALIA', 'Somalia', 'SOM', 706, 252),
+(197, 'ZA', 'SOUTH AFRICA', 'South Africa', 'ZAF', 710, 27),
+(198, 'GS', 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', 'South Georgia and the South Sandwich Islands', NULL, NULL, 0),
+(199, 'ES', 'SPAIN', 'Spain', 'ESP', 724, 34),
+(200, 'LK', 'SRI LANKA', 'Sri Lanka', 'LKA', 144, 94),
+(201, 'SD', 'SUDAN', 'Sudan', 'SDN', 736, 249),
+(202, 'SR', 'SURINAME', 'Suriname', 'SUR', 740, 597),
+(203, 'SJ', 'SVALBARD AND JAN MAYEN', 'Svalbard and Jan Mayen', 'SJM', 744, 47),
+(204, 'SZ', 'SWAZILAND', 'Swaziland', 'SWZ', 748, 268),
+(205, 'SE', 'SWEDEN', 'Sweden', 'SWE', 752, 46),
+(206, 'CH', 'SWITZERLAND', 'Switzerland', 'CHE', 756, 41),
+(207, 'SY', 'SYRIAN ARAB REPUBLIC', 'Syrian Arab Republic', 'SYR', 760, 963),
+(208, 'TW', 'TAIWAN, PROVINCE OF CHINA', 'Taiwan, Province of China', 'TWN', 158, 886),
+(209, 'TJ', 'TAJIKISTAN', 'Tajikistan', 'TJK', 762, 992),
+(210, 'TZ', 'TANZANIA, UNITED REPUBLIC OF', 'Tanzania, United Republic of', 'TZA', 834, 255),
+(211, 'TH', 'THAILAND', 'Thailand', 'THA', 764, 66),
+(212, 'TL', 'TIMOR-LESTE', 'Timor-Leste', NULL, NULL, 670),
+(213, 'TG', 'TOGO', 'Togo', 'TGO', 768, 228),
+(214, 'TK', 'TOKELAU', 'Tokelau', 'TKL', 772, 690),
+(215, 'TO', 'TONGA', 'Tonga', 'TON', 776, 676),
+(216, 'TT', 'TRINIDAD AND TOBAGO', 'Trinidad and Tobago', 'TTO', 780, 1868),
+(217, 'TN', 'TUNISIA', 'Tunisia', 'TUN', 788, 216),
+(218, 'TR', 'TURKEY', 'Turkey', 'TUR', 792, 90),
+(219, 'TM', 'TURKMENISTAN', 'Turkmenistan', 'TKM', 795, 7370),
+(220, 'TC', 'TURKS AND CAICOS ISLANDS', 'Turks and Caicos Islands', 'TCA', 796, 1649),
+(221, 'TV', 'TUVALU', 'Tuvalu', 'TUV', 798, 688),
+(222, 'UG', 'UGANDA', 'Uganda', 'UGA', 800, 256),
+(223, 'UA', 'UKRAINE', 'Ukraine', 'UKR', 804, 380),
+(224, 'AE', 'UNITED ARAB EMIRATES', 'United Arab Emirates', 'ARE', 784, 971),
+(225, 'GB', 'UNITED KINGDOM', 'United Kingdom', 'GBR', 826, 44),
+(226, 'US', 'UNITED STATES', 'United States', 'USA', 840, 1),
+(227, 'UM', 'UNITED STATES MINOR OUTLYING ISLANDS', 'United States Minor Outlying Islands', NULL, NULL, 1),
+(228, 'UY', 'URUGUAY', 'Uruguay', 'URY', 858, 598),
+(229, 'UZ', 'UZBEKISTAN', 'Uzbekistan', 'UZB', 860, 998),
+(230, 'VU', 'VANUATU', 'Vanuatu', 'VUT', 548, 678),
+(231, 'VE', 'VENEZUELA', 'Venezuela', 'VEN', 862, 58),
+(232, 'VN', 'VIET NAM', 'Viet Nam', 'VNM', 704, 84),
+(233, 'VG', 'VIRGIN ISLANDS, BRITISH', 'Virgin Islands, British', 'VGB', 92, 1284),
+(234, 'VI', 'VIRGIN ISLANDS, U.S.', 'Virgin Islands, U.s.', 'VIR', 850, 1340),
+(235, 'WF', 'WALLIS AND FUTUNA', 'Wallis and Futuna', 'WLF', 876, 681),
+(236, 'EH', 'WESTERN SAHARA', 'Western Sahara', 'ESH', 732, 212),
+(237, 'YE', 'YEMEN', 'Yemen', 'YEM', 887, 967),
+(238, 'ZM', 'ZAMBIA', 'Zambia', 'ZMB', 894, 260),
+(239, 'ZW', 'ZIMBABWE', 'Zimbabwe', 'ZWE', 716, 263);
 
 -- --------------------------------------------------------
 
@@ -332,7 +561,9 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`id`, `category_id`, `subcategory_id`, `subsubcategory_id`, `document_name`, `document`, `country`, `valid_upto`, `status`) VALUES
-(1, 1, 3, 5, 'Title', 'http://localhost:8000/uploads/documents/5Ww90FMMZvvPBFlXB5MtGIXi0vtlXr9xGeEVzrd5.txt', 1, '2022-12-09 18:30:00', 1);
+(1, 1, 3, 5, 'Title', 'http://localhost:8000/uploads/document/1670316028-full.pdf', 1, '2022-12-19 18:30:00', 1),
+(2, 1, 3, 5, 'Green Apple', 'http://localhost:8000/uploads/document/1670315955-full.pptx', 1, '2022-12-15 18:30:00', 1),
+(3, 1, 3, 5, 'Orange', 'http://localhost:8000/uploads/document/1670311766-full.txt', 1, '2022-12-06 11:21:49', 1);
 
 -- --------------------------------------------------------
 
@@ -356,7 +587,13 @@ INSERT INTO `doc_category` (`id`, `parent_id`, `title`, `status`) VALUES
 (1, 0, 'Organic', 1),
 (3, 1, 'Fruits', 1),
 (4, 3, 'Dry', 1),
-(5, 3, 'Seasonal', 1);
+(5, 3, 'Seasonal', 1),
+(6, 1, 'Grains', 1),
+(7, 0, 'Herbal', 1),
+(8, 7, 'Medicine', 1),
+(9, 8, 'Amla', 1),
+(10, 7, 'Spice', 1),
+(11, 10, 'Turmeric', 1);
 
 -- --------------------------------------------------------
 
@@ -372,32 +609,6 @@ CREATE TABLE `doc_request` (
   `accessin` int(1) NOT NULL,
   `request_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `doc_user`
---
-
-DROP TABLE IF EXISTS `doc_user`;
-CREATE TABLE `doc_user` (
-  `id` bigint(20) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `country` int(20) NOT NULL,
-  `company` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `doc_user`
---
-
-INSERT INTO `doc_user` (`id`, `username`, `password`, `name`, `email`, `phone`, `country`, `company`, `status`) VALUES
-(2, 'textile', '12345678', 'Drama textile', 'dharma@textile.com', '9879876543', 1, 'Company', 1);
 
 -- --------------------------------------------------------
 
@@ -423,14 +634,15 @@ CREATE TABLE `faq` (
 
 INSERT INTO `faq` (`faq_id`, `category_id`, `title`, `description`, `status`, `created_at`, `modified_at`, `order_by`) VALUES
 (2, 1, 'What are Standard ingredients and Customized ingredients?', 'Standard ingredients: These are the ingredients that we have in stock typically and sold as standard ingredients. \r\nCustomized Ingredients: These are the ingredients we develop according to your formulation, technological and marketing needs', 1, '2021-07-19 08:27:36', NULL, 0),
-(3, 1, 'Can standard ingredients be customized to my formulation needs?', 'Yes, we could customize these standard ingredients according to ton your requirements. Thus, Deltabiocare customizes each ingredient we develop or produce. \r\n', 1, '2021-07-19 08:28:04', NULL, 0),
+(3, 1, 'Can standard ingredients be customized to my formulation needs?', 'Yes, we could customize these standard ingredients according to ton your requirements. Thus, Deltabiocare customizes each ingredient we develop or produce.', 1, '2021-07-19 08:28:04', '2022-11-27 20:26:33', 0),
 (4, 1, 'I do not see ingredients in your portfolio which I am currently looking for on your website. Can DBC help me to find the ingredient? ', 'Yes, being a company closely associated with various organic farming associations, tribal communities across the world, we can procure and process your desired ingredients. \r\nStandard ingredients: These are the ingredients that we have in stock typically and sold as standard ingredients. \r\nCustomized Ingredients: These are the ingredients we develop according to your formulation, technological and marketing needs ', 1, '2021-07-19 08:28:19', NULL, 0),
 (5, 2, 'How can I send a complaint or a feedback about your ingredient?', 'You can register your complaint via our contact us page. This way we can help our best to resolve issue that you ever encountered.', 1, '2021-07-19 08:28:59', NULL, 0),
 (6, 2, 'How much time warranty of ingredients are provided?', 'We perform stability studies to each ingredient produced at DBC. Based on these test results each ingredient will be labelled with expiry date or re-test date accordingly. ', 1, '2021-07-19 08:29:20', NULL, 0),
 (7, 3, 'Stock & Availability', 'Being natural ingredients it is very difficult to predict availability of all ingredients throughout the year. It is recommended to check with our distributor in your region or send us an email to know about the availability. ', 1, '2021-07-19 08:29:53', NULL, 0),
-(8, 4, 'Delivery of the ordered product (inco-terms)?', 'We typically can deliver at your manufacturing site or laboratory door-step. This will help you avoid regulatory concerns that you have to deal with. However, we can also do ex-works if you desire. \r\n', 1, '2021-07-19 08:30:15', NULL, 0),
+(8, 4, 'Delivery of the ordered product (inco-terms)?', 'We typically can deliver at your manufacturing site or laboratory door-step. This will help you avoid regulatory concerns that you have to deal with. However, we can also do ex-works if you desire. \r\n', 1, '2021-07-19 08:30:15', '2022-11-28 07:39:52', 0),
 (9, 5, 'I am a formulator working for a company in Paris. How can I request a sample?', 'You can always send your sample request using our contact us form. We will assign you to our distributor in your region. Our distributor will contact you for further details about delivery timelines etc., \r\n', 1, '2021-07-19 08:30:52', NULL, 0),
-(10, 5, 'How much time warranty of ingredients provided?', 'You can see each ingredient\'s expiry date or re-test date on our certificate of analysis and ingredient package. As you might know that natural ingredients hold different shelf-life. \r\n', 1, '2021-07-19 08:31:11', NULL, 0);
+(10, 5, 'How much time warranty of ingredients provided?', 'You can see each ingredient\'s expiry date or re-test date on our certificate of analysis and ingredient package. As you might know that natural ingredients hold different shelf-life. \r\n', 1, '2021-07-19 08:31:11', NULL, 0),
+(11, 13, 'This is testing category related faq. This is testing category related faq. edited', 'This is testing category related faq.This is testing category related faq.This is testing category related faq. edited', 1, '2022-11-28 07:40:58', '2022-11-28 07:41:52', 1);
 
 -- --------------------------------------------------------
 
@@ -458,7 +670,8 @@ INSERT INTO `faq_category` (`id`, `title`, `status`) VALUES
 (6, 'Confidentiality and Marketing ', 1),
 (7, 'Export documents', 1),
 (8, 'Customization and projects', 1),
-(9, 'Raw-material sourcing-ethics', 1);
+(9, 'Raw-material sourcing-ethics', 1),
+(13, 'Test', 1);
 
 -- --------------------------------------------------------
 
@@ -521,7 +734,8 @@ CREATE TABLE `meetus` (
 
 INSERT INTO `meetus` (`id`, `address`, `link`, `image`, `status`) VALUES
 (1, '<p>Nuzvid, Andhra Pradesh, India</p>', 'http://localhost:8000/contact-us', 'https://deltabiocare.com/uploads/1626767152.jpg', 1),
-(2, '<p>Tezpur, Assam, India</p>', 'http://localhost:8000/contact-us', 'https://deltabiocare.com/uploads/1626767050.jpg', 1);
+(2, '<p>Tezpur, Assam, India</p>', 'http://localhost:8000/contact-us', 'https://deltabiocare.com/uploads/1626767050.jpg', 1),
+(3, 'Test address', 'http://localhost:8000/contact-us', 'http://localhost:8000/uploads/address/1669911094-full.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -557,7 +771,9 @@ INSERT INTO `news_blog` (`id`, `category_id`, `metatitle`, `metakeyword`, `metad
 (4, 0, 'Ethnic communities organic herbals', 'Herbal sourcing, organic herbals', 'Ethnic communities around the world have widely adopted organic farming', 'news', 'Organic farming practices: Positive impact on ethnic communities ', '<p>Many ethnic communities around the world have widely adopted organic farming. These groups usually cultivate herbs and employ traditional knowledge to maintain a healthy and sustainable ecosystem.</p><p>The benefits of organic farming are many and varied. They include:</p><p>1) Organic foods taste better than their chemically grown counterparts because they contain more flavor and nutrients than processed foods.</p><p>2) Organic farms are less likely to have contamination problems because no chemicals are used in the soil or water supply.</p><p>3) Organic farming utilizes natural processes instead of artificial ones, resulting in overall healthier products for both humans and animals alike.</p><p>4) It reduces pollution and adverse environmental</p><p>With the growing interest in purchasing organic farm products, the change in mindset on farmers&#39; communities is getting visible. Unfortunately, in recent years the use of pesticides and artificial fertilizers has been touching thes', 'Many ethnic communities around the world have widely adopted organic farming. These groups usually cultivate herbs and employ traditional knowledge to maintain a healthy and sustainable ecosystem.', 'https://deltabiocare.com/uploads/1639952014.jpg', 'https://deltabiocare.com/uploads/1626766110.jpg', 1, '2021-07-16 07:47:36', '2021-12-19 16:43:34', 0),
 (5, 0, '', '', '', 'blog', 'Blog 2', '<p>Morbi ultricies mi pharetra ex bibendum pretium. Mauris consectetur ipsum vitae eleifend condimentum. Etiam ante sem, pulvinar in accumsan et, pharetra quis ligula. Sed accumsan consequat magna, ut dapibus quam condimentum sed. Morbi sollicitudin, elit sit amet dapibus rhoncus, odio ipsum tempor diam, a pellentesque nulla quam vitae libero. Ut vitae libero quam. Aenean quam dui, interdum nec sapien eget, ornare ultrices ipsum. Donec condimentum rhoncus mi, nec iaculis felis condimentum ac. Praesent viverra dolor vitae arcu volutpat feugiat. Nulla rutrum sit amet quam nec venenatis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse hendrerit tempus tortor, nec vulputate ex luctus quis. Mauris porttitor ut purus et rhoncus. Aliquam pulvinar maximus nunc, vitae malesuada felis dapibus id.</p><p>Etiam et neque dui. Vestibulum risus risus, ultrices ac lorem ac, bibendum pharetra dolor. Phasellus sodales molestie nibh, vitae placerat nulla pulvinar non. Sed interdum lac', 'Maecenas blandit turpis eget dui vestibulum, eget ullamcorper elit pulvinar. Nunc vitae enim in nisl iaculis consequat pellentesque at nisi. Proin faucibus dolor molestie nisl accumsan euismod. In placerat dolor rutrum, rutrum ex quis, vehicula turpis. Aliquam libero arcu, pellentesque sit amet volutpat ut, hendrerit a metus. Aenean luctus ante odio, et viverra nibh aliquam ac. Nunc at sem malesuada, dictum sem sit amet, aliquam tortor. Fusce et nisi consequat dui fringilla sollicitudin sed vitae sem. Ut mollis nibh non luctus ullamcorper. Vivamus sed dapibus dolor. Nulla aliquam at odio at mattis. Proin auctor risus urna, eu molestie elit volutpat ullamcorper. Phasellus feugiat arcu eu quam iaculis, non ultricies libero faucibus.', 'https://deltabiocare.com/uploads/1626767317.JPG', 'https://deltabiocare.com/uploads/1626442121.png', 1, '2021-07-16 07:58:41', '2021-07-20 02:18:37', 0),
 (6, 1, 'Blog 3', 'Blog 3', 'Blog 3', 'blog', 'Blog 3', '<p>Morbi ultricies mi pharetra ex bibendum pretium. Mauris consectetur ipsum vitae eleifend condimentum. Etiam ante sem, pulvinar in accumsan et, pharetra quis ligula. Sed accumsan consequat magna, ut dapibus quam condimentum sed. Morbi sollicitudin, elit sit amet dapibus rhoncus, odio ipsum tempor diam, a pellentesque nulla quam vitae libero. Ut vitae libero quam. Aenean quam dui, interdum nec sapien eget, ornare ultrices ipsum. Donec condimentum rhoncus mi, nec iaculis felis condimentum ac. Praesent viverra dolor vitae arcu volutpat feugiat. Nulla rutrum sit amet quam nec venenatis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse hendrerit tempus tortor, nec vulputate ex luctus quis. Mauris porttitor ut purus et rhoncus. Aliquam pulvinar maximus nunc, vitae malesuada felis dapibus id.</p><p>Etiam et neque dui. Vestibulum risus risus, ultrices ac lorem ac, bibendum pharetra dolor. Phasellus sodales molestie nibh, vitae placerat nulla pulvinar non. Sed interdum lac', 'Etiam et neque dui. Vestibulum risus risus, ultrices ac lorem ac, bibendum pharetra dolor. Phasellus sodales molestie nibh, vitae placerat nulla pulvinar non. Sed interdum lacus placerat aliquet venenatis. Nulla sed nibh laoreet, laoreet turpis vel, maximus ligula. Vivamus id nisl eget tellus efficitur viverra congue ac mi. Vivamus quis pellentesque neque. Phasellus lacinia, nunc a aliquet aliquam, tellus purus consequat justo, vitae sodales sem eros eget nisl. Suspendisse malesuada, nunc quis sollicitudin sagittis, nunc quam eleifend nulla, eget tristique turpis nisl non lectus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id lacus sit amet libero vestibulum vulputate. Nullam in turpis hendrerit lorem condimentum tincidunt. Aenean eros lacus, molestie at tincidunt et, pretium id velit. Nam pretium ultrices mollis', 'https://deltabiocare.com/uploads/1626767363.jpg', 'https://deltabiocare.com/uploads/1626767363.png', 1, '2021-07-17 00:18:30', '2021-07-20 02:19:23', 0),
-(7, 3, 'DBC News 2', 'DBC News 2', 'DBC News 2', 'news', 'Research herbals to simplify your life', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac tellus nec mi semper semper. Sed aliquam convallis quam, a posuere lorem tincidunt ullamcorper. Sed nec maximus nisi. Cras ultrices arcu velit, et rhoncus sem pharetra non. Vivamus ut urna mauris. Phasellus aliquam metus condimentum cursus mattis. Curabitur in elit vel nunc efficitur porttitor sit amet id ipsum. Sed sit amet velit ante. Ut eu finibus elit. Praesent nec risus viverra, convallis nisl in, dictum nisl. Nunc fringilla cursus posuere. Curabitur venenatis arcu ac erat sodales, vel varius sapien accumsan. Sed nisl erat, venenatis nec faucibus sit amet, commodo quis odio. Integer cursus ante quis ligula venenatis venenatis. Donec massa nisl, tincidunt ut nibh vel, luctus pharetra justo.</p><p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam vehicula placerat tellus non commodo. Proin sed mi vel ante maximus egestas. Pellentesque nisl dui, convallis eget maximus sed', 'Where can I get some?\r\nThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', 'https://deltabiocare.com/uploads/1626766375.jpg', 'https://deltabiocare.com/uploads/1626766375.png', 1, '2021-07-20 02:02:55', '2021-07-26 04:50:08', 0);
+(7, 3, 'DBC News 2', 'DBC News 2', 'DBC News 2', 'news', 'Research herbals to simplify your life', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac tellus nec mi semper semper. Sed aliquam convallis quam, a posuere lorem tincidunt ullamcorper. Sed nec maximus nisi. Cras ultrices arcu velit, et rhoncus sem pharetra non. Vivamus ut urna mauris. Phasellus aliquam metus condimentum cursus mattis. Curabitur in elit vel nunc efficitur porttitor sit amet id ipsum. Sed sit amet velit ante. Ut eu finibus elit. Praesent nec risus viverra, convallis nisl in, dictum nisl. Nunc fringilla cursus posuere. Curabitur venenatis arcu ac erat sodales, vel varius sapien accumsan. Sed nisl erat, venenatis nec faucibus sit amet, commodo quis odio. Integer cursus ante quis ligula venenatis venenatis. Donec massa nisl, tincidunt ut nibh vel, luctus pharetra justo.</p><p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam vehicula placerat tellus non commodo. Proin sed mi vel ante maximus egestas. Pellentesque nisl dui, convallis eget maximus sed', 'Where can I get some?\r\nThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', 'https://deltabiocare.com/uploads/1626766375.jpg', 'https://deltabiocare.com/uploads/1626766375.png', 1, '2021-07-20 02:02:55', '2021-07-26 04:50:08', 0),
+(8, 1, 'All garbage mountains to vanish after AAP’s MCD win: Manish  ..', 'All garbage mountains to vanish after AAP’s MCD win: Manish  ..', 'All garbage mountains to vanish after AAP’s MCD win: Manish  ..', 'blog', 'All garbage mountains to vanish after AAP’s MCD win: Manish  ..', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent magna arcu, sollicitudin volutpat fermentum id, mattis sed ex. Vestibulum finibus elit et ex fermentum suscipit. Proin aliquam rhoncus felis id suscipit. Suspendisse nec ipsum non nisl lobortis laoreet. Aliquam erat volutpat. Suspendisse dolor massa, ullamcorper quis nunc id, egestas lacinia mauris. Etiam vel aliquam sem, a lacinia lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur urna sit amet mauris dictum, eget blandit mi ultrices.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent magna arcu, sollicitudin volutpat fermentum id, mattis sed ex. Vestibulum finibus elit et ex fermentum suscipit.', 'http://localhost:8000/uploads/blog/1669748660-full.jpg', 'http://localhost:8000/uploads/blog/1669748660-list.jpg', 1, '2022-11-28 06:17:36', '2022-11-29 13:34:20', 1),
+(10, 5, 'jabhca scjasb cjasch', 'jHBC JAHSC AJHCB AJ HSCB', 'jsdhbc sjdvhbsjhdjsbdhbv sjdhb', 'news', 'jsbdhvs jvdhb sjhdvbs j dhb', 'jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds', 'jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds jshdvb sjdhvb sjhdvb sjhbdvj sbdvks jds', 'http://localhost:8000/uploads/news/1669748873-full.JPEG', 'http://localhost:8000/uploads/news/1669748873-list.JPEG', 1, '2022-11-29 13:37:53', '2022-11-29 13:37:53', 0);
 
 -- --------------------------------------------------------
 
@@ -732,7 +948,8 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`slider_id`, `title`, `description`, `image`, `position`, `status`, `order_by`) VALUES
-(1, 'Home Slider', 'TOP DIET AND LIFESTYLE TIPS TO SUPPORT YOUR IMMUNE SYSTEM', 'https://www.deltabiocare.com/uploads/1626191114.jpg', 'top', 1, 1);
+(1, 'Home Slider', 'TOP DIET AND LIFESTYLE TIPS TO SUPPORT YOUR IMMUNE SYSTEM', 'https://www.deltabiocare.com/uploads/1626191114.jpg', 'top', 1, 1),
+(2, 'slider1', ',mnbmb mbnmnbm bn mnbmnb m', 'http://localhost:8000/uploads/slider/1669838947-full.jpg', 'top', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -760,6 +977,38 @@ INSERT INTO `subscription` (`id`, `name`, `email`) VALUES
 (6, 'ajay', 'ajay@asjcn.com'),
 (7, 'jdsabcab', 'aksbc@skdc.com'),
 (8, 'jdsabcab', 'aksbc@skdc.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `country` int(20) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `approve` tinyint(1) NOT NULL DEFAULT 0,
+  `type` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `name`, `email`, `phone`, `country`, `company`, `status`, `approve`, `type`) VALUES
+(1, 'delta', '123456', 'Deltabiocare', 'admin@deltabiocare.com', '', 195, 'Deltabiocare', 1, 1, 'admin'),
+(2, 'textile', '12345678', 'Drama textile', 'dharma@textile.com', '9879876543', 1, 'Company', 1, 1, 'document'),
+(3, 'abhijit', 'JTmH]6<D', 'Abhijit Sarma', 'asarma464@gmail.com', '6000804627', 5, '', 1, 1, 'distributor'),
+(4, 'srikanth', '12345678', 'Srikanth Lavu', 'srikanthlavu1@gmail.com', '7093747478', 1, 'Delta formulations', 1, 0, 'distributor'),
+(5, 'ekart', '123456', 'Ekart logistics', 'ekart@logistics.com', '73672836487', 1, 'Ekart logistics', 1, 1, 'distributor');
 
 --
 -- Indexes for dumped tables
@@ -832,12 +1081,6 @@ ALTER TABLE `country`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `distributor`
---
-ALTER TABLE `distributor`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `documents`
 --
 ALTER TABLE `documents`
@@ -853,12 +1096,6 @@ ALTER TABLE `doc_category`
 -- Indexes for table `doc_request`
 --
 ALTER TABLE `doc_request`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `doc_user`
---
-ALTER TABLE `doc_user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -934,6 +1171,12 @@ ALTER TABLE `subscription`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -941,7 +1184,7 @@ ALTER TABLE `subscription`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -959,19 +1202,19 @@ ALTER TABLE `attribute`
 -- AUTO_INCREMENT for table `benefits`
 --
 ALTER TABLE `benefits`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `career`
 --
 ALTER TABLE `career`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `category_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `category_filter`
@@ -989,7 +1232,7 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `content_section`
@@ -1001,25 +1244,19 @@ ALTER TABLE `content_section`
 -- AUTO_INCREMENT for table `country`
 --
 ALTER TABLE `country`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `distributor`
---
-ALTER TABLE `distributor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `doc_category`
 --
 ALTER TABLE `doc_category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `doc_request`
@@ -1028,22 +1265,16 @@ ALTER TABLE `doc_request`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `doc_user`
---
-ALTER TABLE `doc_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `faq_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `faq_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `faq_category`
 --
 ALTER TABLE `faq_category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `filter`
@@ -1061,13 +1292,13 @@ ALTER TABLE `manufacture`
 -- AUTO_INCREMENT for table `meetus`
 --
 ALTER TABLE `meetus`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `news_blog`
 --
 ALTER TABLE `news_blog`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -1097,13 +1328,19 @@ ALTER TABLE `site_images`
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `slider_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `slider_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subscription`
 --
 ALTER TABLE `subscription`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

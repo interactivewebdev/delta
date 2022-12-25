@@ -11,6 +11,7 @@ class Meetus extends Model
 
     protected $table = "meetus";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,6 @@ class Meetus extends Model
         'address',
         'link',
         'image',
-        'status'
+        'status',
     ];
 }

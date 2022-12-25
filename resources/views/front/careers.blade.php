@@ -21,27 +21,22 @@
                                     <div class="card-header">
                                         <h6 class="card-title"><a href="{{ url('careers/detail/' . $item->id) }}"
                                                 class="text-capitalize">{{ substr($item->title, 0, 36) }}</a></h6>
-                                        <small class="text-muted">Posted on: {{ $item->created }}</small>
+                                        <small class="text-muted">Job Type: {{ $item->job_type }}</small>
                                     </div>
-                                    @if ($news[0]->list_image != '')
-                                        <a href="{{ url('news/detail/' . $item->id) }}">
-                                            <figure><img src="{{ $item->list_image }}" class="card-img-top hoverEffect"
-                                                    alt="{{ $item->title }}"></figure>
-                                        </a>
-                                    @else
-                                        <a href="{{ url('news/detail/' . $item->id) }}">
-                                            <figure><img src="{{ url('assets/images/Placeholder.png') }}"
-                                                    class="card-img-top hoverEffect" alt="{{ $item->title }}"></figure>
-                                        </a>
-                                    @endif
-
-                                    <div class="card-body">
-                                        <p class="card-text">{!! substr($item->short_desc, 0, 250) !!}</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <p class="card-link"><a href="{{ url('news/detail/' . $item->id) }}"
-                                                class="text-warning">READ MORE
-                                                &raquo;</a></p>
+                                    <div class="card-body" style="height:225px !important;">
+                                        <div class="row">
+                                            <div class="col-6"><strong>Experience:</strong>: {{ $item->experience }}</div>
+                                            <div class="col-6"><strong>No. of positions:</strong>: {{ $item->positions }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12"><strong>Place:</strong>: {{ $item->place }}
+                                            </div>
+                                        </div>
+                                        <p class="card-text"><strong>Functional Area:</strong><br>{!! substr($item->functional_area, 0, 250) !!}
+                                        </p>
+                                        <p class="card-text"><strong>Job Description:</strong><br>{!! substr($item->job_description, 0, 250) !!}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

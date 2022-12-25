@@ -178,12 +178,12 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-5">
-                                <h5>Distributor Zone</h5>
+                                <h5>Document Zone</h5>
                             </div>
                             <div class="col-md-7 text-right">
-                                @if (isset($_SESSION['distributor_logged_in']) && $_SESSION['distributor_logged_in'])
-                                    Hi {{ $_SESSION['dst_name'] }}, <a
-                                        href="{{ url('/logout/distributor/' . $product->product_id) }}">Logout</a>
+                                @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
+                                    Hi {{ Session::get('dst_name') }}, <a
+                                        href="{{ url('/distributor/logout') }}">Logout</a>
                                 @endif
                             </div>
                         </div>
@@ -211,41 +211,43 @@
                                         <div class="tab-pane fade show active" id="how-to-use" role="tabpanel"
                                             aria-labelledby="how-to-use-tab" style="position: relative">
                                             @if (count($type1) > 0)
-                                                {{-- @if (isset($_SESSION['distributor_logged_in']) && $_SESSION['distributor_logged_in']) --}}
-                                                @foreach ($type1 as $val)
-                                                    <p>
-                                                    <h5>{{ $val->main_title }}</h5>
-                                                    @foreach ($val->attachments as $item)
-                                                        @if ($item->link != '')
-                                                            <a href="{{ $item->link }}"
-                                                                onClick="return verifyDistributor()"
-                                                                target="_blank">{{ $item->title }}</a><br />
-                                                        @else
-                                                            <?php $path = pathinfo($item->attachment);
-                                                            $extn = strtolower($path['extension']); ?>
-                                                            @if ($extn == 'html' || $extn == 'htm')
-                                                                <a href="{{ $item->attachment }}" target="_blank"
-                                                                    onClick="return verifyDistributor()">{{ $item->title }}</a><br />
+                                                @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
+                                                    @foreach ($type1 as $val)
+                                                        <p>
+                                                        <h5>{{ $val->main_title }}</h5>
+                                                        @foreach ($val->attachments as $item)
+                                                            @if ($item->link != '')
+                                                                <a href="{{ $item->link }}"
+                                                                    onClick="return verifyDistributor()"
+                                                                    target="_blank">{{ $item->title }}</a><br />
                                                             @else
-                                                                <a href="{{ url('open/document/' . urlencode(str_replace(' ', '', $item->title)) . '/' . base64_encode($item->attachment)) }}"
-                                                                    onClick="return verifyDistributor()">{{ $item->title }}</a><br />
+                                                                <?php $path = pathinfo($item->attachment);
+                                                                $extn = strtolower($path['extension']); ?>
+                                                                @if ($extn == 'html' || $extn == 'htm')
+                                                                    <a href="{{ $item->attachment }}" target="_blank"
+                                                                        onClick="return verifyDistributor()">{{ $item->title }}</a><br />
+                                                                @else
+                                                                    <a href="{{ url('open/document/' . urlencode(str_replace(' ', '', $item->title)) . '/' . base64_encode($item->attachment)) }}"
+                                                                        onClick="return verifyDistributor()">{{ $item->title }}</a><br />
+                                                                @endif
                                                             @endif
-                                                        @endif
+                                                        @endforeach
+                                                        </p>
                                                     @endforeach
-                                                    </p>
-                                                @endforeach
-                                                {{-- @else --}}
-                                                <div class="row distributor-document-zone">
-                                                    <div class="col-12 text-center">
-                                                        Direct access to technical information and documents
-                                                    </div>
-                                                    <div class="col-12 text-center"><a href="{{ url('user/register') }}"
-                                                            class="btn btn-primary btn-lg">Sign In</a></div>
-                                                    <div class="col-12 text-center">Not yet registered ? <a
-                                                            href="{{ url('user/register') }}">Create your
-                                                            account now</a></div>
-                                                </div>
-                                                {{-- @endif --}}
+                                                    @if (!(Session::has('distributor_logged_in') && Session::get('distributor_logged_in')))
+                                                        <div class="row distributor-document-zone">
+                                                            <div class="col-12 text-center">
+                                                                Direct access to technical information and documents
+                                                            </div>
+                                                            <div class="col-12 text-center"><a
+                                                                    href="{{ url('user/register') }}"
+                                                                    class="btn btn-primary btn-lg">Sign In</a></div>
+                                                            <div class="col-12 text-center">Not yet registered ? <a
+                                                                    href="{{ url('user/register') }}">Create your
+                                                                    account now</a></div>
+                                                        </div>
+                                                    @endif
+                                                @endif
                                             @else
                                                 Not any document provided
                                             @endif
@@ -253,7 +255,7 @@
                                         <div class="tab-pane fade" id="ingredients" role="tabpanel"
                                             aria-labelledby="ingredients-tab">
                                             @if (count($type2) > 0)
-                                                @if (isset($_SESSION['distributor_logged_in']) && $_SESSION['distributor_logged_in'])
+                                                @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
                                                     @foreach ($type2 as $val)
                                                         <p>
                                                         <h5>{{ $val->main_title }}</h5>
@@ -281,7 +283,7 @@
                                         <div class="tab-pane fade" id="documents" role="tabpanel"
                                             aria-labelledby="documents-tab">
                                             @if (count($type3) > 0)
-                                                @if (isset($_SESSION['distributor_logged_in']) && $_SESSION['distributor_logged_in'])
+                                                @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
                                                     @foreach ($type3 as $val)
                                                         <p>
                                                         <h5>{{ $val->main_title }}</h5>
@@ -345,8 +347,8 @@
                                     password</a>
                             </div>
                             <!-- <div class="form-row">
-                                                                                                                                       <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
-                                                                                                                                    </div> -->
+                                                                                                                                                                               <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
+                                                                                                                                                                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -446,7 +448,7 @@
         function verifyDistributor() {
             var isLoggedIn = '';
             isLoggedIn =
-                '{{ isset($_SESSION['distributor_logged_in']) && $_SESSION['distributor_logged_in'] ? $_SESSION['distributor_logged_in'] : '' }}';
+                '{{ Session::has('distributor_logged_in') && Session::get('distributor_logged_in') ? Session::get('distributor_logged_in') : '' }}';
             //console.log(isLoggedIn);
             if (isLoggedIn)
                 return true;

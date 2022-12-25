@@ -12,6 +12,8 @@ class NewsBlog extends Model
     protected $table = "news_blog";
     protected $primaryKey = "id";
 
+    const UPDATED_AT = 'modified_at'; 
+
     /**
      * The attributes that are mass assignable.
      *

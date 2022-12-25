@@ -11,6 +11,7 @@ class Faq extends Model
 
     protected $table = "faq";
     protected $primaryKey = "faq_id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

@@ -59,8 +59,8 @@
     <section>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-5"><img class="bg-img-cover bg-center"
-                        src="{{ url('assets/images/login/3.jpg') }}" alt="looginpage"></div>
+                <div class="col-xl-5"><img class="bg-img-cover bg-center" src="{{ url('assets/images/login/3.jpg') }}"
+                        alt="looginpage"></div>
                 <div class="col-xl-7 p-0">
                     <div class="login-card">
                         <form class="theme-form login-form" method="post" action="{{ route('auth.dologin') }}">
@@ -86,16 +86,16 @@
                                 {{-- <div class="checkbox">
                                     <input id="checkbox1" type="checkbox">
                                     <label class="text-muted" for="checkbox1">Remember password</label>
-                                </div> --}}<a class="link" href="{{ route('forgot.password') }}">Forgot
-                                    password?</a>
+                                </div><a class="link" href="{{ route('forgot.password') }}">Forgot
+                                    password?</a> --}}
                             </div>
                             <br>
                             <br>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block" type="submit">Sign in</button>
                             </div>
-                            <p>Don't have account?<a class="ms-2" href="{{ route('auth.register') }}">Create
-                                    Account</a></p>
+                            {{-- <p>Don't have account?<a class="ms-2" href="{{ route('auth.register') }}">Create
+                                    Account</a></p> --}}
                         </form>
                     </div>
                 </div>

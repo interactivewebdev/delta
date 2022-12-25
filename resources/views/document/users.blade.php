@@ -37,8 +37,8 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>Listing of document users
-                            <a href="{{ url('admin/doc_user-form') }}" class="mx-5 btn btn-primary btn-xs"
-                                data-original-title="btn btn-danger btn-xs" title="">Add New Document User</a>
+                            {{-- <a href="{{ url('admin/doc_user-form') }}" class="mx-5 btn btn-primary btn-xs"
+                                data-original-title="btn btn-danger btn-xs" title="">Add New Document User</a> --}}
                         </h5>
                     </div>
                     <div class="card-body">
@@ -62,14 +62,23 @@
                                     <tbody>
                                         @foreach ($users as $key => $value)
                                             <tr>
-                                                <td class="text-start">{{ $value->name }}</td>
+                                                <td class="text-start">
+                                                    {{ $value->name }}
+                                                    @if ($value->approve == 0)
+                                                        <br><span class="badge bg-warning text-white">Pending</span>
+                                                    @elseif ($value->approve == 1)
+                                                        <br><span class="badge bg-success text-white">Approved</span>
+                                                    @else
+                                                        <br><span class="badge bg-danger text-white">Rejected</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-start">{{ $value->email }}</td>
                                                 <td>{{ $value->phone }}</td>
                                                 <td class="font-success">{{ $value->status ? 'Active' : 'Inactive' }}</td>
                                                 <td>
-                                                    <a href="{{ url('/admin/doc_user/edit/' . $value->id) }}"
+                                                    {{-- <a href="{{ url('/admin/doc_user/edit/' . $value->id) }}"
                                                         class="btn btn-primary btn-xs" type="button"
-                                                        data-original-title="btn btn-danger btn-xs" title="">Edit</a>
+                                                        data-original-title="btn btn-danger btn-xs" title="">Edit</a> --}}
                                                     <a href="{{ url('/admin/doc_user/delete/' . $value->id) }}"
                                                         class="btn btn-danger btn-xs" type="button"
                                                         data-original-title="btn btn-danger btn-xs"
@@ -84,6 +93,19 @@
                                                             class="btn btn-info btn-xs" type="button"
                                                             data-original-title="btn btn-info btn-xs"
                                                             title="">Deactive</a>
+                                                    @endif
+
+                                                    @if ($value->approve == 0)
+                                                        <div class="m-1"><a
+                                                                href="{{ url('/admin/doc_user/approve/' . $value->id) }}"
+                                                                class="btn btn-success btn-xs" type="button"
+                                                                data-original-title="btn btn-success btn-xs"
+                                                                title="">Approve</a>
+                                                            <a href="{{ url('/admin/doc_user/reject/' . $value->id) }}"
+                                                                class="btn btn-danger btn-xs" type="button"
+                                                                data-original-title="btn btn-danger btn-xs"
+                                                                title="">Reject</a>
+                                                        </div>
                                                     @endif
 
 

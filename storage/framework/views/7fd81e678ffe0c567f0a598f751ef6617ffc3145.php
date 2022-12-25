@@ -109,13 +109,14 @@
                         </svg>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        <li><a href="user-profile.html"><i data-feather="user"></i><span>Account </span></a>
+                        <li>Welcome <?php echo e(Session::get('name')); ?>,</li>
+                        <li><a href="<?php echo e(url('admin/user/profile')); ?>"><i data-feather="user"></i><span>Personal Info
+                                </span></a>
                         </li>
-                        <li><a href="email-application.html"><i data-feather="mail"></i><span>Inbox</span></a>
+                        <li><a href="<?php echo e(url('admin/user/inbox')); ?>"><i data-feather="mail"></i><span>Alerts</span></a>
                         </li>
-                        <li><a href="kanban.html"><i data-feather="file-text"></i><span>Taskboard</span></a>
-                        </li>
-                        <li><a href="edit-profile.html"><i data-feather="settings"></i><span>Settings</span></a></li>
+                        <li><a href="<?php echo e(url('admin/user/setting')); ?>"><i
+                                    data-feather="settings"></i><span>Settings</span></a></li>
                         <li><a href="<?php echo e(route('logout')); ?>"><i data-feather="log-in"> </i><span>Logout</span></a>
                         </li>
                     </ul>

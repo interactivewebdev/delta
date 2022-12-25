@@ -31,6 +31,20 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style>
+        .goog-logo-link {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            color: transparent !important;
+        }
+
+        .goog-te-gadget .goog-te-combo {
+            color: blue !important;
+            margin: 0px !important;
+        }
+    </style>
     <?php echo $__env->yieldContent('custom-css'); ?>
 </head>
 <?php echo $__env->make('layouts.front-partial.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -113,6 +127,32 @@
                 console.log(msg);
             });
     }
+
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: "en"
+        }, 'google_translate_element');
+    }
+
+    function changeLanguageByButtonClick(language) {
+        var selectField = document.querySelector("#google_translate_element select");
+        for (var i = 0; i < selectField.children.length; i++) {
+            var option = selectField.children[i];
+            // find desired langauge and change the former language of the hidden selection-field 
+            //console.log(option.value, language);
+            if (option.value == language) {
+                console.log('here');
+                selectField.selectedIndex = i;
+                // trigger change event afterwards to make google-lib translate this side
+                selectField.dispatchEvent(new Event('change'));
+                break;
+            }
+        }
+
+        window.location.reload();
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 </script>
 
 </html>

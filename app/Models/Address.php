@@ -11,6 +11,7 @@ class Address extends Model
 
     protected $table = "address";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -18,11 +19,11 @@ class Address extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'counytry',
+        'country',
         'city',
         'lat',
         'lon',
-        'addfress',
-        'status'
+        'address',
+        'status',
     ];
 }

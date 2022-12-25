@@ -11,6 +11,7 @@ class FaqCategory extends Model
 
     protected $table = "faq_category";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

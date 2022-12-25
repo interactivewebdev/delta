@@ -12,6 +12,8 @@ class Content extends Model
     protected $table = "content";
     protected $primaryKey = "id";
 
+    const UPDATED_AT = "modified_at";
+
     /**
      * The attributes that are mass assignable.
      *

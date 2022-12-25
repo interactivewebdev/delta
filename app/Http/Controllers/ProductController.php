@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\CategoryFilter;
+use App\Models\Filter;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    public function index(Request $request) 
+    public function index(Request $request)
     {
         $products = FacadesDB::table('product as p')
             ->leftJoin('category as c', 'p.category_id', 'c.category_id')
-            ->select('p.*','c.title as category')
+            ->select('p.*', 'c.title as category')
             ->get();
         $username = $request->session()->get('name');
 
@@ -25,13 +27,17 @@ class ProductController extends Controller
     {
         $title = "Add New Product";
         $categories = Category::all();
-        return view('product-add', compact('categories', 'title'));
+        $filters = Filter::where('status', 1)->get()->toArray();
+        foreach ($filters as $key => $value) {
+            $filters[$key]['attributes'] = CategoryFilter::where('filter_id', $value['filter_id'])->get()->toArray();
+        }
+        return view('product-add', compact('categories', 'title', 'filters'));
     }
 
     public function edit($id)
     {
         $title = "Edit Product";
-        $products = Product::where('parent_id',0)->get();
+        $products = Product::where('parent_id', 0)->get();
         $category = Product::where('product_id', $id)->first();
         return view('category-add', compact('products', 'category', 'title'));
     }
@@ -43,13 +49,13 @@ class ProductController extends Controller
             'title' => 'required',
             'level' => '',
             'description' => 'required',
-            'image' => 'required|max:10000'
+            'image' => 'required|max:10000',
         ]);
 
         if ($validator->fails()) {
             return redirect('category-form')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $validated = $validator->validated();
@@ -61,7 +67,7 @@ class ProductController extends Controller
             'title' => $validated['title'],
             'level' => $validated['level'],
             'description' => $validated['description'],
-            'image' => url('uploads/'.$path)
+            'image' => url('uploads/' . $path),
         ]);
 
         return redirect('products')->with('success', 'Product is added successfully!');
@@ -71,7 +77,7 @@ class ProductController extends Controller
     {
         Product::where('product_id', $id)
             ->update([
-                'status' => 0
+                'status' => 0,
             ]);
 
         return redirect('products')->with('success', 'Product is deactivated successfully!');
@@ -81,7 +87,7 @@ class ProductController extends Controller
     {
         Product::where('product_id', $id)
             ->update([
-                'status' => 1
+                'status' => 1,
             ]);
 
         return redirect('products')->with('success', 'Product is activated successfully!');

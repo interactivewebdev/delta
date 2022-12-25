@@ -47,15 +47,15 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <div class="table-responsive product-table">
+                        <div class="table-responsive">
                             @if (count($doc_categories) > 0)
                                 <table class="display" id="category-list" style="width:98% !important;">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Parent</th>
-                                            <th class="text-center">Status</th>
-                                            <th>Action</th>
+                                            <th width="30%">Name</th>
+                                            <th width="30%">Parent</th>
+                                            <th width="15%" class="text-center">Status</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -65,7 +65,7 @@
                                                 <td>{{ $value->parent }}</td>
                                                 <td class="text-center font-success">
                                                     {{ $value->status ? 'Active' : 'Inactive' }}</td>
-                                                <td>
+                                                <td class="text-center">
                                                     @if ($value->status == 0)
                                                         <a href="{{ url('/admin/doc_category/active/' . $value->id) }}"
                                                             class="btn btn-success btn-xs" type="button"

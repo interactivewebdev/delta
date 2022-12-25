@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\ProductAttribute;
-use Illuminate\Http\Request;
 use App\Traits\ProductsTrait;
+use Illuminate\Http\Request;
 
 class ProductController extends BaseController
 {
@@ -31,8 +30,11 @@ class ProductController extends BaseController
                 ->select('product_id')
                 ->get();
 
-            $arr  = array();
-            foreach ($result as $item) array_push($arr, $item->product_id);
+            $arr = array();
+            foreach ($result as $item) {
+                array_push($arr, $item->product_id);
+            }
+
             $filters[] = $arr;
             $products = (count($filters) > 1) ? call_user_func_array('array_intersect', $filters) : $filters[0];
         }
@@ -41,21 +43,24 @@ class ProductController extends BaseController
             ->select('level')
             ->first();
 
-        if (!!$navs && $navs->parent_id != 0 && $navs->parent != '')
+        if (!!$navs && $navs->parent_id != 0 && $navs->parent != '') {
             $parent_nav = '<a href="' . url('/product/list/' . $navs->parent_id) . '">' . $navs->parent . '</a>';
-        else
+        } else {
             $parent_nav = '';
+        }
 
         $leaf_nav = (!!$navs) ? $navs->title : "";
         $page_heading = (!!$navs) ? $navs->title : "";
 
-        if (count($products) > 0)
+        if (count($products) > 0) {
             $products = $this->getProductsList($category_id, $sort, $filter_cert, $top_filter, $products);
-        else {
-            if (!!$top_filter)
+        } else {
+            if (!!$top_filter) {
                 $products = array();
-            else
+            } else {
                 $products = $this->getProductsList($category_id, $sort, $filter_cert, $top_filter);
+            }
+
         }
         $filters = $this->getCategoryFilters($category_id);
         $top_filters = $this->getCategoryTopFilters($category_id);
@@ -71,13 +76,16 @@ class ProductController extends BaseController
         $products = array();
 
         if (!!$request->input('filter')) {
-            $arr  = array();
+            $arr = array();
             foreach ($request->input('filter') as $val) {
                 $result = ProductAttribute::where('category_filter_id', $val)
                     ->select('product_id')
                     ->get();
 
-                foreach ($result as $item) array_push($arr, $item->product_id);
+                foreach ($result as $item) {
+                    array_push($arr, $item->product_id);
+                }
+
             }
 
             $products = $arr;
@@ -97,17 +105,18 @@ class ProductController extends BaseController
             ->select('level')
             ->first();
 
-        if (!!$navs && $navs->parent_id != 0 && $navs->parent != '')
+        if (!!$navs && $navs->parent_id != 0 && $navs->parent != '') {
             $parent_nav = '<a href="' . url('/product/list/' . $navs->parent_id) . '">' . $navs->parent . '</a>';
-        else
+        } else {
             $parent_nav = '';
+        }
 
         $leaf_nav = (!!$navs) ? $navs->title : "";
         $page_heading = (!!$navs) ? $navs->title : "";
 
-        if (count($products) > 0)
+        if (count($products) > 0) {
             $products = $this->getProductsList($category_id, $sort, $filter_cert, $top_filter, $products);
-        else {
+        } else {
             $products = $this->getProductsList($category_id, $sort, $filter_cert, $top_filter);
         }
         $filters = $this->getCategoryFilters($category_id);
@@ -129,10 +138,12 @@ class ProductController extends BaseController
         $type3 = $this->getAttachment('type 3', $product_id);
 
         $navs = $this->getCategory($product->category_id);
-        if (isset($navs->parent_id) && $navs->parent_id != 0 && $navs->parent != '')
+        if (isset($navs->parent_id) && $navs->parent_id != 0 && $navs->parent != '') {
             $parent_nav = '<a href="' . url('/product/list/' . $navs->parent_id) . '">' . $navs->parent . '</a>';
-        else
+        } else {
             $parent_nav = '';
+        }
+
         $leaf_nav = '<a href="' . url('/product/list/' . $product->category_id) . '">' . $product->category . '</a>';
         $leaf = $product->title;
         $page_heading = $product->title;
@@ -140,5 +151,45 @@ class ProductController extends BaseController
         $product_images = $this->getSlideImages($product_id);
 
         return view('front.products_detail', compact('product', 'attributes', 'type3', 'type2', 'type1', 'navs', 'leaf_nav', 'parent_nav', 'leaf', 'page_heading', 'product_images'));
+    }
+
+    public function openDoc($name, $attachment)
+    {
+        $url = base64_decode($attachment);
+        $path = pathinfo($url);
+
+        if (!file_exists('uploads/' . $path['basename'])) {
+            return view('errors.file_404');
+        } else {
+            $file_name = $name . '.' . $path['extension'];
+            $mime = 'application/force-download';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: ' . $mime);
+            header('Content-Disposition: attachment; filename="' . basename($file_name) . '"');
+            header('Content-Transfer-Encoding: binary');
+            header('Connection: close');
+            readfile('uploads/' . $path['basename']);
+            exit();
+        }
+
+        // $this->load->helper('download');
+        // $url = base64_decode($attachment);
+        // $path = pathinfo($url);
+        // echo "<pre>";
+        // print_r($path); die;
+        // $data   = file_get_contents(base64_decode($attachment));
+        // force_download($name.'.'.$path['extension'], $data);
+        // die;
+
+        // $data['attachment'] = $attachment;
+
+        // $this->output->set_content_type('application/pdf')
+        //    ->set_output(file_get_contents(base64_decode($attachment)));
+        // //echo file_get_contents(base64_decode($attachment));
+        // die;
+        // $this->load->view('openDoc', $data);
     }
 }

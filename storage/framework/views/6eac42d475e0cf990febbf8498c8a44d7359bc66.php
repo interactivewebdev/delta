@@ -10,6 +10,15 @@
     </script>
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('custom-css-styles'); ?>
+    <style>
+        a.edit-btn {
+            margin: 5px;
+            display: block;
+        }
+    </style>
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('breadcrumb'); ?>
     <div class="container-fluid">
         <div class="page-title">
@@ -48,16 +57,15 @@
 
                             </div>
                         <?php endif; ?>
-                        <div class="table-responsive product-table">
+                        <div class="table-responsive">
                             <?php if(count($documents) > 0): ?>
                                 <table class="display" id="documents-list">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th style="width:150px !important;">Name</th>
                                             <th>Category</th>
-                                            <th>Document</th>
+                                            <th style="width:100px !important;">Document</th>
                                             <th>Country</th>
-                                            <th>Valid Upto</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -65,30 +73,32 @@
                                     <tbody>
                                         <?php $__currentLoopData = $documents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td><?php echo e($value->document_name); ?></td>
-                                                <td><?php echo e($value->category_id); ?></td>
-                                                <td><?php echo e($value->document); ?></td>
-                                                <td><?php echo e($value->country); ?></td>
-                                                <td><?php echo e($value->valid_upto); ?></td>
+                                                <td class="text-start"><?php echo e($value->document_name); ?></td>
+                                                <td><?php echo e($value->category_name); ?></td>
+                                                <td style="width:100px !important; text-align:center;"><a
+                                                        href="<?php echo e($value->document); ?>" target="_blank"><i
+                                                            class="fa-solid fa-file"></i></a>
+                                                </td>
+                                                <td><?php echo e($value->country_name); ?></td>
                                                 <td class="font-success"><?php echo e($value->status ? 'Active' : 'Inactive'); ?></td>
                                                 <td>
                                                     <?php if($value->status == 0): ?>
-                                                        <a href="<?php echo e(url('/document/active/' . $value->id)); ?>"
-                                                            class="btn btn-success btn-xs" type="button"
+                                                        <a href="<?php echo e(url('/admin/document/active/' . $value->id)); ?>"
+                                                            class="btn btn-success btn-xs edit-btn" type="button"
                                                             data-original-title="btn btn-success btn-xs"
                                                             title="">Active</a>
                                                     <?php else: ?>
-                                                        <a href="<?php echo e(url('/document/deactive/' . $value->id)); ?>"
-                                                            class="btn btn-info btn-xs" type="button"
+                                                        <a href="<?php echo e(url('/admin/document/deactive/' . $value->id)); ?>"
+                                                            class="btn btn-info btn-xs edit-btn" type="button"
                                                             data-original-title="btn btn-info btn-xs"
                                                             title="">Deactive</a>
                                                     <?php endif; ?>
-                                                    <a href="<?php echo e(url('/document/delete/' . $value->id)); ?>"
-                                                        class="btn btn-danger btn-xs" type="button"
+                                                    <a href="<?php echo e(url('/admin/document/delete/' . $value->id)); ?>"
+                                                        class="btn btn-danger btn-xs edit-btn" type="button"
                                                         data-original-title="btn btn-danger btn-xs"
                                                         title="">Delete</a>
-                                                    <a href="<?php echo e(url('/document/edit/' . $value->id)); ?>"
-                                                        class="btn btn-primary btn-xs" type="button"
+                                                    <a href="<?php echo e(url('/admin/document/edit/' . $value->id)); ?>"
+                                                        class="btn btn-primary btn-xs edit-btn" type="button"
                                                         data-original-title="btn btn-danger btn-xs" title="">Edit</a>
                                                 </td>
                                             </tr>

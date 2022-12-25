@@ -11,6 +11,7 @@ class Country extends Model
 
     protected $table = "country";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,6 @@ class Country extends Model
      */
     protected $fillable = [
         'iso_code_2',
-        'name'
+        'name',
     ];
 }
