@@ -45,13 +45,10 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Listing of products
-                            <a href="{{ route('product-form') }}" class="mx-5 btn btn-primary btn-xs"
-                                data-original-title="btn btn-danger btn-xs" title="">Add New Product</a>
+                        <h5>Listing of product documents
+                            <a href="{{ url('/admin/product/upload/' . $product_id) }}" class="mx-5 btn btn-primary btn-xs"
+                                data-original-title="btn btn-danger btn-xs" title="">Add New Product Document</a>
                         </h5>
-                        {{-- <span>The searching functionality provided by
-                            DataTables is useful for quickly search through the information in the table - however the
-                            search is global, and you may wish to present controls that search on specific columns.</span> --}}
                     </div>
                     <div class="card-body">
                         @if (session('success'))
@@ -63,49 +60,34 @@
                             <table class="display" id="product-list">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
                                         <th>Title</th>
                                         <th>Category</th>
-                                        <th>Status</th>
-                                        <th>Created At</th>
+                                        <th>Type</th>
+                                        <th>Attachment</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $key => $value)
+                                    @foreach ($attachments as $key => $value)
                                         <tr>
-                                            <td><a href="javascript:void(0)"><img src="{{ $value->image }}" width="50"
-                                                        alt=""></a>
-                                            </td>
                                             <td>{{ $value->title }}</td>
-                                            <td>{{ $value->category }}</td>
-                                            <td class="font-success">{{ $value->status ? 'Active' : 'Inactive' }}</td>
-                                            <td>{{ $value->created_at }}</td>
+                                            <td>{{ $value->main_title }}</td>
                                             <td>
-                                                @if ($value->status == 0)
-                                                    <a href="{{ url('/admin/product/active/' . $value->product_id) }}"
-                                                        class="edit-btn btn btn-success btn-xs" type="button"
-                                                        data-original-title="btn btn-success btn-xs" title=""><i
-                                                            class="fa-solid fa-square-check"></i></a>
+                                                @if ($value->type == 'type 1')
+                                                    How to use
+                                                @elseif($value->type == 'type 2')
+                                                    Ingredient
                                                 @else
-                                                    <a href="{{ url('/admin/product/deactive/' . $value->product_id) }}"
-                                                        class="edit-btn btn btn-info btn-xs" type="button"
-                                                        data-original-title="btn btn-info btn-xs" title=""><i
-                                                            class="fa-solid fa-ban"></i></a>
+                                                    Other
                                                 @endif
-                                                <a href="{{ url('/admin/product/delete/' . $value->product_id) }}"
+                                            </td>
+                                            <td>{{ $value->attachment }}</td>
+                                            <td>
+                                                <a href="{{ url('/admin/product/upload/delete/' . $value->id) }}"
                                                     class="edit-btn btn btn-danger btn-xs" type="button"
                                                     data-original-title="btn btn-danger btn-xs" title=""><i
                                                         class="fa-solid fa-trash"></i></a>
-                                                <a href="{{ url('/admin/product/upload/' . $value->product_id) }}"
-                                                    class="edit-btn btn btn-primary btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title=""><i
-                                                        class="fa-solid fa-upload"></i></a>
-                                                <a href="{{ url('/admin/product/attachment/' . $value->product_id) }}"
-                                                    class="edit-btn btn btn-primary btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title=""><i
-                                                        class="fa-solid fa-layer-group"></i></a>
-                                                <a href="{{ url('/admin/product/edit/' . $value->product_id) }}"
+                                                <a href="{{ url('/admin/product/upload/' . $value->id . '/edit/') }}"
                                                     class="edit-btn btn btn-primary btn-xs" type="button"
                                                     data-original-title="btn btn-danger btn-xs" title=""><i
                                                         class="fa-solid fa-pen-to-square"></i></a>

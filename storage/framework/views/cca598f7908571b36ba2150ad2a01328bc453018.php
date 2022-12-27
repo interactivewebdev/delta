@@ -120,7 +120,7 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="<?php echo e(url('assets/js/script.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/theme-customizer/customizer.js')); ?>"></script>
+    
     <!-- login js-->
     <!-- Plugin used-->
     <?php echo $__env->yieldContent('custom-script-tags'); ?>

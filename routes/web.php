@@ -200,6 +200,11 @@ Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
 
     Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
     Route::get('/product-form', [App\Http\Controllers\ProductController::class, 'add'])->name('product-form');
+    Route::get('/product/attachment/{id}', [App\Http\Controllers\ProductController::class, 'attachments']);
+    Route::get('/product/upload/{id}', [App\Http\Controllers\ProductController::class, 'uploadFile']);
+    Route::get('/product/upload/{id}/edit', [App\Http\Controllers\ProductController::class, 'editUploadFile']);
+    Route::get('/product/upload/delete/{id}', [App\Http\Controllers\ProductController::class, 'deleteUploadFile']);
+    Route::post('/product/uploadfile', [App\Http\Controllers\ProductController::class, 'postUploadFile']);
     Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class, 'edit']);
     Route::post('/product/store', [App\Http\Controllers\ProductController::class, 'store'])->name('product-store');
     Route::get('/product/delete/{id}', [App\Http\Controllers\ProductController::class, 'delete']);

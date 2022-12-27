@@ -6,8 +6,10 @@ use App\Models\Category;
 use App\Models\CategoryFilter;
 use App\Models\Filter;
 use App\Models\Product;
+use App\Models\ProductAttachment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -21,6 +23,13 @@ class ProductController extends Controller
         $username = $request->session()->get('name');
 
         return view('products', compact('products'));
+    }
+
+    public function attachments($product_id)
+    {
+        $attachments = ProductAttachment::join('product as p', 'product_attachment.product_id', 'p.product_id')->where('product_attachment.product_id', $product_id)->select('product_attachment.*', 'p.title as product_title')->get();
+
+        return view('attachments', compact('attachments', 'product_id'));
     }
 
     public function add()
@@ -42,6 +51,81 @@ class ProductController extends Controller
         return view('category-add', compact('products', 'category', 'title'));
     }
 
+    public function uploadFile($product_id)
+    {
+        $title = "Upload Product Document";
+        $titles = ProductAttachment::where('product_id', $product_id)->groupBy('main_title')->get();
+        return view('upload-document', compact('products', 'titles', 'title', 'product_id'));
+    }
+
+    public function editUploadFile($attachment_id)
+    {
+        $title = "Edit Upload Product Document";
+        $attachment = ProductAttachment::where('id', $attachment_id)->first();
+        $product_id = $attachment->product_id;
+        $titles = ProductAttachment::where('product_id', $product_id)->groupBy('main_title')->get();
+        return view('upload-document', compact('attachment', 'titles', 'title', 'product_id'));
+    }
+
+    public function deleteUploadFile($attachment_id)
+    {
+        $attach = ProductAttachment::where('id', $attachment_id)->first();
+        File::delete(str_replace('http://localhost:8000/', '', str_replace('https://deltabiocare.com/', '', $attach->attachment)));
+        ProductAttachment::where('id', $attachment_id)->delete();
+
+        return redirect('/admin/product/attachment/' . $attachment_id)->with('success', 'Product attachment is deleted successfully!');
+    }
+
+    public function postUploadFile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => '',
+            'product_id' => 'required|max:255',
+            'type' => 'required',
+            'main_title1' => 'required_without:main_title',
+            'main_title' => 'required_without:main_title1',
+            'title' => 'required',
+            'link' => 'required_without:attachment',
+            'attachment' => 'required_without:link|max:10000',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $docfile = 'document/' . time() . '-full.' . $request->file('attachment')->getClientOriginalExtension();
+        $request->file('attachment')->move(public_path('uploads/document/'), $docfile);
+
+        if ($validated['id'] != '') {
+            $attach = ProductAttachment::where('id', $validated['id'])->first();
+            File::delete(str_replace('http://localhost:8000/', '', str_replace('https://deltabiocare.com/', '', $attach->attachment)));
+
+            ProductAttachment::where('id', $validated['id'])->update([
+                'product_id' => $validated['product_id'],
+                'main_title' => $validated['main_title1'] != '' ? $validated['main_title1'] : $validated['main_title'],
+                'type' => $validated['type'],
+                'title' => $validated['title'],
+                'link' => $validated['link'],
+                'attachment' => url('uploads/' . $docfile),
+            ]);
+        } else {
+            ProductAttachment::create([
+                'product_id' => $validated['product_id'],
+                'main_title' => $validated['main_title1'] != '' ? $validated['main_title1'] : $validated['main_title'],
+                'type' => $validated['type'],
+                'title' => $validated['title'],
+                'link' => $validated['link'],
+                'attachment' => url('uploads/' . $docfile),
+            ]);
+        }
+
+        return redirect('/admin/product/attachment/' . $validated['id'])->with('success', 'Product attachment is added successfully!');
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -60,14 +144,15 @@ class ProductController extends Controller
 
         $validated = $validator->validated();
 
-        $path = $request->file('image')->store('products');
+        $docfile = 'document/' . time() . '-full.' . $request->file('document')->getClientOriginalExtension();
+        $request->file('document')->move(public_path('uploads/document/'), $docfile);
 
         $category = Product::create([
             'parent_id' => $validated['parent_id'],
             'title' => $validated['title'],
             'level' => $validated['level'],
             'description' => $validated['description'],
-            'image' => url('uploads/' . $path),
+            'image' => url('uploads/' . $docfile),
         ]);
 
         return redirect('products')->with('success', 'Product is added successfully!');

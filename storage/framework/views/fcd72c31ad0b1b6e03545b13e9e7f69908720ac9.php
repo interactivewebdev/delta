@@ -45,11 +45,10 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Listing of products
-                            <a href="<?php echo e(route('product-form')); ?>" class="mx-5 btn btn-primary btn-xs"
-                                data-original-title="btn btn-danger btn-xs" title="">Add New Product</a>
+                        <h5>Listing of product documents
+                            <a href="<?php echo e(url('/admin/product/upload/' . $product_id)); ?>" class="mx-5 btn btn-primary btn-xs"
+                                data-original-title="btn btn-danger btn-xs" title="">Add New Product Document</a>
                         </h5>
-                        
                     </div>
                     <div class="card-body">
                         <?php if(session('success')): ?>
@@ -62,49 +61,34 @@
                             <table class="display" id="product-list">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
                                         <th>Title</th>
                                         <th>Category</th>
-                                        <th>Status</th>
-                                        <th>Created At</th>
+                                        <th>Type</th>
+                                        <th>Attachment</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $attachments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td><a href="javascript:void(0)"><img src="<?php echo e($value->image); ?>" width="50"
-                                                        alt=""></a>
-                                            </td>
                                             <td><?php echo e($value->title); ?></td>
-                                            <td><?php echo e($value->category); ?></td>
-                                            <td class="font-success"><?php echo e($value->status ? 'Active' : 'Inactive'); ?></td>
-                                            <td><?php echo e($value->created_at); ?></td>
+                                            <td><?php echo e($value->main_title); ?></td>
                                             <td>
-                                                <?php if($value->status == 0): ?>
-                                                    <a href="<?php echo e(url('/admin/product/active/' . $value->product_id)); ?>"
-                                                        class="edit-btn btn btn-success btn-xs" type="button"
-                                                        data-original-title="btn btn-success btn-xs" title=""><i
-                                                            class="fa-solid fa-square-check"></i></a>
+                                                <?php if($value->type == 'type 1'): ?>
+                                                    How to use
+                                                <?php elseif($value->type == 'type 2'): ?>
+                                                    Ingredient
                                                 <?php else: ?>
-                                                    <a href="<?php echo e(url('/admin/product/deactive/' . $value->product_id)); ?>"
-                                                        class="edit-btn btn btn-info btn-xs" type="button"
-                                                        data-original-title="btn btn-info btn-xs" title=""><i
-                                                            class="fa-solid fa-ban"></i></a>
+                                                    Other
                                                 <?php endif; ?>
-                                                <a href="<?php echo e(url('/admin/product/delete/' . $value->product_id)); ?>"
+                                            </td>
+                                            <td><?php echo e($value->attachment); ?></td>
+                                            <td>
+                                                <a href="<?php echo e(url('/admin/product/upload/delete/' . $value->id)); ?>"
                                                     class="edit-btn btn btn-danger btn-xs" type="button"
                                                     data-original-title="btn btn-danger btn-xs" title=""><i
                                                         class="fa-solid fa-trash"></i></a>
-                                                <a href="<?php echo e(url('/admin/product/upload/' . $value->product_id)); ?>"
-                                                    class="edit-btn btn btn-primary btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title=""><i
-                                                        class="fa-solid fa-upload"></i></a>
-                                                <a href="<?php echo e(url('/admin/product/attachment/' . $value->product_id)); ?>"
-                                                    class="edit-btn btn btn-primary btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title=""><i
-                                                        class="fa-solid fa-layer-group"></i></a>
-                                                <a href="<?php echo e(url('/admin/product/edit/' . $value->product_id)); ?>"
+                                                <a href="<?php echo e(url('/admin/product/upload/' . $value->id . '/edit/')); ?>"
                                                     class="edit-btn btn btn-primary btn-xs" type="button"
                                                     data-original-title="btn btn-danger btn-xs" title=""><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
@@ -121,4 +105,4 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Projects\dbc\resources\views/products.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Projects\dbc\resources\views/attachments.blade.php ENDPATH**/ ?>
