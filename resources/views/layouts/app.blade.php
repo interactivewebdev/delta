@@ -49,6 +49,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/responsive.css') }}">
     @yield('custom-css-tags')
     @yield('custom-css-styles')
+    <style>
+        .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .simplebar-offset {
+            height: 100vh !important;
+        }
+    </style>
 </head>
 
 <body>

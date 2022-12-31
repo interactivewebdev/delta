@@ -58,7 +58,7 @@
                         <div class="card mt-2 mx-auto p-4 bg-light">
                             <div class="card-body bg-light">
                                 <div class="container">
-                                    <form id="login-form" role="form">
+                                    <form id="login-form" role="form" method="POST" action="{{url('/user/login')}}">
                                         <div class="controls">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -105,7 +105,7 @@
                         <div class="card mt-2 mx-auto p-4 bg-light">
                             <div class="card-body bg-light">
                                 <div class="container">
-                                    <form id="register-form" role="form">
+                                    <form id="register-form" role="form" method="POST" action="{{url('/user/register')}}">>
                                         <div class="controls">
                                             <div class="row">
                                                 <div class="col-md-6">
