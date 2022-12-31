@@ -63,7 +63,7 @@ class CategoryController extends Controller
             'image' => url('uploads/'.$path)
         ]);
 
-        return redirect('categories')->with('success', 'Category is added successfully!');
+        return redirect('/admin/categories')->with('success', 'Category is added successfully!');
     }
 
     public function deactive($id)
@@ -73,7 +73,7 @@ class CategoryController extends Controller
                 'status' => 0
             ]);
 
-        return redirect('categories')->with('success', 'Category is deactivated successfully!');
+        return redirect('/admin/categories')->with('success', 'Category is deactivated successfully!');
     }
 
     public function active($id)
@@ -83,13 +83,13 @@ class CategoryController extends Controller
                 'status' => 1
             ]);
 
-        return redirect('categories')->with('success', 'Category is activated successfully!');
+        return redirect('/admin/categories')->with('success', 'Category is activated successfully!');
     }
 
     public function delete($id)
     {
         Category::where('category_id', $id)->delete();
 
-        return redirect('categories')->with('success', 'Category is deleted successfully!');
+        return redirect('/admin/categories')->with('success', 'Category is deleted successfully!');
     }
 }

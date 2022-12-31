@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Distributor extends Model
+class Doccategory extends Model
 {
     use HasFactory;
 
-    protected $table = "distributor";
+    protected $table = "doc_category";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -18,11 +19,8 @@ class Distributor extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
-        'password',
-        'name',
-        'email',
-        'phone',
+        'parent_id',
+        'title',
         'status'
     ];
 }

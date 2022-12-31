@@ -10,6 +10,15 @@
     </script>
 @endsection
 
+@section('custom-css-styles')
+    <style>
+        a.edit-btn {
+            margin: 0px 2px;
+            display: inline;
+        }
+    </style>
+@endsection
+
 @section('breadcrumb')
     <div class="container-fluid">
         <div class="page-title">
@@ -50,7 +59,7 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <div class="table-responsive product-table">
+                        <div class="table-responsive">
                             <table class="display" id="product-list">
                                 <thead>
                                     <tr>
@@ -65,7 +74,7 @@
                                 <tbody>
                                     @foreach ($products as $key => $value)
                                         <tr>
-                                            <td><a href="javascript:void(0)"><img src="{{ $value->image }}" width="100"
+                                            <td><a href="javascript:void(0)"><img src="{{ $value->image }}" width="50"
                                                         alt=""></a>
                                             </td>
                                             <td>{{ $value->title }}</td>
@@ -74,22 +83,32 @@
                                             <td>{{ $value->created_at }}</td>
                                             <td>
                                                 @if ($value->status == 0)
-                                                    <a href="{{ url('/product/active/' . $value->product_id) }}"
-                                                        class="btn btn-success btn-xs" type="button"
-                                                        data-original-title="btn btn-success btn-xs"
-                                                        title="">Active</a>
+                                                    <a href="{{ url('/admin/product/active/' . $value->product_id) }}"
+                                                        class="edit-btn btn btn-success btn-xs" type="button"
+                                                        data-original-title="btn btn-success btn-xs" title=""><i
+                                                            class="fa-solid fa-square-check"></i></a>
                                                 @else
-                                                    <a href="{{ url('/product/deactive/' . $value->product_id) }}"
-                                                        class="btn btn-info btn-xs" type="button"
-                                                        data-original-title="btn btn-info btn-xs"
-                                                        title="">Deactive</a>
+                                                    <a href="{{ url('/admin/product/deactive/' . $value->product_id) }}"
+                                                        class="edit-btn btn btn-info btn-xs" type="button"
+                                                        data-original-title="btn btn-info btn-xs" title=""><i
+                                                            class="fa-solid fa-ban"></i></a>
                                                 @endif
-                                                <a href="{{ url('/product/delete/' . $value->product_id) }}"
-                                                    class="btn btn-danger btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Delete</a>
-                                                <a href="{{ url('/product/edit/' . $value->product_id) }}"
-                                                    class="btn btn-primary btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Edit</a>
+                                                <a href="{{ url('/admin/product/delete/' . $value->product_id) }}"
+                                                    class="edit-btn btn btn-danger btn-xs" type="button"
+                                                    data-original-title="btn btn-danger btn-xs" title=""><i
+                                                        class="fa-solid fa-trash"></i></a>
+                                                <a href="{{ url('/admin/product/upload/' . $value->product_id) }}"
+                                                    class="edit-btn btn btn-primary btn-xs" type="button"
+                                                    data-original-title="btn btn-danger btn-xs" title=""><i
+                                                        class="fa-solid fa-upload"></i></a>
+                                                <a href="{{ url('/admin/product/attachment/' . $value->product_id) }}"
+                                                    class="edit-btn btn btn-primary btn-xs" type="button"
+                                                    data-original-title="btn btn-danger btn-xs" title=""><i
+                                                        class="fa-solid fa-layer-group"></i></a>
+                                                <a href="{{ url('/admin/product/edit/' . $value->product_id) }}"
+                                                    class="edit-btn btn btn-primary btn-xs" type="button"
+                                                    data-original-title="btn btn-danger btn-xs" title=""><i
+                                                        class="fa-solid fa-pen-to-square"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

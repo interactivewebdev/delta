@@ -12,6 +12,8 @@ class Slider extends Model
     protected $table = "slider";
     protected $primaryKey = "slider_id";
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *

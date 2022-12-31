@@ -11,6 +11,7 @@ class Benefits extends Model
 
     protected $table = "benefits";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,6 @@ class Benefits extends Model
         'title',
         'short_desc',
         'image',
-        'status'
+        'status',
     ];
 }

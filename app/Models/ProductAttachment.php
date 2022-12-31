@@ -11,6 +11,7 @@ class ProductAttachment extends Model
 
     protected $table = "product_attachment";
     protected $primaryKey = "id";
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +24,6 @@ class ProductAttachment extends Model
         'type',
         'title',
         'link',
-        'attachment'
+        'attachment',
     ];
 }

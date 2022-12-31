@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <meta name="description"
         content="Zeta admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
     <meta name="keywords"
@@ -12,7 +13,7 @@
     <meta name="author" content="pixelstrap"> --}}
     <link rel="icon" href="{{ url('assets/images/logo/favicon-icon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ url('assets/images/logo/favicon-icon.png') }}" type="image/x-icon">
-    <title>Deltabiocare :: Admin Dashboard </title>
+    <title>Deltabiocare :: {{ ucfirst(strtolower(Session::get('usertype'))) }} Dashboard </title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -51,7 +52,11 @@
     @yield('custom-css-styles')
     <style>
         .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .simplebar-offset {
+<<<<<<< HEAD
             height: 100vh !important;
+=======
+            height: calc(100vh - 150px);
+>>>>>>> 7fe96ef45246e5927955ba8b3cf8df7088e29a52
         }
     </style>
 </head>
@@ -123,7 +128,7 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ url('assets/js/script.js') }}"></script>
-    <script src="{{ url('assets/js/theme-customizer/customizer.js') }}"></script>
+    {{-- <script src="{{ url('assets/js/theme-customizer/customizer.js') }}"></script> --}}
     <!-- login js-->
     <!-- Plugin used-->
     @yield('custom-script-tags')
