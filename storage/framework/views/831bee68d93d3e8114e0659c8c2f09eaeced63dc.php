@@ -31,7 +31,7 @@
 <?php $__env->startSection('page-content'); ?>
     <div class="content-banner-image">
         <figure>
-            <img src="<?php echo e(url('../assets/front/images/b3.jpg')); ?>">
+            <img src="<?php echo e(url('/assets/front/images/b3.jpg')); ?>">
         </figure>
     </div>
     <div class="container my-4">

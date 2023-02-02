@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Traits\BlogTrait;
+use Illuminate\Http\Request;
 
 class BlogController extends BaseController
 {
@@ -12,12 +11,13 @@ class BlogController extends BaseController
 
     public function __construct()
     {
-        
+
     }
 
-    public function index(){
+    public function index()
+    {
         $blogs = $this->getAllBlogs();
-		$recentPosts = $this->getRecentPosts();
+        $recentPosts = $this->getRecentPosts();
 
         return view('front.blog', compact('blogs', 'recentPosts'));
     }
@@ -25,30 +25,30 @@ class BlogController extends BaseController
     public function detail($id)
     {
         $blog = $this->getBlogDetail($id);
-		$recentPosts = $this->getRecentPosts();
+        $recentPosts = $this->getRecentPosts();
 
-		return view('front.blog-detail', compact('blog', 'recentPosts'));
+        return view('front.blog-detail', compact('blog', 'recentPosts'));
     }
 
-    public function searchBlog()
-	{		
-		$blogs = $this->getAllBlogs();
-		$recentPosts = $this->getRecentPosts();
+    public function searchBlog(Request $request)
+    {
+        $blogs = $this->getAllBlogs($request->all());
+        $recentPosts = $this->getRecentPosts();
 
-		return view('front.blog', compact('blogs', 'recentPosts'));
-	}
+        return view('front.blog', compact('blogs', 'recentPosts'));
+    }
 
-	public function news()
-	{
-		$news = $this->getAllNews();
+    public function news()
+    {
+        $news = $this->getAllNews();
 
-		return view('front.news', compact('news'));
-	}	
+        return view('front.news', compact('news'));
+    }
 
-	public function newsDetail($id)
-	{
-		$blog = $this->getBlogDetail($id);
+    public function newsDetail($id)
+    {
+        $blog = $this->getBlogDetail($id);
 
-		return view('front.news-detail', compact('blog'));
-	}
+        return view('front.news-detail', compact('blog'));
+    }
 }

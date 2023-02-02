@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\ProductAttachment;
+use App\Models\ProductAttribute;
 use App\Models\SiteImage;
 use Illuminate\Support\Facades\DB;
 
@@ -14,11 +15,11 @@ trait ProductsTrait
         if ($filter_cert != '') {
             $condition = array(
                 'p.status' => 1,
-                'p.certification' => $filter_cert
+                'p.certification' => $filter_cert,
             );
         } else {
             $condition = array(
-                'p.status' => 1
+                'p.status' => 1,
             );
         }
 
@@ -27,15 +28,19 @@ trait ProductsTrait
             ->selectRaw("c.title as category_name, c.image as category_image , p.*")
             ->where($condition);
 
-        if ($category_id != '') $query = $query->where('c.category_id', $category_id);
+        if ($category_id != '') {
+            $query = $query->where('c.category_id', $category_id);
+        }
 
-        if (count($product_id) > 0) $query = $query->whereIn('product_id', $product_id);
+        if (count($product_id) > 0) {
+            $query = $query->whereIn('product_id', $product_id);
+        }
 
         return $query->orderBy('p.title', $sort)
             ->get();
     }
 
-    function getCategoryFilters($category_id)
+    public function getCategoryFilters($category_id)
     {
         $data = array();
 
@@ -57,7 +62,7 @@ trait ProductsTrait
                 ->join('filter as f', 'cf.filter_id', 'f.filter_id')
                 ->where([
                     'category_id' => $category_id,
-                    'cf.filter_id' => $item->filter_id
+                    'cf.filter_id' => $item->filter_id,
                 ])
                 ->select('cf.*')
                 ->get();
@@ -68,7 +73,7 @@ trait ProductsTrait
         return $data;
     }
 
-    function getCategoryTopFilters($category_id)
+    public function getCategoryTopFilters($category_id)
     {
         $data = array();
 
@@ -90,7 +95,7 @@ trait ProductsTrait
                 ->join('filter as f', 'cf.filter_id', 'f.filter_id')
                 ->where([
                     'category_id' => $category_id,
-                    'cf.filter_id' => $item->filter_id
+                    'cf.filter_id' => $item->filter_id,
                 ])
                 ->select('cf.*')
                 ->get();
@@ -156,6 +161,13 @@ trait ProductsTrait
         return SiteImage::where('type_id', $product_id)
             ->where('type', 'product')
             ->selectRaw('title, image')
+            ->get();
+    }
+
+    public function filterProductsList($category_filter_id)
+    {
+        return ProductAttribute::where('category_filter_id', $category_filter_id)
+            ->select('product_id')
             ->get();
     }
 }

@@ -208,10 +208,10 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="how-to-use" role="tabpanel"
-                                            aria-labelledby="how-to-use-tab" style="position: relative">
-                                            @if (count($type1) > 0)
-                                                @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
+                                        @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
+                                            <div class="tab-pane fade show active" id="how-to-use" role="tabpanel"
+                                                aria-labelledby="how-to-use-tab" style="position: relative">
+                                                @if (count($type1) > 0)
                                                     @foreach ($type1 as $val)
                                                         <p>
                                                         <h5>{{ $val->main_title }}</h5>
@@ -247,15 +247,13 @@
                                                                     account now</a></div>
                                                         </div>
                                                     @endif
+                                                @else
+                                                    Not any document provided
                                                 @endif
-                                            @else
-                                                Not any document provided
-                                            @endif
-                                        </div>
-                                        <div class="tab-pane fade" id="ingredients" role="tabpanel"
-                                            aria-labelledby="ingredients-tab">
-                                            @if (count($type2) > 0)
-                                                @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
+                                            </div>
+                                            <div class="tab-pane fade" id="ingredients" role="tabpanel"
+                                                aria-labelledby="ingredients-tab">
+                                                @if (count($type2) > 0)
                                                     @foreach ($type2 as $val)
                                                         <p>
                                                         <h5>{{ $val->main_title }}</h5>
@@ -272,18 +270,12 @@
                                                         </p>
                                                     @endforeach
                                                 @else
-                                                    Please <a href="javascript:void(0)"
-                                                        onClick="return verifyDistributor()">click here to login</a> as
-                                                    distributor to get attachments.
+                                                    Not any document provided
                                                 @endif
-                                            @else
-                                                Not any document provided
-                                            @endif
-                                        </div>
-                                        <div class="tab-pane fade" id="documents" role="tabpanel"
-                                            aria-labelledby="documents-tab">
-                                            @if (count($type3) > 0)
-                                                @if (Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))
+                                            </div>
+                                            <div class="tab-pane fade" id="documents" role="tabpanel"
+                                                aria-labelledby="documents-tab">
+                                                @if (count($type3) > 0)
                                                     @foreach ($type3 as $val)
                                                         <p>
                                                         <h5>{{ $val->main_title }}</h5>
@@ -300,14 +292,14 @@
                                                         </p>
                                                     @endforeach
                                                 @else
-                                                    Please <a href="javascript:void(0)"
-                                                        onClick="return verifyDistributor()">click here to login</a> as
-                                                    distributor to get attachments.
+                                                    Not any document provided
                                                 @endif
-                                            @else
-                                                Not any document provided
-                                            @endif
-                                        </div>
+                                            </div>
+                                        @else
+                                            Please <a href="javascript:void(0)" onClick="return verifyDistributor()">click
+                                                here to login</a> as
+                                            distributor to get attachments.
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -347,8 +339,8 @@
                                     password</a>
                             </div>
                             <!-- <div class="form-row">
-                                                                                                                                                                               <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
-                                                                                                                                                                            </div> -->
+                                                                                                                                                                                               <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
+                                                                                                                                                                                            </div> -->
                         </div>
                     </div>
                 </div>

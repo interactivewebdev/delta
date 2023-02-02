@@ -7,13 +7,17 @@ use App\Models\CategoryFilter;
 use App\Models\Filter;
 use App\Models\Product;
 use App\Models\ProductAttachment;
+use App\Traits\ProductsTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    use ProductsTrait;
+
     public function index(Request $request)
     {
         $products = FacadesDB::table('product as p')

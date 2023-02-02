@@ -1,10 +1,9 @@
-@extends('layouts.front')
-@section('page-content')
-    <div id="faq" style="background-image: url('{{ $contact->image }}');">
+<?php $__env->startSection('page-content'); ?>
+    <div id="faq" style="background-image: url('<?php echo e($contact->image); ?>');">
         <h1 style="flex-basis:100%;">Contact Us</h1>
         <nav aria-label="breadcrumb" style="margin-top:-90px;">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
             </ol>
         </nav>
@@ -16,9 +15,9 @@
                 <div class="col-md-3">
                     <select name="country" id="mapcountry" class="form-control">
                         <option value="">-- Select --</option>
-                        @foreach ($selectedCountries as $item)
-                            <option value="{{ $item->code }}">{{ $item->name }}</option>
-                        @endforeach
+                        <?php $__currentLoopData = $selectedCountries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($item->code); ?>"><?php echo e($item->name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
             </div>
@@ -32,10 +31,10 @@
             <div class="contact-form">
                 <div class="row">
                     <div class="col-md-8 contact-grid">
-                        <h5 class="text-warning">{{-- $this->session->flashdata('success') --}}</h5>
-                        {{-- validation_errors('<div class="alert alert-danger">', '</div>') --}}
-                        <form method="post" enctype="multipart/form-data" action="{{ url('/post/contact') }}">
-                            @csrf
+                        <h5 class="text-warning"></h5>
+                        
+                        <form method="post" enctype="multipart/form-data" action="<?php echo e(url('/post/contact')); ?>">
+                            <?php echo csrf_field(); ?>
                             <select name="subject">
                                 <option value="">-- Select Purpose--</option>
                                 <option value="General inquiry">General inquiry</option>
@@ -60,34 +59,36 @@
                     </div>
                     <div class="col-md-4 contact-in">
                         <div class="address-more">
-                            @if ($config->email != '')
+                            <?php if($config->email != ''): ?>
                                 <p style="font-weight:bold;"><i class="far fa-envelope"></i>
-                                    &nbsp;&nbsp;{{ $config->email }}
+                                    &nbsp;&nbsp;<?php echo e($config->email); ?>
+
                                 </p>
-                            @endif
-                            @if ($config->phone != '')
+                            <?php endif; ?>
+                            <?php if($config->phone != ''): ?>
                                 <p style="font-weight:bold;"><i class="fab fa-whatsapp"></i>
-                                    &nbsp;&nbsp;{{ $config->phone }}
+                                    &nbsp;&nbsp;<?php echo e($config->phone); ?>
+
                                 </p>
-                            @endif
+                            <?php endif; ?>
                         </div>
 
                         <div class="address-more">
                             <h4>Address</h4>
-                            @if ($default)
-                                <p>{{ nl2br($default->address) }}</p>
-                            @else
+                            <?php if($default): ?>
+                                <p><?php echo e(nl2br($default->address)); ?></p>
+                            <?php else: ?>
                                 <p>Not mentioned</p>
-                            @endif
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('custom-script')
+<?php $__env->startSection('custom-script'); ?>
     <script>
         var map;
         var locations;
@@ -96,7 +97,7 @@
         function initMap() {
             $.ajax({
                     method: "POST",
-                    url: "{{ url('map/locations') }}",
+                    url: "<?php echo e(url('map/locations')); ?>",
                     data: ''
                 })
                 .done(function(data) {
@@ -136,7 +137,7 @@
         $('#mapcountry').on('change', function(e) {
             $.ajax({
                     method: "POST",
-                    url: "{{ url('map/country/locations') }}",
+                    url: "<?php echo e(url('map/country/locations')); ?>",
                     data: {
                         country: e.target.value
                     }
@@ -186,4 +187,6 @@
             return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
         }
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.front', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Projects\dbc\resources\views/front/contact.blade.php ENDPATH**/ ?>

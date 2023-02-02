@@ -15,7 +15,7 @@ $num = 0;
                 <img src="<?php echo e($slide->image); ?>" class="d-block w-100 slideshow" alt="...">
                 <div class="carousel-caption d-none d-md-block"
                     style="text-align:left; left:5%; text-shadow: #000000 2px 2px 15px;bottom: 200px;font-family: verdana, arial;">
-                    <h2><?php echo e($slide->title); ?></h2>
+                    <h2><?php echo $slide->title; ?></h2>
                     <?php if($slide->link != ''): ?>
                         <a href="<?php echo e($slide->link); ?>" class="btn btn-primary">Read more</a>
                     <?php endif; ?>

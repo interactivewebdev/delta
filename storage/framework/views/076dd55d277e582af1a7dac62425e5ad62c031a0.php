@@ -48,10 +48,11 @@
                     <div class="col-md-12">
                         <div class="card mb-5" style="height:300px;">
                             <div class="card-body">
-                                <form name="searchForm">
+                                <form name="searchForm" method="post" action="<?php echo e(url('/blog/search')); ?>">
+                                    <?php echo csrf_field(); ?>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Sort By Date</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
+                                        <select class="form-control" name="sort" id="exampleFormControlSelect1">
                                             <option value="latest">Latest</option>
                                             <option value="oldest">Oldest</option>
                                         </select>

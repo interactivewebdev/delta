@@ -71,7 +71,7 @@
                         <li class="nav-item" style="margin-left:100px;">
                             @if (Session::has('distributor'))
                                 <div class="nav-item text-success">Hello {{ Session::get('distributor')['name'] }}, <a
-                                        href="{{ url('/distributor/logout') }}" class="nav-link">Logout</a>
+                                        href="{{ url('/distributor/logout') }}" style="font-size: 14px;">Logout</a>
                                 </div>
                             @else
                                 <a class="nav-link" href='{{ url('/distributor/register') }}'>Login/Signup</a>

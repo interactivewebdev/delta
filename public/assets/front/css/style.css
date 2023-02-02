@@ -460,7 +460,8 @@ img.hoverEffect:hover{
 	background-image: url('https://www.deltaformulations.com/images/background/faq-title-bg.jpg');
 	background-position: left top;
 	background-repeat: no-repeat;
-	height:280px;
+	background-size: cover;
+	height:300px;
 	display:flex;
 	flex-wrap: wrap;
 	align-items: center;

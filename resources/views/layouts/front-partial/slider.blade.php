@@ -15,7 +15,7 @@ $num = 0;
                 <img src="{{ $slide->image }}" class="d-block w-100 slideshow" alt="...">
                 <div class="carousel-caption d-none d-md-block"
                     style="text-align:left; left:5%; text-shadow: #000000 2px 2px 15px;bottom: 200px;font-family: verdana, arial;">
-                    <h2>{{ $slide->title }}</h2>
+                    <h2>{!! $slide->title !!}</h2>
                     @if ($slide->link != '')
                         <a href="{{ $slide->link }}" class="btn btn-primary">Read more</a>
                     @endif

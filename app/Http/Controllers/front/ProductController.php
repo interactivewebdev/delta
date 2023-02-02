@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\ProductAttribute;
 use App\Traits\ProductsTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends BaseController
 {
@@ -62,6 +63,7 @@ class ProductController extends BaseController
             }
 
         }
+
         $filters = $this->getCategoryFilters($category_id);
         $top_filters = $this->getCategoryTopFilters($category_id);
         $header_image = (!!$navs) ? $navs->image : "";
@@ -74,13 +76,12 @@ class ProductController extends BaseController
     {
         $filters = array();
         $products = array();
+        $left_filters = array();
 
-        if (!!$request->input('filter')) {
+        if (!!$request->filter) {
             $arr = array();
-            foreach ($request->input('filter') as $val) {
-                $result = ProductAttribute::where('category_filter_id', $val)
-                    ->select('product_id')
-                    ->get();
+            foreach ($request->filter as $val) {
+                $result = $this->filterProductsList($val);
 
                 foreach ($result as $item) {
                     array_push($arr, $item->product_id);
@@ -90,9 +91,9 @@ class ProductController extends BaseController
 
             $products = $arr;
 
-            $filters = $request->input('filter');
+            $left_filters = $request->filter;
 
-            $_SESSION['products'] = $products;
+            Session::put('products', $products);
         } else {
             $products = array();
         }
@@ -105,24 +106,25 @@ class ProductController extends BaseController
             ->select('level')
             ->first();
 
-        if (!!$navs && $navs->parent_id != 0 && $navs->parent != '') {
+        if ($navs->parent_id != 0 && $navs->parent != '') {
             $parent_nav = '<a href="' . url('/product/list/' . $navs->parent_id) . '">' . $navs->parent . '</a>';
         } else {
             $parent_nav = '';
         }
 
-        $leaf_nav = (!!$navs) ? $navs->title : "";
-        $page_heading = (!!$navs) ? $navs->title : "";
+        $leaf_nav = $navs->title;
+        $page_heading = $navs->title;
+        $category_id = $category_id;
 
         if (count($products) > 0) {
             $products = $this->getProductsList($category_id, $sort, $filter_cert, $top_filter, $products);
         } else {
             $products = $this->getProductsList($category_id, $sort, $filter_cert, $top_filter);
         }
+
         $filters = $this->getCategoryFilters($category_id);
         $top_filters = $this->getCategoryTopFilters($category_id);
         $header_image = (!!$navs) ? $navs->image : "";
-        $left_filters = $filters;
 
         return view('front.products', compact('category_id', 'parent_nav', 'leaf_nav', 'page_heading', 'products', 'filters', 'top_filters', 'header_image', 'left_filters'));
     }

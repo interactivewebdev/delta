@@ -5,10 +5,10 @@ namespace App\Http\Controllers\front;
 use App\Models\Benefits;
 use App\Models\Content;
 use App\Models\Country;
-use App\Models\Distributor;
 use App\Models\Doccategory;
 use App\Models\Documents;
 use App\Models\Meetus;
+use App\Models\User;
 use App\Traits\SubscribeTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -105,12 +105,14 @@ class HomeController extends BaseController
 
     public function postDistLogin(Request $request)
     {
-        $distributor = Distributor::where(['username' => $request->username, 'password' => $request->password]);
+        $user = User::where(['username' => $request->username, 'password' => $request->password]);
 
-        if ($distributor->count() > 0) {
-            $data = $distributor->first()->toArray();
+        if ($user->count() > 0) {
+            $data = $user->first()->toArray();
+            $request->session()->put('user_type', $data['type']);
             $request->session()->put('dst_name', $data['name']);
             $request->session()->put('distributor', $data);
+            if($data['type'] == "document")
             $request->session()->put('distributor_logged_in', true);
 
             return redirect('/distributor/' . $data['id'] . '/profile');
@@ -152,7 +154,7 @@ class HomeController extends BaseController
 
     public function distributor_profile($id)
     {
-        $distributor = Distributor::where('id', $id)->first();
+        $distributor = User::where('id', $id)->first();
         $country = Country::where('id', $distributor->country)->first();
         $documents = Documents::where('country', $distributor->country)->get();
 

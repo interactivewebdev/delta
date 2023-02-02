@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2022 at 07:02 PM
+-- Generation Time: Jan 01, 2023 at 06:00 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -852,7 +852,7 @@ CREATE TABLE `product_attachment` (
   `product_id` int(20) NOT NULL,
   `type` varchar(100) NOT NULL,
   `title` varchar(150) NOT NULL,
-  `link` varchar(255) NOT NULL,
+  `link` varchar(255) DEFAULT NULL,
   `attachment` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -862,11 +862,11 @@ CREATE TABLE `product_attachment` (
 
 INSERT INTO `product_attachment` (`id`, `main_title`, `product_id`, `type`, `title`, `link`, `attachment`) VALUES
 (1, 'title 1', 1, 'type 2', 'lkalcn', 'ldkdk', 'https://deltabiocare.com/uploads/1626982952.png'),
-(2, 'Ingredieent List', 2, 'type 2', 'Ingredieent List', '', 'https://deltabiocare.com/uploads/1627044119.jpg'),
 (3, 'Ingredieent List', 2, 'type 2', 'List 2', '', 'https://deltabiocare.com/uploads/1627044147.pptx'),
 (4, 'Ingredieent List', 2, 'type 1', 'List 3', '', 'https://deltabiocare.com/uploads/1627044171.pdf'),
 (5, 'Ingredieent List', 2, 'type 1', 'List 4', '', 'https://deltabiocare.com/uploads/1627044206.docx'),
-(6, 'Formulation Guidelines', 2, 'type 1', 'Ginger-Ashwaganda drink', '', 'https://deltabiocare.com/uploads/1627323281.docx');
+(6, 'Formulation Guidelines', 2, 'type 1', 'Ginger-Ashwaganda drink', '', 'https://deltabiocare.com/uploads/1627323281.docx'),
+(7, 'Test Title', 2, 'type 1', 'Attach title', NULL, 'http://localhost:8000/uploads/document/1672159452-full.png');
 
 -- --------------------------------------------------------
 
@@ -1310,7 +1310,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_attachment`
 --
 ALTER TABLE `product_attachment`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product_attribute`

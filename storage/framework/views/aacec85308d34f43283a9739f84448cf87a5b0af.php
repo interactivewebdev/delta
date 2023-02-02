@@ -211,10 +211,10 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="how-to-use" role="tabpanel"
-                                            aria-labelledby="how-to-use-tab" style="position: relative">
-                                            <?php if(count($type1) > 0): ?>
-                                                <?php if(Session::has('distributor_logged_in') && Session::get('distributor_logged_in')): ?>
+                                        <?php if(Session::has('distributor_logged_in') && Session::get('distributor_logged_in')): ?>
+                                            <div class="tab-pane fade show active" id="how-to-use" role="tabpanel"
+                                                aria-labelledby="how-to-use-tab" style="position: relative">
+                                                <?php if(count($type1) > 0): ?>
                                                     <?php $__currentLoopData = $type1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <p>
                                                         <h5><?php echo e($val->main_title); ?></h5>
@@ -250,15 +250,13 @@
                                                                     account now</a></div>
                                                         </div>
                                                     <?php endif; ?>
+                                                <?php else: ?>
+                                                    Not any document provided
                                                 <?php endif; ?>
-                                            <?php else: ?>
-                                                Not any document provided
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="tab-pane fade" id="ingredients" role="tabpanel"
-                                            aria-labelledby="ingredients-tab">
-                                            <?php if(count($type2) > 0): ?>
-                                                <?php if(Session::has('distributor_logged_in') && Session::get('distributor_logged_in')): ?>
+                                            </div>
+                                            <div class="tab-pane fade" id="ingredients" role="tabpanel"
+                                                aria-labelledby="ingredients-tab">
+                                                <?php if(count($type2) > 0): ?>
                                                     <?php $__currentLoopData = $type2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <p>
                                                         <h5><?php echo e($val->main_title); ?></h5>
@@ -275,18 +273,12 @@
                                                         </p>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 <?php else: ?>
-                                                    Please <a href="javascript:void(0)"
-                                                        onClick="return verifyDistributor()">click here to login</a> as
-                                                    distributor to get attachments.
+                                                    Not any document provided
                                                 <?php endif; ?>
-                                            <?php else: ?>
-                                                Not any document provided
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="tab-pane fade" id="documents" role="tabpanel"
-                                            aria-labelledby="documents-tab">
-                                            <?php if(count($type3) > 0): ?>
-                                                <?php if(Session::has('distributor_logged_in') && Session::get('distributor_logged_in')): ?>
+                                            </div>
+                                            <div class="tab-pane fade" id="documents" role="tabpanel"
+                                                aria-labelledby="documents-tab">
+                                                <?php if(count($type3) > 0): ?>
                                                     <?php $__currentLoopData = $type3; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <p>
                                                         <h5><?php echo e($val->main_title); ?></h5>
@@ -303,14 +295,14 @@
                                                         </p>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 <?php else: ?>
-                                                    Please <a href="javascript:void(0)"
-                                                        onClick="return verifyDistributor()">click here to login</a> as
-                                                    distributor to get attachments.
+                                                    Not any document provided
                                                 <?php endif; ?>
-                                            <?php else: ?>
-                                                Not any document provided
-                                            <?php endif; ?>
-                                        </div>
+                                            </div>
+                                        <?php else: ?>
+                                            Please <a href="javascript:void(0)" onClick="return verifyDistributor()">click
+                                                here to login</a> as
+                                            distributor to get attachments.
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -350,8 +342,8 @@
                                     password</a>
                             </div>
                             <!-- <div class="form-row">
-                                                                                                                                                                               <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
-                                                                                                                                                                            </div> -->
+                                                                                                                                                                                               <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
+                                                                                                                                                                                            </div> -->
                         </div>
                     </div>
                 </div>

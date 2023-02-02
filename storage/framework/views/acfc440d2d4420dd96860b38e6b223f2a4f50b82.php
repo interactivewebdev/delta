@@ -73,7 +73,7 @@
                         <li class="nav-item" style="margin-left:100px;">
                             <?php if(Session::has('distributor')): ?>
                                 <div class="nav-item text-success">Hello <?php echo e(Session::get('distributor')['name']); ?>, <a
-                                        href="<?php echo e(url('/distributor/logout')); ?>" class="nav-link">Logout</a>
+                                        href="<?php echo e(url('/distributor/logout')); ?>" style="font-size: 14px;">Logout</a>
                                 </div>
                             <?php else: ?>
                                 <a class="nav-link" href='<?php echo e(url('/distributor/register')); ?>'>Login/Signup</a>

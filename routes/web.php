@@ -20,7 +20,7 @@ Route::get('/about', [App\Http\Controllers\front\PageController::class, 'aboutus
 Route::get('/contact-us', [App\Http\Controllers\front\PageController::class, 'contact']);
 Route::get('/faq', [App\Http\Controllers\front\FaqController::class, 'index']);
 Route::get('/blog', [App\Http\Controllers\front\BlogController::class, 'index']);
-Route::post('/blog/search', [App\Http\Controllers\front\BlogController::class, 'search']);
+Route::post('/blog/search', [App\Http\Controllers\front\BlogController::class, 'searchBlog']);
 Route::get('/blog/detail/{id}', [App\Http\Controllers\front\BlogController::class, 'detail']);
 Route::get('/news', [App\Http\Controllers\front\BlogController::class, 'news']);
 Route::get('/careers', [App\Http\Controllers\front\CareerController::class, 'index']);
@@ -37,7 +37,7 @@ Route::get('/open/document/{name}/{attachment}', [App\Http\Controllers\front\Pro
 Route::post('/enquiry/product', [App\Http\Controllers\front\ProductController::class, 'productEnquiry']);
 Route::get('/map/locations', [App\Http\Controllers\front\HomeController::class, 'getLocations']);
 Route::get('/map/country/locations', [App\Http\Controllers\front\HomeController::class, 'getCountryLocations']);
-Route::post('/post/contact', [App\Http\Controllers\front\HomeController::class, 'postContact']);
+Route::post('/post/contact', [App\Http\Controllers\front\PageController::class, 'postContact']);
 
 // User login/registration
 Route::get('/user/register', [App\Http\Controllers\front\HomeController::class, 'register']);
@@ -80,6 +80,8 @@ Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
     Route::get('/document/delete/{id}', [App\Http\Controllers\DocumentController::class, 'doc_delete']);
     Route::get('/document/active/{id}', [App\Http\Controllers\DocumentController::class, 'doc_active']);
     Route::get('/document/deactive/{id}', [App\Http\Controllers\DocumentController::class, 'doc_deactive']);
+
+    Route::get('/dataentry/users', [App\Http\Controllers\DataEntryController::class, 'docUsers']);
 
     Route::get('/document/users', [App\Http\Controllers\DocumentController::class, 'docUsers']);
     //Route::get('/doc_user-form', [App\Http\Controllers\DocumentController::class, 'docuser_add']);

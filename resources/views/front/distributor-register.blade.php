@@ -92,6 +92,8 @@
                                         </div>
                                     </form>
                                 </div>
+
+                                <div class="mt-5"><em>&raquo; <a href="#">forgot password</a></em></div>
                             </div>
                         </div>
                         <!-- /.8 -->

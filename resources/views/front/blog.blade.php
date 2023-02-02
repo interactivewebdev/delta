@@ -49,10 +49,11 @@
                     <div class="col-md-12">
                         <div class="card mb-5" style="height:300px;">
                             <div class="card-body">
-                                <form name="searchForm">
+                                <form name="searchForm" method="post" action="{{ url('/blog/search') }}">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Sort By Date</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
+                                        <select class="form-control" name="sort" id="exampleFormControlSelect1">
                                             <option value="latest">Latest</option>
                                             <option value="oldest">Oldest</option>
                                         </select>
