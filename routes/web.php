@@ -81,7 +81,15 @@ Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
     Route::get('/document/active/{id}', [App\Http\Controllers\DocumentController::class, 'doc_active']);
     Route::get('/document/deactive/{id}', [App\Http\Controllers\DocumentController::class, 'doc_deactive']);
 
-    Route::get('/dataentry/users', [App\Http\Controllers\DataEntryController::class, 'docUsers']);
+    Route::get('/dataentry/users', [App\Http\Controllers\DataEntryController::class, 'index']);
+    Route::get('/dataentry/user-form', [App\Http\Controllers\DataEntryController::class, 'add']);
+    Route::post('/dataentry/user/store', [App\Http\Controllers\DataEntryController::class, 'store']);
+    Route::get('/dataentry/edit/{id}', [App\Http\Controllers\DataEntryController::class, 'edit']);
+    Route::get('/dataentry/delete/{id}', [App\Http\Controllers\DataEntryController::class, 'delete']);
+    Route::get('/dataentry/active/{id}', [App\Http\Controllers\DataEntryController::class, 'activate']);
+    Route::get('/dataentry/deactive/{id}', [App\Http\Controllers\DataEntryController::class, 'deactivate']);
+    Route::get('/dataentry/approve/{id}', [App\Http\Controllers\DataEntryController::class, 'approve']);
+    Route::get('/dataentry/reject/{id}', [App\Http\Controllers\DataEntryController::class, 'reject']);
 
     Route::get('/document/users', [App\Http\Controllers\DocumentController::class, 'docUsers']);
     //Route::get('/doc_user-form', [App\Http\Controllers\DocumentController::class, 'docuser_add']);

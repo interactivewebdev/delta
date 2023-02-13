@@ -24,7 +24,7 @@
                                 <i class="fa-solid fa-user"></i><span>Users</span></a>
                             <ul class="sidebar-submenu">
                                 <li><a href="{{ url('admin/config') }}">Admin Configuration</a></li>
-                                <li><a href="{{ url('#') }}">Data Entry User</a></li>
+                                <li><a href="{{ url('admin/dataentry/users') }}">Data Entry User</a></li>
                                 <li><a href="{{ url('admin/document/users') }}">Document User</a></li>
                                 <li><a href="{{ url('admin/distributors') }}">Distributors</a></li>
                             </ul>
