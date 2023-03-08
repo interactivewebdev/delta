@@ -343,6 +343,8 @@ ol.product-breadcrumb li:last-child:after {
 /* text-align: justify;*/
 }
 
+.login a {display: block; color:#007bff;}
+
 .card-text{
 	font-size:15px !important;
 }
@@ -524,9 +526,29 @@ img.hoverEffect:hover{
 }
 
 .zone-box div{
-	margin-top: 10px;
+	margin: 10px 0;
 	/*padding: 10px;*/
 }
+
+.zone-container {
+	min-height:300px;
+}
+
+.zone-container-shaded {
+	display:flex;
+	min-height:300px;
+	background-color: #000;
+	letter-spacing: normal;
+	opacity: 0.8;
+	align-items: center;
+	justify-content: center;
+	color:#fff;
+}
+
+/* .zone-container-shaded a {
+	padding:0 5px;
+	color:#00f;
+} */
 
 #myTabContent {
 	padding:10px;

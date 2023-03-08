@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\front;
 
+use App\Mail\DemoEmail;
 use App\Models\Benefits;
 use App\Models\Content;
 use App\Models\Country;
 use App\Models\Doccategory;
+use App\Models\Docrequests;
 use App\Models\Documents;
 use App\Models\Meetus;
 use App\Models\User;
@@ -13,6 +15,7 @@ use App\Traits\SubscribeTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends BaseController
@@ -78,7 +81,50 @@ class HomeController extends BaseController
 
     public function postLogin(Request $request)
     {
-        dd($request);
+        $user = User::where(['username' => $request->username, 'password' => $request->password]);
+
+        if ($user->count() > 0) {
+            $data = $user->first()->toArray();
+            $request->session()->put('user_type', $data['type']);
+            $request->session()->put('username', $data['username']);
+            $request->session()->put('name', $data['name']);
+            $request->session()->put('user', $data);
+
+            if ($data['type'] == "document") {
+                if (isset($request->doc_request) && $request->doc_request == "yes") {
+                    $docrequests = Docrequests::where(array(
+                        'doc_user_id' => $data['id'],
+                        'product_id' => $request->productid,
+                    ))->count();
+
+                    if ($docrequests <= 0) {
+                        Docrequests::insert(array(
+                            'doc_user_id' => $data['id'],
+                            'product_id' => $request->productid,
+                            'accessin' => 0,
+                            'request_date' => now(),
+                        ));
+                    }
+                }
+
+                $request->session()->put('docuser_logged_in', true);
+            } else if ($data['type'] == "distributor") {
+                $request->session()->put('distributor_logged_in', true);
+                $request->session()->put('dst_name', $data['name']);
+                $request->session()->put('distributor', $data);
+            }
+
+            if (isset($request->pageurl) && $request->pageurl != '') {
+                return response()->json([
+                    'msg' => "You have successfully logged in...",
+                ]);
+            } else {
+                return redirect('/distributor/' . $data['id'] . '/profile');
+            }
+
+        } else {
+            return back()->withInput();
+        }
     }
 
     public function postRegister(Request $request)
@@ -103,6 +149,12 @@ class HomeController extends BaseController
         return view('front.distributor-register', compact('countries'));
     }
 
+    public function forgotPassword()
+    {
+        Mail::to('recipient@example.com')->send(new DemoEmail());
+        return view('front.forgot');
+    }
+
     public function postDistLogin(Request $request)
     {
         $user = User::where(['username' => $request->username, 'password' => $request->password]);
@@ -112,10 +164,18 @@ class HomeController extends BaseController
             $request->session()->put('user_type', $data['type']);
             $request->session()->put('dst_name', $data['name']);
             $request->session()->put('distributor', $data);
-            if($data['type'] == "document")
-            $request->session()->put('distributor_logged_in', true);
+            if ($data['type'] == "document") {
+                $request->session()->put('distributor_logged_in', true);
+            }
 
-            return redirect('/distributor/' . $data['id'] . '/profile');
+            if (isset($request->pageurl) && $request->pageurl != '') {
+                return response()->json([
+                    'msg' => "You have successfully logged in...",
+                ]);
+            } else {
+                return redirect('/distributor/' . $data['id'] . '/profile');
+            }
+
         } else {
             return back()->withInput();
         }
@@ -127,6 +187,12 @@ class HomeController extends BaseController
         Session::forget('distributor');
         Session::forget('distributor_logged_in');
 
+        return redirect('/');
+    }
+
+    public function logout()
+    {
+        Session::flush();
         return redirect('/');
     }
 

@@ -30,7 +30,7 @@
 
 @section('content')
     <div class="container">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="{{ url('/admin//product/store') }}" method="post" enctype="multipart/form-data" id="product-form">
             <div id="smartwizard">
                 <ul class="nav">
                     <li class="nav-item"><a class="nav-link" href="#step-1">Step 1<br /><small>Product Info</small></a></li>
@@ -49,16 +49,21 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group mt-4">
-                                    <label>Category</label>
-                                    <select class="form-control" name="category" required>
+                                    <label>Category<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="category" required
+                                        onchange="changeCategory(this, 'subcategory1')">
                                         <option value="">-- Select --</option>
+                                        @foreach ($categories as $c)
+                                            <option value="{{ $c->category_id }}">{{ $c->title }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group mt-4">
-                                    <label>Sub-Category</label>
-                                    <select class="form-control" name="subcategory1" id="subcategory1" required>
+                                    <label>Sub-Category<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="subcategory1" id="subcategory1" required
+                                        onchange="changeCategory(this, 'subcategory2')">
                                         <option value="">-- Select --</option>
                                     </select>
                                 </div>
@@ -66,7 +71,7 @@
                             <div class="col-4">
                                 <div class="form-group mt-4">
                                     <label>Sub Sub Category</label>
-                                    <select class="form-control" name="subcategory2" id="subcategory2" required>
+                                    <select class="form-control" name="subcategory2" id="subcategory2">
                                         <option value="">-- Select --</option>
                                     </select>
                                 </div>
@@ -75,14 +80,14 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="form-group mt-4">
-                                    <label>Title</label>
+                                    <label>Title<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="title" id="title"
                                         placeholder="Enter title" value="">
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group mt-4">
-                                    <label for="price">Price</label>
+                                    <label for="price">Price<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control w-50" name="price" id="price"
                                         placeholder="Enter price" value="">
                                 </div>
@@ -93,17 +98,17 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="metatitle">Meta Title</label>
+                                    <label for="metatitle">Meta Title<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="metatitle" id="metatitle"
                                         placeholder="Enter meta title" value="<?php echo isset($product) ? $product->metatitle : ''; ?>">
                                 </div>
                                 <div class="form-group mt-4">
-                                    <label for="metakeyword">Meta Keyword</label>
+                                    <label for="metakeyword">Meta Keyword<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="metakeyword" id="metakeyword"
                                         placeholder="Enter meta keyword" value="<?php echo isset($product) ? $product->metakeyword : ''; ?>">
                                 </div>
                                 <div class="form-group mt-4">
-                                    <label for="metadesc">Meta Description</label>
+                                    <label for="metadesc">Meta Description<span class="text-danger">*</span></label>
                                     <textarea class="form-control" id="metadesc" name="metadesc" placeholder="Meta Description"><?php echo isset($product) ? $product->metadesc : ''; ?></textarea>
                                 </div>
                             </div>
@@ -113,7 +118,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mt-4">
-                                    <label for="image">Upload Image</label>
+                                    <label for="image">Upload Image<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="image"
@@ -127,7 +132,7 @@
                                 <div><img src="<?php echo $product->image; ?>" width="100"></div>
                                 <?php }?>
                                 <div class="form-group mt-4">
-                                    <label for="image">Upload List Image</label>
+                                    <label for="image">Upload List Image<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="list_image"
@@ -161,7 +166,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group mt-4">
-                                    <label for="short_desc">Short Description</label>
+                                    <label for="short_desc">Short Description<span class="text-danger">*</span></label>
                                     <textarea class="form-control" id="short_desc" name="short_desc" placeholder="Short Description"><?php echo isset($product) ? $product->short_desc : ''; ?></textarea>
                                 </div>
                                 <div class="form-group mt-4">
@@ -179,7 +184,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group mt-4">
-                                    <label for="certification">Certification</label>
+                                    <label for="certification">Certification<span class="text-danger">*</span></label>
                                     <select name="certification" class="form-control" id="certification">
                                         <option value="">-- Select --</option>
                                         <option value="organic" <?php if (isset($product) && $product->certification == 'organic') {
@@ -396,6 +401,8 @@
 
 @section('custom-js-script')
     <script>
+        var currentStep = 0;
+
         $(document).ready(function() {
             $('#smartwizard').smartWizard({
                 selected: 0,
@@ -415,9 +422,84 @@
 
             $("#smartwizard").on("leaveStep", function(e, anchorObject, currentStepIndex, nextStepIndex,
                 stepDirection) {
-                return confirm("Do you want to leave the step " + currentStepIndex + "?");
+                var formStepComplete = true;
+                const productForm = $('#product-form')[0];
+
+                currentStep = currentStepIndex;
+                console.log(currentStep);
+
+                // Validation for step 1
+                if (currentStepIndex == 0 && stepDirection == "forward") {
+                    if (!productForm.category.value || !productForm.subcategory1.value || !productForm.title
+                        .value || !productForm.price.value) {
+                        formStepComplete = false;
+                    }
+                }
+
+                // Validation for step 2
+                if (currentStepIndex == 1 && stepDirection == "forward") {
+                    if (!productForm.metatitle.value || !productForm.metakeyword.value || !productForm
+                        .metadesc.value) {
+                        formStepComplete = false;
+                    }
+                }
+
+                // Validation for step 3
+                if (currentStepIndex == 2 && stepDirection == "forward") {
+                    if (!productForm.image.value || !productForm.list_image.value) {
+                        formStepComplete = false;
+                    }
+                }
+
+                // Validation for step 4
+                if (currentStepIndex == 3 && stepDirection == "forward") {
+                    if (!productForm.short_desc.value) {
+                        formStepComplete = false;
+                    }
+                }
+
+                // Validation for step 5
+                if (currentStepIndex == 4 && stepDirection == "forward") {
+                    if (!productForm.certification.value) {
+                        formStepComplete = false;
+                    }
+                }
+
+                // console.log('form-data', productForm.title.value);
+                // console.log(e, anchorObject, currentStepIndex, nextStepIndex, stepDirection)
+                // return confirm("Do you want to leave the step " + currentStepIndex + "?");
+
+                if (!formStepComplete) {
+                    alert("Please fill required fields data first...");
+                    return false;
+                } else
+                    return true;
             });
         });
+
+        function changeCategory(obj, eid) {
+            $.ajax({
+                type: "post",
+                url: "{{ url('/admin/getCategories') }}",
+                data: {
+                    'category_id': obj.value
+                },
+                success: function(response) {
+                    $('#' + eid).find('option').remove();
+                    $('#' + eid)
+                        .append($("<option></option>")
+                            .attr("value", "")
+                            .text("-- Select --"));
+                    response.forEach(element => {
+                        $('#' + eid)
+                            .append($("<option></option>")
+                                .attr("value", element.category_id)
+                                .text(element.title));
+                    });
+
+                }
+            });
+        }
 
         function provideContent(idx, stepDirection, stepPosition, selStep, callback) {
             console.log(idx, stepDirection, stepPosition, selStep);
@@ -425,18 +507,22 @@
         }
 
         function onFinish() {
-            alert('Finish Clicked');
-            /*
-            $.ajax({
-                type: 'POST',
-                url: 'index.cfm?action=addClassData&nolayout',
-                data: $('#classEditForm').serialize(),
-                cache: false,
-                success: function() {
-                    alert("successful post");
-                }
+            console.log(currentStep);
+            if (currentStep == 5) {
+                console.log(currentStep);
+                console.log($('#product-form').serialize());
 
-            });*/
+                $.ajax({
+                    type: 'POST',
+                    url: {{ url('/admin/product-form') }},
+                    data: $('#product-form').serialize(),
+                    success: function() {
+                        alert("successful post");
+                    }
+                });
+            } else {
+                alert("Please complete all steps first, then finish it.");
+            }
         }
 
         function onCancel() {

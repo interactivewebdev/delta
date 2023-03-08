@@ -43,11 +43,14 @@ Route::post('/post/contact', [App\Http\Controllers\front\PageController::class, 
 Route::get('/user/register', [App\Http\Controllers\front\HomeController::class, 'register']);
 Route::post('/user/register', [App\Http\Controllers\front\HomeController::class, 'postRegister']);
 Route::post('/user/login', [App\Http\Controllers\front\HomeController::class, 'postLogin']);
+Route::get('/front/logout', [App\Http\Controllers\front\HomeController::class, 'logout']);
 
 // Distributor login/registration
 Route::get('/distributor/register', [App\Http\Controllers\front\HomeController::class, 'distRegister']);
 Route::post('/distributor/register', [App\Http\Controllers\front\HomeController::class, 'postDistRegister']);
 Route::post('/distributor/login', [App\Http\Controllers\front\HomeController::class, 'postDistLogin']);
+Route::get('/distributor/forgot', [App\Http\Controllers\front\HomeController::class, 'forgotPassword']);
+Route::post('/distributor/forgot', [App\Http\Controllers\front\HomeController::class, 'postForgotPassword']);
 Route::get('/distributor/logout', [App\Http\Controllers\front\HomeController::class, 'distLogout']);
 
 // Thanks
@@ -85,6 +88,8 @@ Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
     Route::get('/dataentry/user-form', [App\Http\Controllers\DataEntryController::class, 'add']);
     Route::post('/dataentry/user/store', [App\Http\Controllers\DataEntryController::class, 'store']);
     Route::get('/dataentry/edit/{id}', [App\Http\Controllers\DataEntryController::class, 'edit']);
+    Route::get('/dataentry/assign/{id}', [App\Http\Controllers\DataEntryController::class, 'assign']);
+    Route::post('/dataentry/assign', [App\Http\Controllers\DataEntryController::class, 'assignAccess']);
     Route::get('/dataentry/delete/{id}', [App\Http\Controllers\DataEntryController::class, 'delete']);
     Route::get('/dataentry/active/{id}', [App\Http\Controllers\DataEntryController::class, 'activate']);
     Route::get('/dataentry/deactive/{id}', [App\Http\Controllers\DataEntryController::class, 'deactivate']);
@@ -100,6 +105,7 @@ Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
     Route::get('/doc_user/deactive/{id}', [App\Http\Controllers\DocumentController::class, 'docuser_deactive']);
     Route::get('/doc_user/approve/{id}', [App\Http\Controllers\DocumentController::class, 'docuser_approve']);
     Route::get('/doc_user/reject/{id}', [App\Http\Controllers\DocumentController::class, 'docuser_reject']);
+    Route::get('/doc_requests', [App\Http\Controllers\DocumentController::class, 'doc_requests']);
 
     Route::get('/distributors', [App\Http\Controllers\DistributerController::class, 'index']);
     Route::get('/distributor-form', [App\Http\Controllers\DistributerController::class, 'add']);
@@ -123,6 +129,7 @@ Route::middleware(['checkUserLoggedIn'])->prefix('admin')->group(function () {
     Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
     Route::get('/category-form', [App\Http\Controllers\CategoryController::class, 'add'])->name('category-form');
     Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category-store');
+    Route::post('/getCategories', [App\Http\Controllers\CategoryController::class, 'getCategories']);
     Route::get('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'edit']);
     Route::get('/category/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete']);
     Route::get('/category/active/{id}', [App\Http\Controllers\CategoryController::class, 'active']);

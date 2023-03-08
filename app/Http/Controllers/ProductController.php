@@ -39,8 +39,11 @@ class ProductController extends Controller
     public function add()
     {
         $title = "Add New Product";
-        $categories = Category::all();
+        $categories = Category::where('parent_id', 0)->get();
         $filters = Filter::where('status', 1)->get()->toArray();
+
+        // dd($categories);
+
         foreach ($filters as $key => $value) {
             $filters[$key]['attributes'] = CategoryFilter::where('filter_id', $value['filter_id'])->get()->toArray();
         }
@@ -133,11 +136,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'parent_id' => 'required|max:255',
+            'category' => 'required|max:255',
             'title' => 'required',
-            'level' => '',
+            'price' => 'required',
             'description' => 'required',
-            'image' => 'required|max:10000',
         ]);
 
         if ($validator->fails()) {

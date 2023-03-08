@@ -184,7 +184,7 @@
                                 <h5>Document Zone</h5>
                             </div>
                             <div class="col-md-7 text-right">
-                                <?php if(Session::has('distributor_logged_in') && Session::get('distributor_logged_in')): ?>
+                                <?php if(Session::has('distributor')): ?>
                                     Hi <?php echo e(Session::get('dst_name')); ?>, <a
                                         href="<?php echo e(url('/distributor/logout')); ?>">Logout</a>
                                 <?php endif; ?>
@@ -192,26 +192,26 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 zone-box">
-                                <div>
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="how-to-use-tab" data-toggle="tab"
-                                                href="#how-to-use" role="tab" aria-controls="home"
-                                                aria-selected="true">How to use</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="ingredients-tab" data-toggle="tab"
-                                                href="#ingredients" role="tab" aria-controls="profile"
-                                                aria-selected="false">Ingredients</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents"
-                                                role="tab" aria-controls="contact"
-                                                aria-selected="false">Documents</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="myTabContent">
-                                        <?php if(Session::has('distributor_logged_in') && Session::get('distributor_logged_in')): ?>
+                                <?php if(Session::has('distributor')): ?>
+                                    <div class="zone-container">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="how-to-use-tab" data-toggle="tab"
+                                                    href="#how-to-use" role="tab" aria-controls="home"
+                                                    aria-selected="true">How to use</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="ingredients-tab" data-toggle="tab"
+                                                    href="#ingredients" role="tab" aria-controls="profile"
+                                                    aria-selected="false">Ingredients</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="documents-tab" data-toggle="tab"
+                                                    href="#documents" role="tab" aria-controls="contact"
+                                                    aria-selected="false">Documents</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="how-to-use" role="tabpanel"
                                                 aria-labelledby="how-to-use-tab" style="position: relative">
                                                 <?php if(count($type1) > 0): ?>
@@ -237,19 +237,6 @@
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </p>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if(!(Session::has('distributor_logged_in') && Session::get('distributor_logged_in'))): ?>
-                                                        <div class="row distributor-document-zone">
-                                                            <div class="col-12 text-center">
-                                                                Direct access to technical information and documents
-                                                            </div>
-                                                            <div class="col-12 text-center"><a
-                                                                    href="<?php echo e(url('user/register')); ?>"
-                                                                    class="btn btn-primary btn-lg">Sign In</a></div>
-                                                            <div class="col-12 text-center">Not yet registered ? <a
-                                                                    href="<?php echo e(url('user/register')); ?>">Create your
-                                                                    account now</a></div>
-                                                        </div>
-                                                    <?php endif; ?>
                                                 <?php else: ?>
                                                     Not any document provided
                                                 <?php endif; ?>
@@ -298,13 +285,36 @@
                                                     Not any document provided
                                                 <?php endif; ?>
                                             </div>
-                                        <?php else: ?>
-                                            Please <a href="javascript:void(0)" onClick="return verifyDistributor()">click
-                                                here to login</a> as
-                                            distributor to get attachments.
-                                        <?php endif; ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php else: ?>
+                                    <?php if(Session::has('docuser_logged_in')): ?>
+                                        <div class="zone-container-shaded">
+                                            <div class="row distributor-document-zone">
+                                                <div class="col-12 text-center">
+                                                    Your document request has been sent. Please wait until administrator
+                                                    permission.
+                                                    <div class="col-12 text-center"><a href="<?php echo e(url('/front/logout')); ?>"
+                                                            class="btn btn-primary btn-lg">Logout</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="zone-container-shaded">
+                                            <div class="row distributor-document-zone">
+                                                <div class="col-12 text-center">
+                                                    Direct access to technical information and documents
+                                                </div>
+                                                <div class="col-12 text-center"><a href="javascript:void(0)"
+                                                        onClick="return verifyDistributor()"
+                                                        class="btn btn-primary btn-lg">Sign In</a></div>
+                                                <div class="col-12 text-center">Not yet registered ? <a
+                                                        href="javascript:void(0)" onClick="return registerDistbr()">Create
+                                                        your account now</a></div>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -327,6 +337,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form id="loginForm">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="pageurl" value="<?php echo e(Request::url()); ?>">
+                                <input type="hidden" name="productid" value="<?php echo e($product->product_id); ?>">
+                                <input type="hidden" name="doc_request" value="yes">
                                 <div class="alert alert-danger d-none" id="log_msg"></div>
                                 <div class="form-row login">
                                     <input type="text" class="form-control" name="username" placeholder="Username"
@@ -337,13 +351,17 @@
                                         value="">
                                 </div>
                             </form>
-                            <div class="form-row login">
-                                <a href="javascript:void(0)" id="forgot" class="font-italic">&raquo;&nbsp;forgot
-                                    password</a>
+                            <div class="form-row">
+                                <div class="login">
+                                    <br><a href="javascript:void(0)" id="register"
+                                        class="font-italic">&raquo;&nbsp;Signup</a>
+                                    <a href="javascript:void(0)" id="forgot" class="font-italic">&raquo;&nbsp;forgot
+                                        password</a>
+                                </div>
                             </div>
                             <!-- <div class="form-row">
-                                                                                                                                                                                               <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
-                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                                                                                                                                           <a href="javascript:void(0)" id="register" class="font-italic">&raquo;&nbsp;register</a>
+                                                                                                                                                                                                                                                                                                                                                        </div> -->
                         </div>
                     </div>
                 </div>
@@ -469,6 +487,11 @@
             $('#registersection').modal('show');
         });
 
+        function registerDistbr() {
+            $('#registersection').modal('show');
+
+        }
+
         function userRegister() {
             let user = $('form#register').serializeArray();
             let data = [];
@@ -513,6 +536,7 @@
 
         function loginUser() {
             let user = $('form#loginForm').serializeArray();
+            console.log(user);
             let data = [];
             let newObj = {};
             $.each(user, function(idx, obj) {
@@ -521,7 +545,7 @@
 
             $.ajax({
                     method: "POST",
-                    url: "<?php echo e(url('login/distributor')); ?>",
+                    url: "<?php echo e(url('user/login')); ?>",
                     data: newObj
                 })
                 .done(function(msg) {

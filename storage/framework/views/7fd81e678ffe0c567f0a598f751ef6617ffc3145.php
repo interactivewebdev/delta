@@ -2,7 +2,7 @@
     <div class="header-wrapper row m-0">
         <div class="header-logo-wrapper col-auto p-0">
             <div class="logo-wrapper"><a href="index.html"><img class="img-fluid"
-                        src="<?php echo e(url('assets/images/logo/Deltabiocare_logo.svg')); ?>" alt=""></a></div>
+                        src="<?php echo e(url('assets/front/images/Deltabiocare_logo.svg')); ?>" alt=""></a></div>
             <div class="toggle-sidebar">
                 <div class="status_toggle sidebar-toggle d-flex">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"

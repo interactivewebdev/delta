@@ -76,6 +76,10 @@
                                                 <td>{{ $value->phone }}</td>
                                                 <td class="font-success">{{ $value->status ? 'Active' : 'Inactive' }}</td>
                                                 <td>
+                                                    <a href="{{ url('/admin/dataentry/assign/' . $value->id) }}"
+                                                        class="btn btn-primary btn-xs" type="button"
+                                                        data-original-title="btn btn-danger btn-xs" title="">Assign
+                                                        Access</a>
                                                     <a href="{{ url('/admin/dataentry/edit/' . $value->id) }}"
                                                         class="btn btn-primary btn-xs" type="button"
                                                         data-original-title="btn btn-danger btn-xs" title="">Edit</a>

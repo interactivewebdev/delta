@@ -41,7 +41,7 @@
             <nav>
                 <ol class="product-breadcrumb">
                     <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
-                    Login/Register
+                    <li>Login/Register</li>
                 </ol>
             </nav>
         </div>
@@ -52,13 +52,14 @@
         <p>&nbsp;</p>
         <div class="row">
             <div class="col-6">
-                <div class=" text-center mt-5 ">
+                <div class="text-left mt-5">
                     <h3>Login</h3>
+                    Existing distributors/users
                 </div>
 
                 <div class="row ">
                     <div class="col-lg-12 mx-auto">
-                        <div class="card mt-2 mx-auto p-4 bg-light">
+                        <div class="card mt-2 mx-auto bg-light">
                             <div class="card-body bg-light">
                                 <div class="container">
                                     <form id="login-form" role="form" method="POST"
@@ -91,8 +92,8 @@
                                         </div>
                                     </form>
                                 </div>
-
-                                <div class="mt-5"><em>&raquo; <a href="#">forgot password</a></em></div>
+                                <div class="mt-5"><em>&raquo; <a href="<?php echo e(url('/distributor/forgot')); ?>">forgot
+                                            password</a></em></div>
                             </div>
                         </div>
                         <!-- /.8 -->
@@ -102,12 +103,12 @@
             </div>
             <div class="col-6">
                 <div class=" text-center mt-5 ">
-                    <h3>Register</h3>
+                    <h3>Signup! Create an Account</h3>
                 </div>
 
                 <div class="row ">
                     <div class="col-lg-12 mx-auto">
-                        <div class="card mt-2 mx-auto p-4 bg-light">
+                        <div class="card mt-2 mx-auto bg-light">
                             <div class="card-body bg-light">
                                 <div class="container">
                                     <?php if(Session::has('error')): ?>
@@ -137,7 +138,6 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Name *</label>
                                                         <input type="text" name="name" class="form-control"
                                                             placeholder="Please enter your name *" required>
 
@@ -147,7 +147,6 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Company Email *</label>
                                                         <input type="email" name="email" class="form-control"
                                                             placeholder="Please enter your email *" required>
                                                     </div>
@@ -156,7 +155,6 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Phone</label>
                                                         <input type="text" name="phone" class="form-control"
                                                             placeholder="Please enter your phone">
 
@@ -164,7 +162,6 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Country *</label>
                                                         <select name="country" class="form-control" required>
                                                             <option value="">-- Select --</option>
                                                             <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -179,7 +176,24 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Company</label>
+                                                        <input type="text" name="designation" class="form-control"
+                                                            placeholder="Your current job designation">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="text" name="purpose" class="form-control"
+                                                            placeholder="Purpose of registration">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
                                                         <input type="text" name="company" class="form-control"
                                                             placeholder="Please enter your company">
 

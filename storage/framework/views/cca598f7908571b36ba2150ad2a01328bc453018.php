@@ -80,11 +80,13 @@
             <?php echo $__env->make('layouts.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
     </div>
+
     <!-- latest jquery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
         integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<?php echo e(url('assets/js/jquery-3.5.1.min.js')); ?>"></script>
+    
     <!-- Bootstrap js-->
     <script src="<?php echo e(url('assets/js/bootstrap/bootstrap.bundle.min.js')); ?>"></script>
     <!-- feather icon js-->
@@ -97,24 +99,18 @@
     <script src="<?php echo e(url('assets/js/config.js')); ?>"></script>
     <!-- Plugins JS start-->
     <script src="<?php echo e(url('assets/js/sidebar-menu.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/chart/knob/knob.min.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/chart/knob/knob-chart.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/chart/apex-chart/apex-chart.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/chart/apex-chart/stock-prices.js')); ?>"></script>
+    <?php if(Request::is('admin/dashboard')): ?>
+        <script src="<?php echo e(url('assets/js/chart/knob/knob.min.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/js/chart/knob/knob-chart.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/js/chart/apex-chart/apex-chart.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/js/chart/apex-chart/stock-prices.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/js/dashboard/default.js')); ?>"></script>
+    <?php endif; ?>
     <script src="<?php echo e(url('assets/js/notify/bootstrap-notify.min.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/dashboard/default.js')); ?>"></script>
     <script src="<?php echo e(url('assets/js/notify/index.js')); ?>"></script>
     <script src="<?php echo e(url('assets/js/datepicker/date-picker/datepicker.js')); ?>"></script>
     <script src="<?php echo e(url('assets/js/datepicker/date-picker/datepicker.en.js')); ?>"></script>
     <script src="<?php echo e(url('assets/js/datepicker/date-picker/datepicker.custom.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/photoswipe/photoswipe.min.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/photoswipe/photoswipe-ui-default.min.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/photoswipe/photoswipe.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/typeahead/handlebars.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/typeahead/typeahead.bundle.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/typeahead/typeahead.custom.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/typeahead-search/handlebars.js')); ?>"></script>
-    <script src="<?php echo e(url('assets/js/typeahead-search/typeahead-custom.js')); ?>"></script>
     <script src="<?php echo e(url('assets/js/height-equal.js')); ?>"></script>
     <script src="<?php echo e(url('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
     <!-- Plugins JS Ends-->

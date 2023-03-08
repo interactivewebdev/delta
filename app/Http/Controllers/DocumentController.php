@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Doccategory;
+use App\Models\Docrequests;
 use App\Models\Documents;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,6 +29,18 @@ class DocumentController extends Controller
         }
 
         return view('documents', compact('documents'));
+    }
+
+    public function doc_requests()
+    {
+        $requests = Docrequests::join('user as u', 'doc_request.doc_user_id', 'u.id')
+            ->join('product as p', 'doc_request.product_id', 'p.product_id')
+            ->select('doc_request.*', 'u.name', 'p.title')
+            ->get();
+
+        // dd($requests);
+
+        return view('document.doc_requests', compact('requests'));
     }
 
     public function doc_add()

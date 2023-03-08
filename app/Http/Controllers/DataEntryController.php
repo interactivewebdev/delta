@@ -71,6 +71,38 @@ class DataEntryController extends Controller
         return view('dataentry.user-add', compact('title', 'user'));
     }
 
+    public function assign($id)
+    {
+        $title = "Assign Access to Dataentry User";
+        $user = User::where('id', $id)->first();
+        $access = array(
+            'Blog', 'News', 'Home', 'Document',
+        );
+
+        return view('dataentry.assign-add', compact('title', 'user', 'access'));
+    }
+
+    public function assignAccess(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'access' => 'required',
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('admin/dataentry/assign/' . $request->id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $validated = $validator->validated();
+        User::where('id', $validated['id'])->update([
+            'access' => $validated['access'],
+        ]);
+
+        return redirect('admin/dataentry/users')->with('success', 'Dataentry user access is assigned successfully!');
+    }
+
     public function delete($id)
     {
         User::where('id', $id)->delete();
